@@ -4,7 +4,7 @@ test_that("nested lints", {
 
   # Examples from #60
   expect_snapshot(
-    flint::fix_text(
+    fix_text(
       "
 expect_equal(
   anyDuplicated(x) > 0,

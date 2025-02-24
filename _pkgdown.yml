@@ -1,4 +1,4 @@
-url: https://flint.etiennebacher.com/
+url: https://flir.etiennebacher.com/
 template:
   bootstrap: 5
   bslib:
@@ -27,11 +27,11 @@ reference:
   - lint
   - list_linters
 
-- title: Setup `flint`
+- title: Setup `flir`
   contents:
-  - setup_flint
-  - setup_flint_gha
-  - update_flint
+  - setup_flir
+  - setup_flir_gha
+  - update_flir
 
 - title: Linters
   contents:

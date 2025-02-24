@@ -63,12 +63,12 @@ get_tests_from_lintr <- function(name) {
 }
 
 resolve_linters <- function(path, linters, exclude_linters) {
-  if (uses_flint(path)) {
-    path_to_rules <- fs::path("flint/rules")
-  } else if (is_flint_package(path)) {
+  if (uses_flir(path)) {
+    path_to_rules <- fs::path("flir/rules")
+  } else if (is_flir_package(path)) {
     path_to_rules <- fs::path("inst/rules")
   } else {
-    path_to_rules <- fs::path(system.file(package = "flint"), "rules")
+    path_to_rules <- fs::path(system.file(package = "flir"), "rules")
   }
 
   has_custom_linters <- fs::dir_exists(fs::path(path_to_rules, "custom")) &&
@@ -118,12 +118,12 @@ resolve_linters <- function(path, linters, exclude_linters) {
   }
 
   # All linters passed to lint() / fix()
-  if (is.null(exclude_linters) && uses_flint(path_common)) {
+  if (is.null(exclude_linters) && uses_flir(path_common)) {
     exclude_linters <- get_excluded_linters_from_config(path_common)
   }
 
   if (is.null(linters)) {
-    if (uses_flint(path_common)) {
+    if (uses_flir(path_common)) {
       linters <- get_linters_from_config(path_common)
     } else {
       linters <- rules_basename_noext
@@ -177,10 +177,10 @@ get_linters_from_config <- function(path) {
     )
   }
   # browser()
-  if (is_flint_package(path)) {
+  if (is_flir_package(path)) {
     config_file <- "inst/config.yml"
   } else {
-    config_file <- "flint/config.yml"
+    config_file <- "flir/config.yml"
   }
   if (fs::file_exists(config_file)) {
     linters <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["keep"]]
@@ -209,10 +209,10 @@ get_excluded_linters_from_config <- function(path) {
       error = function(e) fs::path_dir(path)
     )
   }
-  if (is_flint_package(path)) {
+  if (is_flir_package(path)) {
     config_file <- file.path(path, "inst/config.yml")
   } else {
-    config_file <- file.path(path, "flint/config.yml")
+    config_file <- file.path(path, "flir/config.yml")
   }
   if (fs::file_exists(config_file)) {
     linters <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["exclude"]]
@@ -258,16 +258,16 @@ resolve_path <- function(path, exclude_path) {
 }
 
 resolve_hashes <- function(path, use_cache) {
-  if (!use_cache || !uses_flint(path)) {
+  if (!use_cache || !uses_flir(path)) {
     NULL
-  } else if (is_flint_package(path) || is_testing()) {
+  } else if (is_flir_package(path) || is_testing()) {
     readRDS(file.path("inst/cache_file_state.rds"))
   } else {
-    readRDS(file.path("flint/cache_file_state.rds"))
+    readRDS(file.path("flir/cache_file_state.rds"))
   }
 }
 
-is_flint_package <- function(path) {
+is_flir_package <- function(path) {
   if (length(path) > 1) {
     path <- fs::path_common(path)
   }
@@ -278,10 +278,10 @@ is_flint_package <- function(path) {
   if (!fs::file_exists(path)) {
     return(FALSE)
   }
-  read.dcf(path)[, "Package"] == "flint"
+  read.dcf(path)[, "Package"] == "flir"
 }
 
-uses_flint <- function(path = ".") {
+uses_flir <- function(path = ".") {
   if (length(path) > 1) {
     if (all(fs::path_has_parent(path, "."))) {
       path <- "."
@@ -296,8 +296,8 @@ uses_flint <- function(path = ".") {
     ),
     error = function(e) return(FALSE)
   )
-  flint_dir <- fs::path(path, "flint")
-  fs::dir_exists(flint_dir) && length(list.files(flint_dir)) > 0
+  flir_dir <- fs::path(path, "flir")
+  fs::dir_exists(flir_dir) && length(list.files(flir_dir)) > 0
 }
 
 is_testing <- function() {

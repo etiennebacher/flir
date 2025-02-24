@@ -28,31 +28,31 @@
 #'
 #' @section Ignoring lines:
 #'
-#'   `flint` supports ignoring single lines of code with `# flint-ignore`. For
+#'   `flir` supports ignoring single lines of code with `# flir-ignore`. For
 #'   example, this will not warn:
 #'
 #' ```r
-#' # flint-ignore
+#' # flir-ignore
 #' any(duplicated(x))
 #' ```
 #'
 #'   However, this will warn for the second `any(duplicated())`:
 #'
 #' ```r
-#' # flint-ignore
+#' # flir-ignore
 #' any(duplicated(x))
 #' any(duplicated(y))
 #' ```
 #'
 #'
-#'   To ignore more than one line of code, use `# flint-ignore-start` and
-#'   `# flint-ignore-end`:
+#'   To ignore more than one line of code, use `# flir-ignore-start` and
+#'   `# flir-ignore-end`:
 #'
 #' ```r
-#' # flint-ignore-start
+#' # flir-ignore-start
 #' any(duplicated(x))
 #' any(duplicated(y))
-#' # flint-ignore-end
+#' # flir-ignore-end
 #' ```
 #'
 #'
@@ -135,7 +135,7 @@ lint <- function(
 
     lints_raw <- astgrepr::tree_new(
       file = file,
-      ignore_tags = c("flint-ignore", "nolint")
+      ignore_tags = c("flir-ignore", "nolint")
     ) |>
       astgrepr::tree_root() |>
       astgrepr::node_find_all(files = rule_files)
@@ -155,10 +155,10 @@ lint <- function(
   cli::cli_progress_done()
 
   if (use_cache) {
-    if (is_flint_package(path) || is_testing()) {
+    if (is_flir_package(path) || is_testing()) {
       saveRDS(hashes, file.path(getwd(), "inst/cache_file_state.rds"))
-    } else if (uses_flint(path)) {
-      saveRDS(hashes, file.path(getwd(), "flint/cache_file_state.rds"))
+    } else if (uses_flir(path)) {
+      saveRDS(hashes, file.path(getwd(), "flir/cache_file_state.rds"))
     }
   }
   lints <- data.table::rbindlist(lints, use.names = TRUE, fill = TRUE)
@@ -192,7 +192,7 @@ lint <- function(
   } else if (in_github_actions() && !is_testing()) {
     github_actions_log_lints(lints)
   } else {
-    if (Sys.getenv("FLINT_ERROR_ON_LINT") == "true" && nrow(lints) > 0) {
+    if (Sys.getenv("FLIR_ERROR_ON_LINT") == "true" && nrow(lints) > 0) {
       stop("Some lints were found.")
     }
     lints
@@ -262,12 +262,12 @@ lint_package <- function(
 #' @export
 
 lint_text <- function(text, linters = NULL, exclude_linters = NULL) {
-  # If the folder "flint" exists, it's possible that there are custom rules.
+  # If the folder "flir" exists, it's possible that there are custom rules.
   # Creating a proper tempfile in this case would make it impossible to
   # uses those rules since rules are accessed directly in the package's system
   # files. Therefore, in this case, the tempfile is created "manually" in the
-  # "flint" folder.
-  if (uses_flint(".")) {
+  # "flir" folder.
+  if (uses_flir(".")) {
     tmp <- paste0(
       paste(sample(letters, 30, replace = TRUE), collapse = ""),
       ".R"
@@ -293,6 +293,6 @@ lint_text <- function(text, linters = NULL, exclude_linters = NULL) {
     return(invisible())
   }
 
-  class(out) <- c("flint_lint", class(out))
+  class(out) <- c("flir_lint", class(out))
   out
 }

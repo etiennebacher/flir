@@ -1,4 +1,4 @@
-#' Get the list of linters in `flint`
+#' Get the list of linters in `flir`
 #'
 #' @return A character vector
 #' @export

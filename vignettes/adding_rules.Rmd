@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(flint, warn.conflicts = FALSE)
+library(flir, warn.conflicts = FALSE)
 ```
 
-`flint` comes with an extensive set of rules taken from `lintr`, but if 
+`flir` comes with an extensive set of rules taken from `lintr`, but if 
 necessary one can also extend it relatively easily. This will require some
 knowledge of the Rust crate `ast-grep` to write. This crate
 has great documentation on [creating new rules](https://ast-grep.github.io/guide/pattern-syntax.html)
@@ -35,12 +35,12 @@ rlang::abort("this is an error")
 
 # Step 1: setup
 
-First, we need to set up `flint` using `setup_flint()`. This will create a 
-`flint` folder that contains (among other things) a `rules` folder where all 
+First, we need to set up `flir` using `setup_flir()`. This will create a 
+`flir` folder that contains (among other things) a `rules` folder where all 
 rules are stored. This is divided between `builtin` rules (that shouldn't modified manually) and `custom` rules (where we will store our custom rule).
 
 Then, we can create the structure of a new rule by copying an existing rule, say
-`flint/rules/builtin/any_is_na.yml` for instance. After removing the stuff that is
+`flir/rules/builtin/any_is_na.yml` for instance. After removing the stuff that is
 specific to this rule, we end up with this structure:
 
 ```yaml
@@ -87,12 +87,12 @@ fix: rlang::abort(paste0(~~ELEMS~~))
 message: Use `rlang::abort()` instead of `stop()`.
 ```
 
-After storing this rule in `flint/rules/custom/stop_abort.yml`, we can
+After storing this rule in `flir/rules/custom/stop_abort.yml`, we can
 call:
 
 ```{r, eval=FALSE}
-flint::lint_text(
-  'stop("Got ", n, " values instead of 1.")', 
+flir::lint_text(
+  'stop("Got ", n, " values instead of 1.")',
   linters = "stop_abort"
 )
 ```
@@ -100,7 +100,7 @@ flint::lint_text(
 Running our example with `lint_text()` now shows the message:
 
 ```{.r}
-flint::lint_text(
+flir::lint_text(
   'stop("Got ", n, " values instead of 1.")', 
   linters = "stop_abort"
 )
@@ -111,12 +111,12 @@ flint::lint_text(
 And `fix_text()` correctly applies the fix:
 
 ```{r, eval=FALSE}
-flint::fix_text(
-  'stop("Got ", n, " values instead of 1.")', 
+flir::fix_text(
+  'stop("Got ", n, " values instead of 1.")',
   linters = "stop_abort"
 )
-#> Old code: stop("Got ", n, " values instead of 1.") 
-#> New code: rlang::abort(paste0("Got ", n, " values instead of 1.")) 
+#> Old code: stop("Got ", n, " values instead of 1.")
+#> New code: rlang::abort(paste0("Got ", n, " values instead of 1."))
 ```
 
 Note that there are still some corner cases to address, such as ignoring the
@@ -127,7 +127,7 @@ not in the scope of this vignette.
 # Step 3 (optional): add to config
 
 To automatically use this new linter without having to specify it manually,
-we can add it to `flint/config.yaml`:
+we can add it to `flir/config.yaml`:
 
 ```yaml
 keep:
@@ -140,12 +140,12 @@ keep:
 Running `lint_text()` or `fix_text()` without `linters` now works:
 
 ```{r, eval=FALSE}
-flint::fix_text('stop("Got ", n, " values instead of 1.")')
-#> Old code: stop("Got ", n, " values instead of 1.") 
-#> New code: rlang::abort(paste0("Got ", n, " values instead of 1.")) 
+flir::fix_text('stop("Got ", n, " values instead of 1.")')
+#> Old code: stop("Got ", n, " values instead of 1.")
+#> New code: rlang::abort(paste0("Got ", n, " values instead of 1."))
 ```
 
 # Step 4: enjoy
 
-The new linter is now set up, you can use `flint` as before to lint or fix
-specific files or entire folders, e.g. `flint::fix_dir("R")`.
+The new linter is now set up, you can use `flir` as before to lint or fix
+specific files or entire folders, e.g. `flir::fix_dir("R")`.

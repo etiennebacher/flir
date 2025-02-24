@@ -1,3 +1,20 @@
+# flir (development)
+
+- **BREAKING**: `flint` is renamed `flir` to avoid namespace conflict with 
+  the recent [`flint` package](https://cran.r-project.org/web/packages/flint/) 
+  on CRAN. Thanks to Mikael Jagan for the warning (#63).
+
+  Consequences:
+    - `setup_flint()` is renamed `setup_flir()` and creates a folder
+      named `flir` instead of `flint`;
+    - `setup_flint_gha()` is renamed `setup_flir_gha()` and creates a 
+      YAML file named `flir.yml` instead of `flint.yml`;
+    - `update_flint()` is renamed `update_flir()`;
+    - ignoring specific lines now requires `flir-ignore` instead of 
+      `flint-ignore`;
+    - if `flint` was used in a package, `.Rbuildignore` must be updated to 
+      ignore the folder `flir` instead of `flint`.
+
 # flint 0.2.1
 
 ## New features
@@ -13,7 +30,7 @@
 * Better detection of `flint/config.yml` when using running `flint` on a 
   package or a directory.
 
-* The cache used after `setup_flint()` is now invalidated if the rules used
+* The cache used after `setup_flir()` is now invalidated if the rules used
   change.
 
 * Do not print "empty data.table(...)" when no lints are detected.
@@ -106,7 +123,7 @@
 
 * New linters: `condition_message_linter()` and `expect_identical_linter()`.
 * Rewrote vignette on adding new rules.
-* `setup_flint()` now puts built-in rules in `flint/rules/builtin`.
+* `setup_flir()` now puts built-in rules in `flint/rules/builtin`.
 
 
 # flint 0.0.8
@@ -126,7 +143,7 @@
 * Set up the Github Actions workflow for `flint` (#22).
 * New linters `function_return_linter` and `todo_comment_linter`.
 * Better support for `library_call_linter`.
-* Add argument `overwrite` to `setup_flint_gha()`.
+* Add argument `overwrite` to `setup_flir_gha()`.
 
 
 # flint 0.0.6

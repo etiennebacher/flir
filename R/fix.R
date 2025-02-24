@@ -200,12 +200,12 @@ fix_text <- function(
   exclude_linters = NULL,
   rerun = TRUE
 ) {
-  # If the folder "flint" exists, it's possible that there are custom rules.
+  # If the folder "flir" exists, it's possible that there are custom rules.
   # Creating a proper tempfile in this case would make it impossible to
   # uses those rules since rules are accessed directly in the package's system
   # files. Therefore, in this case, the tempfile is created "manually" in the
-  # "flint" folder.
-  if (uses_flint(".")) {
+  # "flir" folder.
+  if (uses_flir(".")) {
     tmp <- paste0(
       paste(sample(letters, 30, replace = TRUE), collapse = ""),
       ".R"
@@ -229,7 +229,7 @@ fix_text <- function(
   if (length(out[[1]]) == 0) {
     return(invisible())
   }
-  class(out) <- c("flint_fix", class(out))
+  class(out) <- c("flir_fix", class(out))
   attr(out, "original") <- text
   out
 }
@@ -238,7 +238,7 @@ parse_and_rewrite_file <- function(file, rule_files) {
   needed_fixing <- TRUE
   root <- astgrepr::tree_new(
     file = file,
-    ignore_tags = c("flint-ignore", "nolint")
+    ignore_tags = c("flir-ignore", "nolint")
   ) |>
     astgrepr::tree_root()
 

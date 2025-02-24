@@ -35,12 +35,12 @@ Rust](https://www.rust-lang.org/tools/install) to build the package.
 
 Optional setup:
 
-- `setup_flint()`: creates the folder `flint` and populates it with
+- `setup_flir()`: creates the folder `flint` and populates it with
   built-in rules as well as a cache file. You can modify those rules or
   add new ones if you want more control.
 
 You can use `flint` as-is, without any setup. However, running
-`setup_flint()` enables the use of caching, meaning that the subsequent
+`setup_flir()` enables the use of caching, meaning that the subsequent
 runs will be faster. It is also gives you a place where you can store
 custom rules for your project/package.
 

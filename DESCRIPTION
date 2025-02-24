@@ -1,4 +1,4 @@
-Package: flint
+Package: flir
 Type: Package
 Title: Find and Fix Lints in R Code
 Version: 0.2.1
@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "etienne.bacher@protonmail.com")
 Description: Lints are code patterns that are not optimal because they are 
-    inefficient, forget corner cases, or less readable. 'flint' provides a
+    inefficient, forget corner cases, or less readable. 'flir' provides a
     small set of functions to detect those lints and automatically fix them.
     It builds on 'astgrepr', which itself uses the Rust crate 'ast-grep' to
     parse and navigate R code.
@@ -43,8 +43,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
-URL: https://flint.etiennebacher.com, https://github.com/etiennebacher/flint
-BugReports: https://github.com/etiennebacher/flint/issues
+URL: https://flir.etiennebacher.com, https://github.com/etiennebacher/flir
+BugReports: https://github.com/etiennebacher/flir/issues
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

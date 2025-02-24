@@ -1,5 +1,5 @@
 #' @export
-print.flint_lint <- function(x, ...) {
+print.flir_lint <- function(x, ...) {
   for (i in seq_along(x$text)) {
     x$message[i] <- gsub("\\n", "", x$message[i])
     if (grepl("\\n", x$text[i])) {
@@ -15,7 +15,7 @@ print.flint_lint <- function(x, ...) {
 }
 
 #' @export
-print.flint_fix <- function(x, ...) {
+print.flir_fix <- function(x, ...) {
   new_code_multilines <- grepl("\\n", attr(x, "original")) | grepl("\\n", x)
   if (grepl("\\n", attr(x, "original"))) {
     cat(paste0("Old code:\n", crayon::red(attr(x, "original")), "\n\n"))

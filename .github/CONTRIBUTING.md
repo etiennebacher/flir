@@ -1,7 +1,7 @@
 
-# Contributing to flint
+# Contributing to flir
 
-This outlines how to propose a change to **flint**.
+This outlines how to propose a change to **flir**.
 
 ## Fixing typos
 
@@ -25,7 +25,7 @@ possible, try to illustrate your proposal or the bug with a minimal
 ### General information
 
 - Please create a Git branch for each pull request (PR).
-- flint uses
+- flir uses
   [roxygen2](https://cran.r-project.org/package=roxygen2), with
   [Markdown
   syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html),
@@ -34,7 +34,7 @@ possible, try to illustrate your proposal or the bug with a minimal
   `NEWS.md` describing the changes made. You may optionally add your
   GitHub username, and links to relevant issue(s)/PR(s).
 
-### How to add a new lint rule in `flint`?
+### How to add a new lint rule in `flir`?
 
 Adding a rule that exists in `lintr`:
 

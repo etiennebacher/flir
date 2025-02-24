@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(flint)
+library(flir)
 
-test_check("flint")
+test_check("flir")

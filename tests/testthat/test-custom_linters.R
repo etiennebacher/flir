@@ -1,7 +1,7 @@
 test_that("users can define custom linters", {
   create_local_package()
-  setup_flint()
-  fs::dir_create("flint/rules/custom")
+  setup_flir()
+  fs::dir_create("flir/rules/custom")
   fs::dir_create("dir1/dir2")
 
   cat(
@@ -13,14 +13,14 @@ rule:
 fix: length(unique(~~VAR~~))
 message: Most likely an error
 ",
-    file = "flint/rules/custom/AAAAAAAAA.yml"
+    file = "flir/rules/custom/AAAAAAAAA.yml"
   )
 
   cat("x <- function() { \nunique(length(x))\n}", file = "dir1/dir2/foo.R")
 
-  config <- yaml::read_yaml("flint/config.yml")
+  config <- yaml::read_yaml("flir/config.yml")
   config$keep <- c(config$keep, "AAAAAAAAA")
-  yaml::write_yaml(config, "flint/config.yml")
+  yaml::write_yaml(config, "flir/config.yml")
   withr::with_envvar(
     new = c("TESTTHAT" = FALSE, "GITHUB_ACTIONS" = FALSE),
     {

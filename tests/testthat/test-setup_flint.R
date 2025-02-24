@@ -1,10 +1,10 @@
-test_that("setup_flint works for packages", {
+test_that("setup_flir works for packages", {
   create_local_package()
-  expect_no_error(setup_flint())
+  expect_no_error(setup_flir())
 
-  expect_true(fs::file_exists("flint/cache_file_state.rds"))
-  expect_true(fs::file_exists("flint/config.yml"))
-  expect_true(fs::dir_exists("flint/rules/builtin"))
+  expect_true(fs::file_exists("flir/cache_file_state.rds"))
+  expect_true(fs::file_exists("flir/config.yml"))
+  expect_true(fs::dir_exists("flir/rules/builtin"))
 
   # lint
   cat("any(duplicated(x))", file = "R/foo.R")
@@ -21,13 +21,13 @@ test_that("setup_flint works for packages", {
   )
 })
 
-test_that("setup_flint works for projects", {
+test_that("setup_flir works for projects", {
   create_local_project()
-  expect_no_error(setup_flint())
+  expect_no_error(setup_flir())
 
-  expect_true(fs::file_exists("flint/cache_file_state.rds"))
-  expect_true(fs::file_exists("flint/config.yml"))
-  expect_true(fs::dir_exists("flint/rules"))
+  expect_true(fs::file_exists("flir/cache_file_state.rds"))
+  expect_true(fs::file_exists("flir/config.yml"))
+  expect_true(fs::dir_exists("flir/rules"))
 
   # lint
   cat("any(duplicated(x))", file = "R/foo.R")
@@ -44,7 +44,7 @@ test_that("setup_flint works for projects", {
   )
 })
 
-test_that("flint can work without setup", {
+test_that("flir can work without setup", {
   create_local_package()
   expect_no_error(lint())
   expect_no_error(fix())

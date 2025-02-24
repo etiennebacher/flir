@@ -3,7 +3,7 @@ test_that("absolute_path is not reported", {
   cat('paste0("/n")', file = "R/foo.R")
   expect_equal(nrow(lint()), 0)
 
-  setup_flint()
+  setup_flir()
   expect_equal(nrow(lint()), 0)
 })
 

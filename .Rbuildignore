@@ -4,8 +4,8 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 
-# flint files
-^inst/flint
+# flir files
+^inst/flir
 ^docs$
 ^pkgdown$
 ^_pkgdown\.yml$

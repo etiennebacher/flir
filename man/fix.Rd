@@ -83,27 +83,27 @@ quickly experiment with some lints and fixes.
 \section{Ignoring lines}{
 
 
-\code{flint} supports ignoring single lines of code with \verb{# flint-ignore}. For
+\code{flir} supports ignoring single lines of code with \verb{# flir-ignore}. For
 example, this will not warn:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# flint-ignore
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# flir-ignore
 any(duplicated(x))
 }\if{html}{\out{</div>}}
 
 However, this will warn for the second \code{any(duplicated())}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# flint-ignore
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# flir-ignore
 any(duplicated(x))
 any(duplicated(y))
 }\if{html}{\out{</div>}}
 
-To ignore more than one line of code, use \verb{# flint-ignore-start} and
-\verb{# flint-ignore-end}:
+To ignore more than one line of code, use \verb{# flir-ignore-start} and
+\verb{# flir-ignore-end}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# flint-ignore-start
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# flir-ignore-start
 any(duplicated(x))
 any(duplicated(y))
-# flint-ignore-end
+# flir-ignore-end
 }\if{html}{\out{</div>}}
 }
 

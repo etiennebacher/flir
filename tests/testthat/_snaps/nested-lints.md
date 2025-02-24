@@ -17,7 +17,7 @@
 ---
 
     Code
-      flint::fix_text("\nexpect_equal(\n  anyDuplicated(x) > 0,\n  FALSE\n)")
+      fix_text("\nexpect_equal(\n  anyDuplicated(x) > 0,\n  FALSE\n)")
     Output
       Old code:
       expect_equal(

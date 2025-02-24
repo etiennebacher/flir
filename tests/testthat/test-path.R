@@ -1,6 +1,6 @@
 test_that("arg exclude_path works", {
   create_local_package()
-  expect_no_error(setup_flint())
+  expect_no_error(setup_flir())
 
   dir.create("inst")
   cat("any(duplicated(x))", file = "inst/foo.R")

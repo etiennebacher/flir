@@ -1,20 +1,20 @@
-#' Create a Github Actions workflow for `flint`
+#' Create a Github Actions workflow for `flir`
 #'
 #' @param path Root path to the package.
-#' @param overwrite Whether to overwrite `.github/workflows/flint.yaml` if it
+#' @param overwrite Whether to overwrite `.github/workflows/flir.yaml` if it
 #' already exists.
 #'
-#' @return Creates `.github/workflows/flint.yaml` but doesn't return any value.
+#' @return Creates `.github/workflows/flir.yaml` but doesn't return any value.
 #' @export
-setup_flint_gha <- function(path = ".", overwrite = FALSE) {
-  src <- system.file("gha/flint.yaml", package = "flint")
-  tar <- file.path(path, ".github/workflows/flint.yaml")
+setup_flir_gha <- function(path = ".", overwrite = FALSE) {
+  src <- system.file("gha/flir.yaml", package = "flir")
+  tar <- file.path(path, ".github/workflows/flir.yaml")
   if (!fs::dir_exists(dirname(tar))) {
     fs::dir_create(dirname(tar))
   }
   fs::file_copy(src, tar, overwrite = overwrite)
   if (!is_testing()) {
-    message("Created `.github/workflows/flint.yaml.")
+    message("Created `.github/workflows/flir.yaml.")
   }
 }
 

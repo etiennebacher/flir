@@ -23,7 +23,7 @@ rstudio_source_markers <- function(lints) {
   # request source markers
   out <- rstudioapi::callFun(
     "sourceMarkers",
-    name = "flint",
+    name = "flir",
     markers = markers,
     basePath = getwd(),
     autoSelect = "first"

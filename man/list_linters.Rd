@@ -2,7 +2,7 @@
 % Please edit documentation in R/list-linters.R
 \name{list_linters}
 \alias{list_linters}
-\title{Get the list of linters in \code{flint}}
+\title{Get the list of linters in \code{flir}}
 \usage{
 list_linters()
 }
@@ -10,7 +10,7 @@ list_linters()
 A character vector
 }
 \description{
-Get the list of linters in \code{flint}
+Get the list of linters in \code{flir}
 }
 \examples{
 list_linters()
