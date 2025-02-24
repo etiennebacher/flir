@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Adding new rules • flint</title>
+<title>Adding new rules • flir</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -18,9 +18,9 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="../index.html">flint</a>
+    <a class="navbar-brand me-2" href="../index.html">flir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/etiennebacher/flint/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/etiennebacher/flir/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -59,15 +59,15 @@
       <h1>Adding new rules</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/etiennebacher/flint/blob/v0.2.1/vignettes/adding_rules.Rmd" class="external-link"><code>vignettes/adding_rules.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/etiennebacher/flir/blob/main/vignettes/adding_rules.Rmd" class="external-link"><code>vignettes/adding_rules.Rmd</code></a></small>
       <div class="d-none name"><code>adding_rules.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flint.etiennebacher.com">flint</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><code>flint</code> comes with an extensive set of rules taken from
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flir.etiennebacher.com">flir</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><code>flir</code> comes with an extensive set of rules taken from
 <code>lintr</code>, but if necessary one can also extend it relatively
 easily. This will require some knowledge of the Rust crate
 <code>ast-grep</code> to write. This crate has great documentation on <a href="https://ast-grep.github.io/guide/pattern-syntax.html" class="external-link">creating new
@@ -85,14 +85,14 @@ we prefer the formatting of the output with the latter.</p>
 <div class="section level2">
 <h2 id="step-1-setup">Step 1: setup<a class="anchor" aria-label="anchor" href="#step-1-setup"></a>
 </h2>
-<p>First, we need to set up <code>flint</code> using
-<code><a href="../reference/setup_flint.html">setup_flint()</a></code>. This will create a <code>flint</code> folder
+<p>First, we need to set up <code>flir</code> using
+<code><a href="../reference/setup_flir.html">setup_flir()</a></code>. This will create a <code>flir</code> folder
 that contains (among other things) a <code>rules</code> folder where all
 rules are stored. This is divided between <code>builtin</code> rules
 (that shouldn’t modified manually) and <code>custom</code> rules (where
 we will store our custom rule).</p>
 <p>Then, we can create the structure of a new rule by copying an
-existing rule, say <code>flint/rules/builtin/any_is_na.yml</code> for
+existing rule, say <code>flir/rules/builtin/any_is_na.yml</code> for
 instance. After removing the stuff that is specific to this rule, we end
 up with this structure:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> </span></span>
@@ -133,16 +133,16 @@ using by wrapping them in <code>~~</code>:</p>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> rlang::abort(paste0(~~ELEMS~~))</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> Use `rlang::abort()` instead of `stop()`.</span></span></code></pre></div>
 <p>After storing this rule in
-<code>flint/rules/custom/stop_abort.yml</code>, we can call:</p>
+<code>flir/rules/custom/stop_abort.yml</code>, we can call:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="../reference/lint.html">lint_text</a></span><span class="op">(</span></span>
-<span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>, </span>
+<code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="../reference/lint.html">lint_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>,</span>
 <span>  linters <span class="op">=</span> <span class="st">"stop_abort"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Running our example with <code><a href="../reference/lint.html">lint_text()</a></code> now shows the
 message:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="../reference/lint.html">lint_text</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="../reference/lint.html">lint_text</a></span><span class="op">(</span></span>
 <span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>, </span>
 <span>  linters <span class="op">=</span> <span class="st">"stop_abort"</span></span>
 <span><span class="op">)</span></span>
@@ -151,12 +151,12 @@ message:</p>
 <span><span class="co">#&gt; Rule ID: stop_abort-1 </span></span></code></pre></div>
 <p>And <code><a href="../reference/fix.html">fix_text()</a></code> correctly applies the fix:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="../reference/fix.html">fix_text</a></span><span class="op">(</span></span>
-<span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>, </span>
+<code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="../reference/fix.html">fix_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>,</span>
 <span>  linters <span class="op">=</span> <span class="st">"stop_abort"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Old code: stop("Got ", n, " values instead of 1.") </span></span>
-<span><span class="co">#&gt; New code: rlang::abort(paste0("Got ", n, " values instead of 1.")) </span></span></code></pre></div>
+<span><span class="co">#&gt; Old code: stop("Got ", n, " values instead of 1.")</span></span>
+<span><span class="co">#&gt; New code: rlang::abort(paste0("Got ", n, " values instead of 1."))</span></span></code></pre></div>
 <p>Note that there are still some corner cases to address, such as
 ignoring the arguments <code>call.</code> and <code>domain</code> of
 <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code> if they are specified, but this is not in the scope
@@ -166,7 +166,7 @@ of this vignette.</p>
 <h2 id="step-3-optional-add-to-config">Step 3 (optional): add to config<a class="anchor" aria-label="anchor" href="#step-3-optional-add-to-config"></a>
 </h2>
 <p>To automatically use this new linter without having to specify it
-manually, we can add it to <code>flint/config.yaml</code>:</p>
+manually, we can add it to <code>flir/config.yaml</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">keep</span><span class="kw">:</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> any_duplicated</span></span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="at">  </span><span class="kw">[</span><span class="at">...</span><span class="kw">]</span></span>
@@ -175,16 +175,16 @@ manually, we can add it to <code>flint/config.yaml</code>:</p>
 <p>Running <code><a href="../reference/lint.html">lint_text()</a></code> or <code><a href="../reference/fix.html">fix_text()</a></code> without
 <code>linters</code> now works:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="../reference/fix.html">fix_text</a></span><span class="op">(</span><span class="st">'stop("Got ", n, " values instead of 1.")'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Old code: stop("Got ", n, " values instead of 1.") </span></span>
-<span><span class="co">#&gt; New code: rlang::abort(paste0("Got ", n, " values instead of 1.")) </span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="../reference/fix.html">fix_text</a></span><span class="op">(</span><span class="st">'stop("Got ", n, " values instead of 1.")'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Old code: stop("Got ", n, " values instead of 1.")</span></span>
+<span><span class="co">#&gt; New code: rlang::abort(paste0("Got ", n, " values instead of 1."))</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-4-enjoy">Step 4: enjoy<a class="anchor" aria-label="anchor" href="#step-4-enjoy"></a>
 </h2>
-<p>The new linter is now set up, you can use <code>flint</code> as
-before to lint or fix specific files or entire folders,
-e.g. <code>flint::fix_dir("R")</code>.</p>
+<p>The new linter is now set up, you can use <code>flir</code> as before
+to lint or fix specific files or entire folders,
+e.g. <code>flir::fix_dir("R")</code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

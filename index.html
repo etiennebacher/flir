@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Find and Fix Lints in R Code • flint</title>
+<title>Find and Fix Lints in R Code • flir</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Find and Fix Lints in R Code">
-<meta name="description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. flint provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
-<meta property="og:description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. flint provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
+<meta name="description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
+<meta property="og:description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,9 +20,9 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">flint</a>
+    <a class="navbar-brand me-2" href="index.html">flir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/etiennebacher/flint/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/etiennebacher/flir/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -53,25 +53,28 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="flint">flint<a class="anchor" aria-label="anchor" href="#flint"></a>
+<div class="page-header"><h1 id="flir">flir<a class="anchor" aria-label="anchor" href="#flir"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p><code>flint</code> is a small R package to find and replace lints in R code.</p>
+<hr>
+<p><span class="emoji" data-emoji="information_source">ℹ️</span> Until v0.2.1 (included), this package was named <code>flint</code>. In v0.3.0, it was renamed <code>flir</code>.</p>
+<hr>
+<p><code>flir</code> is a small R package to find and replace lints in R code.</p>
 <ul>
 <li>Lints detection with <code><a href="reference/lint.html">lint()</a></code>
 </li>
 <li>Automatic replacement of lints with <code><a href="reference/fix.html">fix()</a></code>
 </li>
-<li>Compatibility with (some) <a href="https://github.com/r-lib/lintr" class="external-link">lintr</a> rules</li>
+<li>Compatibility with (some) <a href="https://lintr.r-lib.org" class="external-link">lintr</a> rules</li>
 <li>Fast</li>
 </ul>
-<p><code>flint</code> is powered by <a href="https://github.com/etiennebacher/astgrepr/" class="external-link"><code>astgrepr</code></a>, which is itself built on the Rust crate <a href="https://ast-grep.github.io/" class="external-link"><code>ast-grep</code></a>.</p>
+<p><code>flir</code> is powered by <a href="https://github.com/etiennebacher/astgrepr/" class="external-link"><code>astgrepr</code></a>, which is itself built on the Rust crate <a href="https://ast-grep.github.io/" class="external-link"><code>ast-grep</code></a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'flint'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://etiennebacher.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'flir'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://etiennebacher.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Note:</strong> using <code>remotes::install_github()</code>, <code>devtools::install_github()</code>, or <code><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak::pak()</a></code> without specifying the R-universe repo will require you to <a href="https://www.rust-lang.org/tools/install" class="external-link">setup Rust</a> to build the package.</p>
 </div>
 <div class="section level2">
@@ -80,9 +83,9 @@
 <p>Optional setup:</p>
 <ul>
 <li>
-<code><a href="reference/setup_flint.html">setup_flint()</a></code>: creates the folder <code>flint</code> and populates it with built-in rules as well as a cache file. You can modify those rules or add new ones if you want more control.</li>
+<code><a href="reference/setup_flir.html">setup_flir()</a></code>: creates the folder <code>flir</code> and populates it with built-in rules as well as a cache file. You can modify those rules or add new ones if you want more control.</li>
 </ul>
-<p>You can use <code>flint</code> as-is, without any setup. However, running <code><a href="reference/setup_flint.html">setup_flint()</a></code> enables the use of caching, meaning that the subsequent runs will be faster. It is also gives you a place where you can store custom rules for your project/package.</p>
+<p>You can use <code>flir</code> as-is, without any setup. However, running <code><a href="reference/setup_flir.html">setup_flir()</a></code> enables the use of caching, meaning that the subsequent runs will be faster. It is also gives you a place where you can store custom rules for your project/package.</p>
 <p>The everyday usage consists of two functions:</p>
 <ul>
 <li>
@@ -90,12 +93,14 @@
 <li>
 <code><a href="reference/fix.html">fix()</a></code> looks for lints in R files and automatically applies their replacement (if any).</li>
 </ul>
-<p>One can also experiment with <code><a href="reference/lint.html">flint::lint_text()</a></code> and <code><a href="reference/fix.html">flint::fix_text()</a></code>:</p>
+<p>One can also experiment with <code><a href="reference/lint.html">flir::lint_text()</a></code> and <code><a href="reference/fix.html">flir::fix_text()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/lint.html">lint_text</a></span><span class="op">(</span><span class="st">"</span></span>
+<code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/lint.html">lint_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">"</span></span>
 <span><span class="st">any(is.na(x))</span></span>
 <span><span class="st">any(duplicated(y))</span></span>
-<span><span class="st">"</span><span class="op">)</span></span>
+<span><span class="st">"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original code: any(is.na(x)) </span></span>
 <span><span class="co">#&gt; Suggestion: anyNA(x) is better than any(is.na(x)). </span></span>
 <span><span class="co">#&gt; Rule ID: any_na-1 </span></span>
@@ -103,10 +108,12 @@
 <span><span class="co">#&gt; Original code: any(duplicated(y)) </span></span>
 <span><span class="co">#&gt; Suggestion: anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...). </span></span>
 <span><span class="co">#&gt; Rule ID: any_duplicated-1</span></span>
-<span><span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/fix.html">fix_text</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/fix.html">fix_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">"</span></span>
 <span><span class="st">any(is.na(x))</span></span>
 <span><span class="st">any(duplicated(y))</span></span>
-<span><span class="st">"</span><span class="op">)</span></span>
+<span><span class="st">"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Old code:</span></span>
 <span><span class="co">#&gt; any(is.na(x))</span></span>
 <span><span class="co">#&gt; any(duplicated(y))</span></span>
@@ -118,7 +125,7 @@
 <div class="section level2">
 <h2 id="real-life-examples">Real-life examples<a class="anchor" aria-label="anchor" href="#real-life-examples"></a>
 </h2>
-<p>I tested <code>flint</code> on several packages while developing it. I proposed some pull requests for those packages. Here are a few:</p>
+<p>I tested <code>flir</code> on several packages while developing it. I proposed some pull requests for those packages. Here are a few:</p>
 <ul>
 <li>
 <code>ggplot2</code>: <a href="https://github.com/tidyverse/ggplot2/pull/6050/files" class="external-link">#6050</a> and <a href="https://github.com/tidyverse/ggplot2/pull/6051/files" class="external-link">#6051</a>
@@ -136,54 +143,67 @@
 <code>usethis</code>: <a href="https://github.com/r-lib/usethis/pull/2048/files" class="external-link">#2048</a>
 </li>
 </ul>
-<p>Except for some manual tweaks when the replacement was wrong (I was testing <code>flint</code> after all), all changes were generated by <code><a href="reference/fix.html">flint::fix_package()</a></code> or <code>flint::fix_dir(&lt;dirname&gt;)</code>.</p>
+<p>Except for some manual tweaks when the replacement was wrong (I was testing <code>flir</code> after all), all changes were generated by <code><a href="reference/fix.html">flir::fix_package()</a></code> or <code>flir::fix_dir(&lt;dirname&gt;)</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="comparison-with-existing-tools">Comparison with existing tools<a class="anchor" aria-label="anchor" href="#comparison-with-existing-tools"></a>
 </h2>
 <p>The most used tool for lints detection in R is <code>lintr</code>. However, <code>lintr</code>’s performance is not optimal when it is applied on medium to large packages. Also, <code>lintr</code> cannot perform automatic replacement of lints.</p>
 <p><code>styler</code> is a package to clean code by fixing indentation and other things, but doesn’t perform code replacement based on lints.</p>
-<p><code>flint</code> is quite performant. This is a small benchmark on 3.5k lines of code with a few linters:</p>
+<p><code>flir</code> is quite performant. This is a small benchmark on 3.5k lines of code with a few linters:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"bench/test.R"</span>, package <span class="op">=</span> <span class="st">"flint"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"bench/test.R"</span>, package <span class="op">=</span> <span class="st">"flir"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">bench</span><span class="fu">::</span><span class="fu">mark</span><span class="op">(</span></span>
 <span>  lintr <span class="op">=</span> <span class="fu">lintr</span><span class="fu">::</span><span class="fu">lint</span><span class="op">(</span></span>
 <span>    <span class="va">file</span>,</span>
 <span>    linters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">any_duplicated_linter</span><span class="op">(</span><span class="op">)</span>, <span class="fu">lintr</span><span class="fu">::</span><span class="fu">any_is_na_linter</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">matrix_apply_linter</span><span class="op">(</span><span class="op">)</span>, <span class="fu">lintr</span><span class="fu">::</span><span class="fu">function_return_linter</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">lengths_linter</span><span class="op">(</span><span class="op">)</span>, <span class="fu">lintr</span><span class="fu">::</span><span class="fu">T_and_F_symbol_linter</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">undesirable_function_linter</span><span class="op">(</span><span class="op">)</span>, <span class="fu">lintr</span><span class="fu">::</span><span class="fu">expect_length_linter</span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">any_duplicated_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">any_is_na_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">matrix_apply_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">function_return_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">lengths_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">T_and_F_symbol_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">undesirable_function_linter</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">lintr</span><span class="fu">::</span><span class="fu">expect_length_linter</span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  flint <span class="op">=</span> <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/lint.html">lint</a></span><span class="op">(</span></span>
+<span>  flir <span class="op">=</span> <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/lint.html">lint</a></span><span class="op">(</span></span>
 <span>    <span class="va">file</span>,</span>
 <span>    linters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>      <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/any_duplicated_linter.html">any_duplicated_linter</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/any_is_na_linter.html">any_is_na_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/matrix_apply_linter.html">matrix_apply_linter</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/function_return_linter.html">function_return_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/lengths_linter.html">lengths_linter</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/T_and_F_symbol_linter.html">T_and_F_symbol_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/undesirable_function_linter.html">undesirable_function_linter</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">flint</span><span class="fu">::</span><span class="fu"><a href="reference/expect_length_linter.html">expect_length_linter</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/any_duplicated_linter.html">any_duplicated_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/any_is_na_linter.html">any_is_na_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/matrix_apply_linter.html">matrix_apply_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/function_return_linter.html">function_return_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/lengths_linter.html">lengths_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/T_and_F_symbol_linter.html">T_and_F_symbol_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/undesirable_function_linter.html">undesirable_function_linter</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/expect_length_linter.html">expect_length_linter</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="op">)</span>,</span>
 <span>    verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>    open <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  check <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Some expressions had a GC in every iteration;</span></span>
-<span><span class="co">#&gt; so filtering is disabled.</span></span>
+<span><span class="co">#&gt; Warning: Some expressions had a GC in every iteration; so</span></span>
+<span><span class="co">#&gt; filtering is disabled.</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc</span></span>
-<span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;</span></span>
-<span><span class="co">#&gt; 1 lintr         3.26s    3.26s     0.307  315.22MB</span></span>
-<span><span class="co">#&gt; 2 flint      186.44ms 190.74ms     4.95     1.74MB</span></span>
-<span><span class="co">#&gt; # ℹ 1 more variable: `gc/sec` &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
+<span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 lintr          1.7s     1.7s     0.588  306.24MB     3.53</span></span>
+<span><span class="co">#&gt; 2 flir        110.5ms    116ms     8.73     1.79MB     0</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="why-the-name-flir">Why the name “flir”?<a class="anchor" aria-label="anchor" href="#why-the-name-flir"></a>
+</h2>
+<p><code>flir</code> was originally named <code>flint</code> but I had to rename it to avoid conflicts with a package named <code>flint</code> on CRAN.</p>
+<p><code>flir</code> stands for “<strong>F</strong>ix <strong>L</strong>ints <strong>I</strong>n <strong>R</strong>”.</p>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
-<p>Did you find some bugs or some errors in the documentation? Do you want <code>flint</code> to support more rules?</p>
-<p>Take a look at the <a href="https://flint.etiennebacher.com/CONTRIBUTING.html">contributing guide</a> for instructions on bug report and pull requests.</p>
+<p>Did you find some bugs or some errors in the documentation? Do you want <code>flir</code> to support more rules?</p>
+<p>Take a look at the <a href="https://flir.etiennebacher.com/CONTRIBUTING.html">contributing guide</a> for instructions on bug report and pull requests.</p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
@@ -194,8 +214,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/etiennebacher/flint/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/etiennebacher/flint/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/etiennebacher/flir/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/etiennebacher/flir/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -217,7 +237,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing flint</a></li>
+<li><a href="authors.html#citation">Citing flir</a></li>
 </ul>
 </div>
 
@@ -232,7 +252,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/etiennebacher/flint/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/etiennebacher/flint/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/etiennebacher/flir/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/etiennebacher/flir/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
