@@ -63,39 +63,15 @@ get_tests_from_lintr <- function(name) {
 }
 
 resolve_linters <- function(path, linters, exclude_linters) {
-  if (uses_flir(path)) {
-    path_to_rules <- fs::path("flir/rules")
-  } else if (is_flir_package(path)) {
-    path_to_rules <- fs::path("inst/rules")
+  if (is_flir_package(path)) {
+    path_to_rules <- fs::path("inst/rules/builtin")
   } else {
-    path_to_rules <- fs::path(system.file(package = "flir"), "rules")
+    path_to_rules <- fs::path(system.file(package = "flir"), "rules", "builtin")
   }
 
-  has_custom_linters <- fs::dir_exists(fs::path(path_to_rules, "custom")) &&
-    length(list.files(fs::path(path_to_rules, "custom"), pattern = "\\.yml$")) >
-      0
-
-  # All rule files
-  if (isTRUE(has_custom_linters)) {
-    rules <- c(
-      list.files(
-        fs::path(path_to_rules, "builtin"),
-        pattern = "\\.yml$",
-        full.names = TRUE
-      ),
-      list.files(
-        fs::path(path_to_rules, "custom"),
-        pattern = "\\.yml$",
-        full.names = TRUE
-      )
-    )
-  } else {
-    rules <- list.files(
-      fs::path(path_to_rules, "builtin"),
-      pattern = "\\.yml$",
-      full.names = TRUE
-    )
-  }
+  rules <- list.files(path_to_rules, pattern = "\\.yml$", full.names = TRUE)
+  custom_rules <- get_custom_linters(path)
+  rules <- c(rules, custom_rules)
 
   rules_basename <- basename(rules)
   rules_basename_noext <- gsub("\\.yml$", "", rules_basename)
@@ -297,6 +273,34 @@ uses_flir <- function(path = ".") {
   )
   flir_dir <- fs::path(path, "flir")
   fs::dir_exists(flir_dir) && length(list.files(flir_dir)) > 0
+}
+
+get_custom_linters <- function(path = ".") {
+  if (length(path) > 1) {
+    if (all(fs::path_has_parent(path, "."))) {
+      path <- "."
+    } else {
+      path <- fs::path_common(path)
+    }
+  }
+  tryCatch(
+    path <- rprojroot::find_root(
+      rprojroot::is_rstudio_project | rprojroot::is_r_package,
+      path = path
+    ),
+    error = function(e) return(FALSE)
+  )
+  flir_dir <- fs::path(path, "flir")
+  flir_dir <- fs::path(path, "flir")
+  if (
+    uses_flir(path) && fs::dir_exists(fs::path(flir_dir, "rules", "custom"))
+  ) {
+    list.files(
+      fs::path(flir_dir, "rules", "custom"),
+      pattern = "\\.yml$",
+      full.names = TRUE
+    )
+  }
 }
 
 is_testing <- function() {

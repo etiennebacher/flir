@@ -7,7 +7,7 @@ test_that("config.yml is taken into account", {
   cat("a = 1", file = "tests/testthat/foo.R")
   expect_equal(nrow(lint()), 2)
 
-  # # Only keep one linter, not the one about assignment symbols
+  # Only keep one linter, not the one about assignment symbols
   cat("keep:\n  - class_equals", file = "flir/config.yml")
   expect_equal(nrow(lint()), 0)
   expect_equal(nrow(lint_dir("R")), 0)

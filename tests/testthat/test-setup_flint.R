@@ -1,10 +1,7 @@
 test_that("setup_flir works for packages", {
   create_local_package()
   expect_no_error(setup_flir())
-
-  expect_true(fs::file_exists("flir/cache_file_state.rds"))
-  expect_true(fs::file_exists("flir/config.yml"))
-  expect_true(fs::dir_exists("flir/rules/builtin"))
+  expect_snapshot(fs::dir_tree("flir"))
 
   # lint
   cat("any(duplicated(x))", file = "R/foo.R")
@@ -24,10 +21,7 @@ test_that("setup_flir works for packages", {
 test_that("setup_flir works for projects", {
   create_local_project()
   expect_no_error(setup_flir())
-
-  expect_true(fs::file_exists("flir/cache_file_state.rds"))
-  expect_true(fs::file_exists("flir/config.yml"))
-  expect_true(fs::dir_exists("flir/rules"))
+  expect_snapshot(fs::dir_tree("flir"))
 
   # lint
   cat("any(duplicated(x))", file = "R/foo.R")
