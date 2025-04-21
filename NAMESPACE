@@ -3,6 +3,7 @@
 S3method(print,flir_fix)
 S3method(print,flir_lint)
 export(T_and_F_symbol_linter)
+export(add_new_rule)
 export(any_duplicated_linter)
 export(any_is_na_linter)
 export(class_equals_linter)

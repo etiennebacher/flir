@@ -7,7 +7,7 @@
 setup_flir_gha(path = ".", overwrite = FALSE)
 }
 \arguments{
-\item{path}{Root path to the package.}
+\item{path}{Path to package or project root.}
 
 \item{overwrite}{Whether to overwrite \code{.github/workflows/flir.yaml} if it
 already exists.}

@@ -9,6 +9,9 @@
 
 ## Other changes
 
+- New function `add_new_rule()` to create the template for a new rule in
+  `flir/rules/custom` (#67).
+
 ## Bug fixes
 
 - Fix error in replacement in rule `sample_int-4`.

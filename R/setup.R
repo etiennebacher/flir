@@ -47,4 +47,7 @@ setup_flir <- function(path = ".") {
     paste("  -", list_linters(), collapse = "\n")
   )
   writeLines(config_content, file.path(flir_dir, "config.yml"))
+
+  cli::cli_alert_success("Created {.path {flir_dir}}.")
+  cli::cli_alert_info("Use {.fn add_new_rule} to create a custom rule.")
 }

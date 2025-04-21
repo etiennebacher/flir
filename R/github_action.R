@@ -1,6 +1,6 @@
 #' Create a Github Actions workflow for `flir`
 #'
-#' @param path Root path to the package.
+#' @inheritParams setup_flir
 #' @param overwrite Whether to overwrite `.github/workflows/flir.yaml` if it
 #' already exists.
 #'

@@ -319,7 +319,9 @@ message: ...
 ",
     file = dest
   )
-  rstudioapi::documentOpen(dest)
+  if (rstudioapi::isAvailable() && !is_positron()) {
+    rstudioapi::documentOpen(dest)
+  }
 }
 
 uses_git <- function() {
