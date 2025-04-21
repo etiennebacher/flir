@@ -31,7 +31,6 @@ reference:
   contents:
   - setup_flir
   - setup_flir_gha
-  - update_flir
 
 - title: Linters
   contents:
