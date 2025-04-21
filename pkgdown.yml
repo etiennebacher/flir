@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   adding_rules: adding_rules.html
-last_built: 2025-04-21T09:27Z
+last_built: 2025-04-21T10:02Z
 urls:
   reference: https://flir.etiennebacher.com/reference
   article: https://flir.etiennebacher.com/articles
