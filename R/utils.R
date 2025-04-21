@@ -291,7 +291,6 @@ get_custom_linters <- function(path = ".") {
     error = function(e) return(FALSE)
   )
   flir_dir <- fs::path(path, "flir")
-  flir_dir <- fs::path(path, "flir")
   if (
     uses_flir(path) && fs::dir_exists(fs::path(flir_dir, "rules", "custom"))
   ) {
