@@ -1,5 +1,14 @@
 # flir (development)
 
+## Breaking changes
+
+- `setup_flir()` no longer imports all built-in rules in the `flir/rules`
+  folder. Those are now directly read from the folder where `flir` is
+  installed. Consequently, `update_flir()` has been removed as it has no
+  purpose anymore (#66).
+
+## Other changes
+
 ## Bug fixes
 
 - Fix error in replacement in rule `sample_int-4`.
