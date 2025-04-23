@@ -21,7 +21,7 @@ Imports:
     data.table,
     digest,
     fs,
-    gert,
+    gert (< 2.1.5),
     rprojroot,
     yaml
 Suggests:
