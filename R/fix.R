@@ -49,14 +49,13 @@
 #' fix(destfile)
 #' cat(paste(readLines(destfile), collapse = "\n"))
 fix <- function(
-  path = ".",
-  linters = NULL,
-  exclude_path = NULL,
-  exclude_linters = NULL,
-  force = FALSE,
-  verbose = TRUE,
-  rerun = TRUE
-) {
+    path = ".",
+    linters = NULL,
+    exclude_path = NULL,
+    exclude_linters = NULL,
+    force = FALSE,
+    verbose = TRUE,
+    rerun = TRUE) {
   if (isFALSE(verbose) | is_testing()) {
     withr::local_options(cli.default_handler = function(...) {
     })
@@ -67,7 +66,11 @@ fix <- function(
   fixes <- list()
 
   if (uses_git()) {
-    unstaged_files <- unlist(git2r::status()$unstaged)
+    status <- gert::git_status()
+    unstaged_files <- status[status$staged == FALSE, "file"] |>
+      unlist()
+
+    # unstaged_files <- unlist(gert::git_status()["staged" == FALSE, "file"])
     if (any(r_files %in% unstaged_files)) {
       if (interactive()) {
         utils::menu(
@@ -137,14 +140,13 @@ fix <- function(
 #' @export
 
 fix_dir <- function(
-  path = ".",
-  linters = NULL,
-  exclude_path = NULL,
-  exclude_linters = NULL,
-  force = FALSE,
-  verbose = TRUE,
-  rerun = TRUE
-) {
+    path = ".",
+    linters = NULL,
+    exclude_path = NULL,
+    exclude_linters = NULL,
+    force = FALSE,
+    verbose = TRUE,
+    rerun = TRUE) {
   if (!fs::is_dir(path)) {
     stop("`path` must be a directory.")
   }
@@ -163,14 +165,13 @@ fix_dir <- function(
 #' @export
 
 fix_package <- function(
-  path = ".",
-  linters = NULL,
-  exclude_path = NULL,
-  exclude_linters = NULL,
-  force = FALSE,
-  verbose = TRUE,
-  rerun = TRUE
-) {
+    path = ".",
+    linters = NULL,
+    exclude_path = NULL,
+    exclude_linters = NULL,
+    force = FALSE,
+    verbose = TRUE,
+    rerun = TRUE) {
   if (!fs::is_dir(path)) {
     stop("`path` must be a directory.")
   }
@@ -195,11 +196,10 @@ fix_package <- function(
 #' @rdname fix
 #' @export
 fix_text <- function(
-  text,
-  linters = NULL,
-  exclude_linters = NULL,
-  rerun = TRUE
-) {
+    text,
+    linters = NULL,
+    exclude_linters = NULL,
+    rerun = TRUE) {
   # If the folder "flir" exists, it's possible that there are custom rules.
   # Creating a proper tempfile in this case would make it impossible to
   # uses those rules since rules are accessed directly in the package's system
