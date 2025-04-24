@@ -57,6 +57,10 @@
 <li>If your PR is a user-visible change, you may add a bullet point in <code>NEWS.md</code> describing the changes made. You may optionally add your GitHub username, and links to relevant issue(s)/PR(s).</li>
 </ul></div>
 <div class="section level3">
+<h3 id="formatting">Formatting<a class="anchor" aria-label="anchor" href="#formatting"></a></h3>
+<p>Formatting of R files is done by <code>air</code>, a command-line tool (not an R package). You can install it by following <a href="https://posit-dev.github.io/air/cli.html" class="external-link">these instructions</a>, and then run <code>air format .</code> in the folder.</p>
+</div>
+<div class="section level3">
 <h3 id="how-to-add-a-new-lint-rule-in-flir">How to add a new lint rule in <code>flir</code>?<a class="anchor" aria-label="anchor" href="#how-to-add-a-new-lint-rule-in-flir"></a></h3>
 <p>Adding a rule that exists in <code>lintr</code>:</p>
 <ol style="list-style-type: decimal"><li>Create a new <code>.yml</code> file in <code>inst</code> with <code>new_rule("&lt;rule_name&gt;")</code>, e.g <code>new_rule("expect_length")</code>.</li>
