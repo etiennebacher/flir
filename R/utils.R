@@ -312,7 +312,6 @@ is_r_package <- function(path = ".") {
     rprojroot::find_root(rprojroot::is_r_package, path = path),
     silent = TRUE
   )
-
   !inherits(tr, "try-error")
 }
 

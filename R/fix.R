@@ -221,7 +221,6 @@ fix_text <- function(
   } else {
     tmp <- tempfile(fileext = ".R")
   }
-
   text <- trimws(text)
   cat(text, file = tmp)
   out <- fix(
