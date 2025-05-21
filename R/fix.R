@@ -98,10 +98,10 @@ fix <- function(
     }
   }
 
-  if (length(r_files) > 1 && !uses_git()) {
+  if (!uses_git()) {
     if (interactive()) {
       choice <- utils::menu(
-        title = "This will run `fix()` on several R files. It seems that you are not using Git, which will make it difficult to see the changes in code. Do you want to continue?",
+        title = "It seems that you are not using Git, which will make it difficult to see the changes in code. Do you want to continue?",
         choices = c("Yes", "No")
       )
       if (choice == 2) {
@@ -305,7 +305,11 @@ parse_and_rewrite_file <- function(file, rule_files, interactive) {
 
   if (isTRUE(interactive)) {
     writeLines(text = fixes, new_file)
-    review_app(name = file, old_path = file, new_path = file_to_parse)
+    skipped <- review_app(name = file, old_path = file, new_path = file_to_parse)
+    if (isTRUE(skipped)) {
+      needed_fixing <- FALSE
+      n_fixes <- 0
+    }
   } else {
     writeLines(text = fixes, file)
   }

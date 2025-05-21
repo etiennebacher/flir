@@ -8,6 +8,7 @@ review_app <- function(name, old_path, new_path) {
   )
   n <- length(name)
   case_index <- stats::setNames(seq_along(name), name)
+  skipped <- FALSE
   handled <- rep(FALSE, n)
   ui <- shiny::fluidPage(
     style = "margin: 0.5em",
@@ -31,17 +32,14 @@ review_app <- function(name, old_path, new_path) {
     output$diff <- diffviewer::visual_diff_render({
       diffviewer::visual_diff(old_path[[i()]], new_path[[i()]])
     })
-    shiny::observeEvent(input$reject, {
-      rlang::inform(paste0("Rejecting snapshot: '", new_path[[i()]], "'"))
-      unlink(new_path[[i()]])
-      update_cases()
-    })
     shiny::observeEvent(input$accept, {
       rlang::inform(paste0("Accepting snapshot: '", old_path[[i()]], "'"))
       file.rename(new_path[[i()]], old_path[[i()]])
       update_cases()
     })
     shiny::observeEvent(input$skip, {
+      handled[[i()]] <<- TRUE
+      skipped <<- TRUE
       i <- next_case()
       shiny::updateSelectInput(session, "cases", selected = i)
     })
@@ -69,12 +67,12 @@ review_app <- function(name, old_path, new_path) {
   }
   rlang::inform(c(
     "Starting Shiny app for snapshot review",
-    i = "Use Ctrl + C to quit"
+    i = "Use Escape to quit"
   ))
   shiny::runApp(
     shiny::shinyApp(ui, server),
     quiet = TRUE,
     launch.browser = shiny::paneViewer()
   )
-  invisible()
+  skipped
 }
