@@ -306,10 +306,6 @@ parse_and_rewrite_file <- function(file, rule_files, interactive) {
       cur = file,
       new = file_to_parse
     )
-    if (nrow(changed) == 0) {
-      inform("No fixes to review")
-      return(invisible())
-    }
     review_app(changed$name, changed$cur, changed$new)
   } else {
     writeLines(text = fixes, file)
