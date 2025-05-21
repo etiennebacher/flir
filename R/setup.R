@@ -44,7 +44,7 @@ setup_flir <- function(path = ".") {
   }
   config_content <- paste0(
     "keep:\n",
-    paste("  -", list_linters(), collapse = "\n")
+    paste("  -", list_linters(path), collapse = "\n")
   )
   writeLines(config_content, file.path(flir_dir, "config.yml"))
 

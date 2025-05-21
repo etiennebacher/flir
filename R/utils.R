@@ -112,6 +112,7 @@ resolve_linters <- function(path, linters, exclude_linters) {
   }
 
   linters <- setdiff(linters, exclude_linters)
+  linters <- keep_or_exclude_testthat_rules(path, linters)
   if (
     !all(linters %in% rules_basename_noext | linter_is_path_to_yml(linters))
   ) {
@@ -306,6 +307,15 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+is_r_package <- function(path = ".") {
+  tr <- try(
+    rprojroot::find_root(rprojroot::is_r_package, path = path),
+    silent = TRUE
+  )
+
+  !inherits(tr, "try-error")
+}
+
 new_rule <- function(name) {
   dest <- paste0("inst/rules/builtin/", name, ".yml")
   cat(
@@ -328,6 +338,40 @@ uses_git <- function() {
   fs::dir_exists(".git")
 }
 
+# By default, we want this to be TRUE if we're not inside a package (e.g.
+# testing on temp files).
+uses_testthat <- function(path = ".") {
+  out <- TRUE
+  testthat_folder_exists <- unname(fs::dir_exists(fs::path(path, "tests", "testthat")))
+  if (is_r_package(path) && !testthat_folder_exists) {
+    out <-  FALSE
+  }
+  out
+}
+
 is_positron <- function() {
   identical(Sys.getenv("POSITRON"), "1")
+}
+
+keep_or_exclude_testthat_rules <- function(path, linters) {
+  if (length(path) > 1) {
+    path <- fs::path_common(fs::path_abs(path))
+  }
+  if (fs::is_file(path)) {
+    path <- fs::path_dir(path)
+  }
+  if (!uses_testthat(path)) {
+    exclude <- c(
+      "expect_comparison",
+      "expect_identical",
+      "expect_length",
+      "expect_named",
+      "expect_not",
+      "expect_null",
+      "expect_true_false",
+      "expect_type"
+    )
+    linters <- setdiff(linters, exclude)
+  }
+  linters
 }
