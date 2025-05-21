@@ -113,6 +113,17 @@ resolve_linters <- function(path, linters, exclude_linters) {
 
   linters <- setdiff(linters, exclude_linters)
   linters <- keep_or_exclude_testthat_rules(path, linters)
+
+  # Ignore unreachable_code in tests
+  if (is_flir_package(path)) {
+    linters <- linters[grep(
+      "unreachable_code",
+      linters,
+      fixed = TRUE,
+      invert = TRUE
+    )]
+  }
+
   if (
     !all(linters %in% rules_basename_noext | linter_is_path_to_yml(linters))
   ) {

@@ -539,3 +539,22 @@ test_that("Do not lint inline else after stop in inline function", {
 #   expect_lint("\\(x) if (x > 3L) stop() else x + 3", NULL, linter)
 #   expect_lint("\\(x){ if (x > 3L) stop() else x + 3 }", NULL, linter)
 # })
+
+test_that("unreachable_code is deactivated by default", {
+  expect_lint(
+    "foo <- function(bar) { \nreturn(bar)\n 1 + 1}",
+    "Code and comments coming after",
+    unreachable_code_linter()
+  )
+  expect_lint(
+    "foo <- function(bar) { \nreturn(bar)\n 1 + 1}",
+    NULL,
+    NULL
+  )
+
+  create_local_package()
+  setup_flir()
+  cat("foo <- function(bar) { \nreturn(bar)\n 1 + 1}", file = "R/foo.R")
+  lints <- lint_package()
+  expect_equal(nrow(lints), 0)
+})

@@ -1,7 +1,7 @@
 Package: flir
 Type: Package
 Title: Find and Fix Lints in R Code
-Version: 0.4.2
+Version: 0.4.2.9000
 Authors@R:
     person(given = "Etienne",
            family = "Bacher",

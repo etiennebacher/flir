@@ -1,3 +1,11 @@
+# flir (development version)
+
+## Changes
+
+* `unreachable_code` is deactivated by default. It can still be activated with
+  the argument `linters` or in `flir/config.yml` after running `setup_flir()` 
+  (#75).
+
 # flir 0.4.2
 
 ## Changes
