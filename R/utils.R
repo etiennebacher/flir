@@ -341,9 +341,13 @@ uses_git <- function() {
 # testing on temp files).
 uses_testthat <- function(path = ".") {
   out <- TRUE
-  testthat_folder_exists <- unname(fs::dir_exists(fs::path(path, "tests", "testthat")))
+  testthat_folder_exists <- unname(fs::dir_exists(fs::path(
+    path,
+    "tests",
+    "testthat"
+  )))
   if (is_r_package(path) && !testthat_folder_exists) {
-    out <-  FALSE
+    out <- FALSE
   }
   out
 }
