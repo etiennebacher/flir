@@ -301,8 +301,7 @@ parse_and_rewrite_file <- function(file, rule_files, interactive) {
 
   if (isTRUE(interactive)) {
     writeLines(text = fixes, new_file)
-    changed <- data.frame(name = file, cur = file, new = file_to_parse)
-    review_app(changed$name, changed$cur, changed$new)
+    review_app(name = file, old_path = file, new_path = file_to_parse)
   } else {
     writeLines(text = fixes, file)
   }
