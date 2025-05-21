@@ -36,6 +36,7 @@ Setting `interactive = TRUE` will open a Shiny application enabling you to see a
 Those changes are not applied yet: you can decide whether you want to apply them or to skip them. 
 If you have several files to review, accepting or skipping the changes for one file will automatically go to the next file.
 
-The video below shows that I have two files, `foo1.R` and `foo2.R`, both of which would be modified by automated fixes. Using `interactive = TRUE` allows me to decide whether I actually want fixes to be applied or not:
+The video below shows that I have two files, `foo1.R` and `foo2.R`, both of which would be modified by automated fixes. 
+Using `interactive = TRUE` allows me to decide whether I actually want fixes to be applied or not:
 
 ![A gif showing `fix()` applied on two files and opening a Shiny app to review changes. Changes for the first file are accepted but not those for the second file. Only the first file is modified.](flir - interactive-review - RStudio 2025-05-21 18-48-53.gif)
