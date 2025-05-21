@@ -68,6 +68,10 @@ fix <- function(
     })
   }
 
+  if (isTRUE(interactive)) {
+    rlang::check_installed(c("shiny", "diffviewer"))
+  }
+
   rule_files <- resolve_linters(path, linters, exclude_linters)
   r_files <- resolve_path(path, exclude_path)
   fixes <- list()
