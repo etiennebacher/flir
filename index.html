@@ -35,6 +35,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/adding_rules.html">Adding new rules</a></li>
+    <li><a class="dropdown-item" href="articles/automated_fixes.html">Automated fixes</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
@@ -122,6 +123,7 @@
 <span><span class="co">#&gt; New code:</span></span>
 <span><span class="co">#&gt; anyNA(x)</span></span>
 <span><span class="co">#&gt; anyDuplicated(y) &gt; 0</span></span></code></pre></div>
+<p>See the vignette <a href="https://flir.etiennebacher.com/articles/automated_fixes">Automated fixes</a> to see how to be more confident about changes introduced by <code>flir</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="real-life-examples">Real-life examples<a class="anchor" aria-label="anchor" href="#real-life-examples"></a>
@@ -186,13 +188,13 @@
 <span>  <span class="op">)</span>,</span>
 <span>  check <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Some expressions had a GC in every iteration; so filtering</span></span>
-<span><span class="co">#&gt; is disabled.</span></span>
+<span><span class="co">#&gt; Warning: Some expressions had a GC in every iteration; so filtering is</span></span>
+<span><span class="co">#&gt; disabled.</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 lintr         2.97s    2.97s     0.337  315.05MB     2.36</span></span>
-<span><span class="co">#&gt; 2 flir       180.79ms 181.69ms     5.43     1.85MB     0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 lintr         1.84s    1.84s     0.542  315.05MB    21.7 </span></span>
+<span><span class="co">#&gt; 2 flir        110.2ms  111.3ms     8.79     1.85MB     5.27</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="why-the-name-flir">Why the name “flir”?<a class="anchor" aria-label="anchor" href="#why-the-name-flir"></a>

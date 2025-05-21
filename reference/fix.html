@@ -38,6 +38,7 @@ quickly experiment with some lints and fixes."></head><body>
       <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/adding_rules.html">Adding new rules</a></li>
+    <li><a class="dropdown-item" href="../articles/automated_fixes.html">Automated fixes</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -77,7 +78,8 @@ quickly experiment with some lints and fixes.</p>
 <span>  exclude_linters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rerun <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  rerun <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  interactive <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">fix_dir</span><span class="op">(</span></span>
@@ -87,7 +89,8 @@ quickly experiment with some lints and fixes.</p>
 <span>  exclude_linters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rerun <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  rerun <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  interactive <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">fix_package</span><span class="op">(</span></span>
@@ -97,7 +100,8 @@ quickly experiment with some lints and fixes.</p>
 <span>  exclude_linters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rerun <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  rerun <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  interactive <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">fix_text</span><span class="op">(</span><span class="va">text</span>, linters <span class="op">=</span> <span class="cn">NULL</span>, exclude_linters <span class="op">=</span> <span class="cn">NULL</span>, rerun <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -143,6 +147,13 @@ the code is run in a non-interactive setting.</p></dd>
 <dd><p>Run the function several times until there are no more fixes to
 apply. This is useful in the case of nested lints. If <code>FALSE</code>, the function
 runs only once, potentially ignoring nested fixes.</p></dd>
+
+
+<dt id="arg-interactive">interactive<a class="anchor" aria-label="anchor" href="#arg-interactive"></a></dt>
+<dd><p>Opens a Shiny app that shows a visual diff of each
+modified file. This is particularly useful when you want to review the
+potential fixes before accepting them. Setting this to <code>TRUE</code> will disable
+the check on whether Git is used.</p></dd>
 
 
 <dt id="arg-text">text<a class="anchor" aria-label="anchor" href="#arg-text"></a></dt>
