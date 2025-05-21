@@ -98,7 +98,7 @@ fix <- function(
     }
   }
 
-  if (!uses_git()) {
+  if (length(r_files) > 1 && !uses_git()) {
     if (interactive()) {
       choice <- utils::menu(
         title = "It seems that you are not using Git, which will make it difficult to see the changes in code. Do you want to continue?",
