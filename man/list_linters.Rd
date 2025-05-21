@@ -4,7 +4,11 @@
 \alias{list_linters}
 \title{Get the list of linters in \code{flir}}
 \usage{
-list_linters()
+list_linters(path = ".")
+}
+\arguments{
+\item{path}{A valid path to a file or a directory. Relative paths are
+accepted.}
 }
 \value{
 A character vector

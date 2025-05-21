@@ -1,5 +1,6 @@
 #' Get the list of linters in `flir`
 #'
+#' @inheritParams lint
 #' @return A character vector
 #' @export
 #'
