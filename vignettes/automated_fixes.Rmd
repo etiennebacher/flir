@@ -25,9 +25,12 @@ Moreover, since those fixes can be applied to several files at once, going back 
 
 ## Use Git
 
-By default, if the files that would receive fixes are not covered by Git version control, a menu will appear recommending you to use Git. At this stage, you can still decide whether you want to apply the fixes or stop here without changing anything.
+By default, if the files that would receive fixes are not covered by Git version control, a menu will appear recommending you to use Git. 
+At this stage, you can still decide whether you want to apply the fixes or stop here without changing anything.
 
-Git makes it much easier to see changed files and it is therefore very recommended to use it in combination with `flir`. Similarly, if some files are unstaged (meaning that they have changes not yet covered by Git), another menu will ask you to confirm that you want to apply fixes. The reason is that for those unstaged files, it may be difficult to distinguish the new changes introduced by automated fixes from previous, unsaved changes.
+Git makes it much easier to see changed files and it is therefore very recommended to use it in combination with `flir`. 
+Similarly, if some files are unstaged (meaning that they have changes not yet covered by Git), another menu will ask you to confirm that you want to apply fixes. 
+The reason is that for those unstaged files, it may be difficult to distinguish the new changes introduced by automated fixes from previous, unsaved changes.
 
 ## Interactively review all fixes
 
