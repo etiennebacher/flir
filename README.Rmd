@@ -84,6 +84,8 @@ any(duplicated(y))
 )
 ```
 
+See the vignette [Automated fixes](https://flir.etiennebacher.com/articles/automated_fixes) to see how to be more confident about changes introduced by `flir`.
+
 ## Real-life examples
 
 I tested `flir` on several packages while developing it. I proposed some pull
