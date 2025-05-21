@@ -14,7 +14,8 @@ fix(
   exclude_linters = NULL,
   force = FALSE,
   verbose = TRUE,
-  rerun = TRUE
+  rerun = TRUE,
+  interactive = FALSE
 )
 
 fix_dir(
@@ -24,7 +25,8 @@ fix_dir(
   exclude_linters = NULL,
   force = FALSE,
   verbose = TRUE,
-  rerun = TRUE
+  rerun = TRUE,
+  interactive = FALSE
 )
 
 fix_package(
@@ -34,7 +36,8 @@ fix_package(
   exclude_linters = NULL,
   force = FALSE,
   verbose = TRUE,
-  rerun = TRUE
+  rerun = TRUE,
+  interactive = FALSE
 )
 
 fix_text(text, linters = NULL, exclude_linters = NULL, rerun = TRUE)
@@ -63,6 +66,11 @@ the code is run in a non-interactive setting.}
 \item{rerun}{Run the function several times until there are no more fixes to
 apply. This is useful in the case of nested lints. If \code{FALSE}, the function
 runs only once, potentially ignoring nested fixes.}
+
+\item{interactive}{Opens a Shiny app that shows a visual diff of each
+modified file. This is particularly useful when you want to review the
+potential fixes before accepting them. Setting this to \code{TRUE} will disable
+the check on whether Git is used.}
 
 \item{text}{Text to analyze (and to fix if necessary).}
 }
