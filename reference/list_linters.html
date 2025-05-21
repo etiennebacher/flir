@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">flir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,9 +43,18 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">list_linters</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">list_linters</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
+<dl><dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
+<dd><p>A valid path to a file or a directory. Relative paths are
+accepted.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character vector</p>
@@ -57,20 +66,17 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "any_duplicated"       "any_is_na"            "class_equals"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "condition_message"    "double_assignment"    "duplicate_argument"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "empty_assignment"     "equal_assignment"     "equals_na"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "expect_comparison"    "expect_identical"     "expect_length"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "expect_named"         "expect_not"           "expect_null"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "expect_true_false"    "expect_type"          "for_loop_index"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "function_return"      "implicit_assignment"  "is_numeric"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "length_levels"        "length_test"          "lengths"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "library_call"         "list_comparison"      "literal_coercion"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "matrix_apply"         "missing_argument"     "nested_ifelse"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "numeric_leading_zero" "outer_negation"       "package_hooks"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [34] "paste"                "redundant_equals"     "redundant_ifelse"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "rep_len"              "right_assignment"     "sample_int"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [40] "semicolon"            "seq"                  "sort"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "stopifnot_all"        "T_and_F_symbol"       "todo_comment"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [46] "undesirable_function" "undesirable_operator" "unnecessary_nesting" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [49] "unreachable_code"     "which_grepl"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "for_loop_index"       "function_return"      "implicit_assignment" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "is_numeric"           "length_levels"        "length_test"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "lengths"              "library_call"         "list_comparison"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "literal_coercion"     "matrix_apply"         "missing_argument"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "nested_ifelse"        "numeric_leading_zero" "outer_negation"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "package_hooks"        "paste"                "redundant_equals"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "redundant_ifelse"     "rep_len"              "right_assignment"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "sample_int"           "semicolon"            "seq"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [34] "sort"                 "stopifnot_all"        "T_and_F_symbol"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "todo_comment"         "undesirable_function" "undesirable_operator"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [40] "unnecessary_nesting"  "unreachable_code"     "which_grepl"         </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
