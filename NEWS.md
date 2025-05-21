@@ -1,3 +1,11 @@
+# flir (development version)
+
+## Changes
+
+* Linters related to `testthat` (such as `expect_named`) are ignored if the
+  files that are parsed belong to a package that doesn't have a `tests/testthat`
+  folder (for instance if you use `tinytest` instead). (#74)
+
 # flir (0.4.1)
 
 ## Bug fixes
