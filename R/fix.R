@@ -305,7 +305,11 @@ parse_and_rewrite_file <- function(file, rule_files, interactive) {
 
   if (isTRUE(interactive)) {
     writeLines(text = fixes, new_file)
-    skipped <- review_app(name = file, old_path = file, new_path = file_to_parse)
+    skipped <- review_app(
+      name = file,
+      old_path = file,
+      new_path = file_to_parse
+    )
     if (isTRUE(skipped)) {
       needed_fixing <- FALSE
       n_fixes <- 0
