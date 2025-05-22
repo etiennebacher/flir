@@ -3,8 +3,8 @@ pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   adding_rules: adding_rules.html
-  automated_fixes: automated_fixes.html
-last_built: 2025-05-22T07:11Z
+  automatic_fixes: automatic_fixes.html
+last_built: 2025-05-22T09:18Z
 urls:
   reference: https://flir.etiennebacher.com/reference
   article: https://flir.etiennebacher.com/articles

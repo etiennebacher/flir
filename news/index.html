@@ -18,7 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/adding_rules.html">Adding new rules</a></li>
-    <li><a class="dropdown-item" href="../articles/automated_fixes.html">Automatic fixes</a></li>
+    <li><a class="dropdown-item" href="../articles/automatic_fixes.html">Automatic fixes</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -39,6 +39,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="flir-development-version">flir (development version)<a class="anchor" aria-label="anchor" href="#flir-development-version"></a></h2>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>Most <code>fix_*()</code> functions have a new argument <code>interactive</code> (<code>FALSE</code> by default). When set to <code>TRUE</code>, it opens a Shiny app in the Viewer so that the user can review fixes that would be applied to a file. It is therefore possible to accept or skip fixes on a file-by-file basis (<a href="https://github.com/etiennebacher/flir/issues/76" class="external-link">#76</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="changes-development-version">Changes<a class="anchor" aria-label="anchor" href="#changes-development-version"></a></h3>
 <ul><li>
