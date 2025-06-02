@@ -179,13 +179,13 @@ example, this will not warn:</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># `lint_text()` is convenient to explore with a small example</span></span></span>
 <span class="r-in"><span><span class="fu">lint_text</span><span class="op">(</span><span class="st">"any(duplicated(rnorm(5)))"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file21972885987b.R,line=1,col=1::file=/tmp/RtmpjgdkLm/file21972885987b.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce42d264ba8.R,line=1,col=1::file=/tmp/Rtmpjql3zO/file1ce42d264ba8.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">lint_text</span><span class="op">(</span><span class="st">"any(duplicated(rnorm(5)))</span></span></span>
 <span class="r-in"><span><span class="st">any(is.na(x))</span></span></span>
 <span class="r-in"><span><span class="st">"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file21972b6ef271.R,line=1,col=1::file=/tmp/RtmpjgdkLm/file21972b6ef271.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file21972b6ef271.R,line=2,col=1::file=/tmp/RtmpjgdkLm/file21972b6ef271.R,line=2,col=1,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce46556cc52.R,line=1,col=1::file=/tmp/Rtmpjql3zO/file1ce46556cc52.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce46556cc52.R,line=2,col=1::file=/tmp/Rtmpjql3zO/file1ce46556cc52.R,line=2,col=1,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Setup for the example with `lint()`</span></span></span>
 <span class="r-in"><span><span class="va">destfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -207,11 +207,11 @@ example, this will not warn:</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Going to check 1 file.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 5 lints in 1 file.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 of them can be fixed automatically.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file219747bd933f,line=2,col=1::file=/tmp/RtmpjgdkLm/file219747bd933f,line=2,col=1,[x = c(1, 2, 3)] Use &lt;-, not =, for assignment.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file219747bd933f,line=3,col=1::file=/tmp/RtmpjgdkLm/file219747bd933f,line=3,col=1,[any(duplicated(x), na.rm = TRUE)] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file219747bd933f,line=5,col=1::file=/tmp/RtmpjgdkLm/file219747bd933f,line=5,col=1,[any(duplicated(x))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file219747bd933f,line=7,col=5::file=/tmp/RtmpjgdkLm/file219747bd933f,line=7,col=5,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpjgdkLm/file219747bd933f,line=11,col=1::file=/tmp/RtmpjgdkLm/file219747bd933f,line=11,col=1,[any(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=2,col=1::file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=2,col=1,[x = c(1, 2, 3)] Use &lt;-, not =, for assignment.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=3,col=1::file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=3,col=1,[any(duplicated(x), na.rm = TRUE)] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=5,col=1::file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=5,col=1,[any(duplicated(x))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=7,col=5::file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=7,col=5,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=11,col=1::file=/tmp/Rtmpjql3zO/file1ce430cf2799,line=11,col=1,[any(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   duplicated(x)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> )] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
 </code></pre></div>
