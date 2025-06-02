@@ -100,7 +100,9 @@ resolve_linters <- function(path, linters, exclude_linters) {
 
   if (is.null(linters)) {
     if (uses_flir(path_common)) {
+      check_config(path_common)
       linters <- get_linters_from_config(path_common)
+      linters <- c(linters, get_external_linters_from_config(path_common))
     } else {
       linters <- rules_basename_noext
     }
@@ -154,6 +156,31 @@ linter_is_path_to_yml <- function(x) {
   )
 }
 
+
+check_config <- function(path) {
+  if (fs::is_file(path)) {
+    path <- tryCatch(
+      rprojroot::find_root(
+        rprojroot::is_rstudio_project | rprojroot::is_r_package,
+        path = path
+      ),
+      error = function(e) fs::path_dir(path)
+    )
+  }
+  if (is_flir_package(path)) {
+    config_file <- "inst/config.yml"
+  } else {
+    config_file <- "flir/config.yml"
+  }
+  if (fs::file_exists(config_file)) {
+    nms <- names(yaml::read_yaml(config_file, readLines.warn = FALSE))
+    nms <- setdiff(nms, c("keep", "exclude", "from-package"))
+    if (length(nms) > 0) {
+      stop(sprintf("Unknown field in `flir/config.yml`: %s", toString(nms)))
+    }
+  }
+}
+
 get_linters_from_config <- function(path) {
   if (fs::is_file(path)) {
     path <- tryCatch(
@@ -171,7 +198,8 @@ get_linters_from_config <- function(path) {
   }
   if (fs::file_exists(config_file)) {
     linters <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["keep"]]
-    if (length(linters) == 0) {
+    from_package <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["from-package"]]
+    if (length(linters) == 0 && length(from_package) == 0) {
       stop("`", config_file, "` exists but doesn't contain any rule.")
     }
     if (anyDuplicated(linters) > 0) {
@@ -214,6 +242,71 @@ get_excluded_linters_from_config <- function(path) {
         toString(linters[duplicated(linters)])
       )
     }
+    linters
+  }
+}
+
+get_external_linters_from_config <- function(path) {
+  if (fs::is_file(path)) {
+    path <- tryCatch(
+      rprojroot::find_root(
+        rprojroot::is_rstudio_project | rprojroot::is_r_package,
+        path = path
+      ),
+      error = function(e) fs::path_dir(path)
+    )
+  }
+  if (is_flir_package(path)) {
+    config_file <- file.path(path, "inst/config.yml")
+  } else {
+    config_file <- file.path(path, "flir/config.yml")
+  }
+  if (fs::file_exists(config_file)) {
+    pkgs <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["from-package"]]
+    if (length(pkgs) == 0) {
+      return(NULL)
+    }
+    if (anyDuplicated(pkgs) > 0) {
+      stop(
+        "In `",
+        config_file,
+        "`, the following packages are duplicated: ",
+        toString(pkgs[duplicated(pkgs)])
+      )
+    }
+
+    installed <- pkgs[pkgs == basename(pkgs)]
+    remote <- pkgs[grep("/", pkgs)]
+    linters <- NULL
+
+    if (length(installed) > 0) {
+      rlang::check_installed(installed)
+      for (i in installed) {
+        linters <- append(
+          linters,
+          list.files(
+            system.file("inst/flir/rules", package = i),
+            pattern = "\\.(yml|yaml)"
+          )
+        )
+      }
+    }
+
+    if (length(remote) > 0) {
+      path_to_rules <- vector("character", length = length(remote))
+      for (i in remote) {
+        path_to_rules[i] <- sprintf(
+          "https://raw.githubusercontent.com/%s/refs/heads/main/inst/flir/rules",
+          i
+        )
+        # TODO: finish handling of remote
+      }
+    }
+
+    pkgs_short <- basename(pkgs)
+
+
+
     linters
   }
 }

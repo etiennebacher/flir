@@ -66,3 +66,42 @@ test_that("config.yml errors when it contains duplicated rules", {
   )
   expect_error(lint(), "the following linters are duplicated: equal_assignment")
 })
+
+test_that("config.yml errors with unknown fields", {
+  create_local_package()
+  setup_flir()
+
+  cat(
+    "keep:\n  - equal_assignment\nsome_field: hello",
+    file = "flir/config.yml"
+  )
+  expect_error(
+    lint(),
+    "Unknown field in `flir/config.yml`: some_field"
+  )
+})
+
+test_that("config: `from-package` checks duplicated package name", {
+  create_local_package()
+  setup_flir()
+
+  cat(
+    "from-package:\n  - foo\n  - foo",
+    file = "flir/config.yml"
+  )
+  expect_error(
+    lint(),
+    "the following packages are duplicated: foo"
+  )
+})
+
+test_that("config: `from-package` checks that package is installed", {
+  create_local_package()
+  setup_flir()
+
+  cat(
+    "from-package:\n  - foo",
+    file = "flir/config.yml"
+  )
+  expect_error(lint(), "The package \"foo\" is required.")
+})
