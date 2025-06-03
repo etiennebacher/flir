@@ -285,8 +285,9 @@ get_external_linters_from_config <- function(path) {
         linters <- append(
           linters,
           list.files(
-            system.file("inst/flir/rules", package = i),
-            pattern = "\\.(yml|yaml)"
+            system.file("flir/rules", package = i),
+            pattern = "\\.(yml|yaml)",
+            full.names = TRUE
           )
         )
       }
@@ -304,9 +305,6 @@ get_external_linters_from_config <- function(path) {
     }
 
     pkgs_short <- basename(pkgs)
-
-
-
     linters
   }
 }
