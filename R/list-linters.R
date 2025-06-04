@@ -91,7 +91,7 @@ update_linter_factory <- function(path = ".") {
     }
     cat(
       sprintf(
-        "\n\n#' @usage %s_linter\n#' @name %s_linter\n#' @export
+        "\n\n#' @usage %s_linter\n#' @name %s_linter\n#' @export\n#' @return The name of the linter
 NULL
 makeActiveBinding('%s_linter', function() { function() '%s' }, env = environment())\n
 ",

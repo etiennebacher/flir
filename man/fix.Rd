@@ -74,6 +74,13 @@ the check on whether Git is used.}
 
 \item{text}{Text to analyze (and to fix if necessary).}
 }
+\value{
+A list with as many elements as there are files to fix (in \code{fix_text()}),
+the text is written to a temporary file.
+
+Each element of the list contains the fixed text, where all fixes available
+have been applied.
+}
 \description{
 \code{fix()}, \code{fix_package()}, and \code{fix_dir()} all replace lints in files. The
 only difference is in the input they take:

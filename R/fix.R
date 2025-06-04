@@ -26,6 +26,13 @@
 #'
 #' @inheritSection lint Ignoring lines
 #'
+#' @return
+#' A list with as many elements as there are files to fix (in `fix_text()`),
+#' the text is written to a temporary file.
+#'
+#' Each element of the list contains the fixed text, where all fixes available
+#' have been applied.
+#'
 #' @export
 #' @examples
 #' # `fix_text()` is convenient to explore with a small example

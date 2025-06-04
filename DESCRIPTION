@@ -1,7 +1,7 @@
 Package: flir
 Type: Package
 Title: Find and Fix Lints in R Code
-Version: 0.4.2.9000
+Version: 0.5.0
 Authors@R:
     person(given = "Etienne",
            family = "Bacher",
@@ -15,7 +15,7 @@ Description: Lints are code patterns that are not optimal because they are
 Depends:
     R (>= 4.2)
 Imports:
-    astgrepr (>= 0.0.10),
+    astgrepr (>= 0.1.0),
     cli,
     crayon,
     data.table,
@@ -40,8 +40,6 @@ Suggests:
     usethis,
     utils,
     withr
-Remotes:
-    etiennebacher/astgrepr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
