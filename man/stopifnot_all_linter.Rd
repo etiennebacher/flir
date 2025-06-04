@@ -6,6 +6,9 @@
 \usage{
 stopifnot_all_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/stopifnot_all_linter}.
 }

@@ -6,6 +6,9 @@
 \usage{
 outer_negation_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/outer_negation_linter}.
 }

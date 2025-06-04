@@ -6,6 +6,9 @@
 \usage{
 rep_len_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/rep_len_linter}.
 }

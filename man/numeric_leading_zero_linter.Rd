@@ -6,6 +6,9 @@
 \usage{
 numeric_leading_zero_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/numeric_leading_zero_linter}.
 }

@@ -6,6 +6,9 @@
 \usage{
 sort_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/sort_linter}.
 }

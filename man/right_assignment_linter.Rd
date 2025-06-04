@@ -6,6 +6,9 @@
 \usage{
 right_assignment_linter
 }
+\value{
+The name of the linter
+}
 \description{
 right_assignment
 }

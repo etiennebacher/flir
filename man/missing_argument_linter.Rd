@@ -6,6 +6,9 @@
 \usage{
 missing_argument_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/missing_argument_linter}.
 }
