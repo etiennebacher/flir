@@ -75,8 +75,8 @@ the check on whether Git is used.}
 \item{text}{Text to analyze (and to fix if necessary).}
 }
 \value{
-A list with as many elements as there are files to fix (in \code{fix_text()}),
-the text is written to a temporary file.
+A list with as many elements as there are files to fix (in \code{fix_text()},
+the text is written to a temporary file).
 
 Each element of the list contains the fixed text, where all fixes available
 have been applied.
