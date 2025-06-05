@@ -81,6 +81,17 @@ test_that("config.yml errors with unknown fields", {
   )
 })
 
+test_that("config.yml errors with duplicated fields", {
+  create_local_package()
+  setup_flir()
+
+  cat(
+    "keep:\n  - equal_assignment\nkeep:\n  - foo",
+    file = "flir/config.yml"
+  )
+  expect_error(lint(), "Duplicate map key: 'keep'")
+})
+
 test_that("config: `from-package` checks duplicated package name", {
   create_local_package()
   setup_flir()

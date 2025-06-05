@@ -22,9 +22,12 @@ check_config <- function(path) {
     return(invisible())
   }
   nms <- names(yaml::read_yaml(config_file, readLines.warn = FALSE))
-  nms <- setdiff(nms, c("keep", "exclude", "from-package"))
-  if (length(nms) > 0) {
-    stop(sprintf("Unknown field in `flir/config.yml`: %s", toString(nms)))
+  nms_unexpected <- setdiff(nms, c("keep", "exclude", "from-package"))
+  if (length(nms_unexpected) > 0) {
+    stop(sprintf(
+      "Unknown field in `flir/config.yml`: %s",
+      toString(nms_unexpected)
+    ))
   }
 }
 
