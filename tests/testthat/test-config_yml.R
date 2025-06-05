@@ -125,7 +125,12 @@ message: Most likely an error
   )
 
   ### The package needs to be installed
-  suppressMessages(install.packages(".", repos = NULL, type="source", quiet = TRUE))
+  suppressMessages(install.packages(
+    ".",
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  ))
   withr::defer(remove.packages(pkg_with_rules_nm))
 
   ### Step 2: create a package that uses rules from the first package
@@ -137,4 +142,76 @@ message: Most likely an error
   )
   cat("x <- function() { \nunique(length(x))\n}", file = "foo.R")
   expect_equal(nrow(lint("foo.R", open = FALSE)), 1)
+})
+
+test_that("config: `from-package` works with multiple packages having rules with same names", {
+  ### Step 1: create a package that contains some rules
+  pkg_with_rules <- fs::file_temp(pattern = "testpkg")
+  pkg_with_rules_nm <- basename(pkg_with_rules)
+  create_local_package(pkg_with_rules)
+  fs::dir_create("inst/flir/rules")
+  cat(
+    "id: foobar
+language: r
+severity: warning
+rule:
+  pattern: unique(length($VAR))
+fix: length(unique(~~VAR~~))
+message: Most likely an error
+",
+    file = "inst/flir/rules/my_rule.yml"
+  )
+
+  ### The package needs to be installed
+  suppressMessages(install.packages(
+    ".",
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  ))
+  withr::defer(suppressMessages(remove.packages(pkg_with_rules_nm)))
+
+  ### Step 2: create another package that contains some rules
+  pkg_with_rules_2 <- fs::file_temp(pattern = "testpkg")
+  pkg_with_rules_nm_2 <- basename(pkg_with_rules_2)
+  create_local_package(pkg_with_rules_2)
+  fs::dir_create("inst/flir/rules")
+  cat(
+    "id: foobar
+language: r
+severity: warning
+rule:
+  pattern: is.na(any($VAR))
+fix: any(is.na(~~VAR~~))
+message: Most likely an error
+",
+    file = "inst/flir/rules/my_rule.yml"
+  )
+
+  ### The package needs to be installed
+  suppressMessages(install.packages(
+    ".",
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  ))
+  withr::defer(suppressMessages(remove.packages(pkg_with_rules_nm_2)))
+
+  ### Step 3: create a package that uses rules from the first two packages
+  create_local_package()
+  setup_flir()
+  cat(
+    paste0(
+      "from-package:\n  - ",
+      pkg_with_rules_nm,
+      "\n  - ",
+      pkg_with_rules_nm_2
+    ),
+    file = "flir/config.yml"
+  )
+  cat("x <- function() { \nunique(length(x))\nis.na(any(x))\n}", file = "foo.R")
+  lints <- lint("foo.R", open = FALSE)
+
+  expect_true(all(endsWith(lints$id, "-custom-foobar")))
+  expect_equal(nrow(lints), 2)
 })
