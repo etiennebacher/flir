@@ -6,6 +6,9 @@
 \usage{
 double_assignment_linter
 }
+\value{
+The name of the linter
+}
 \description{
 double_assignment
 }

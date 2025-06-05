@@ -6,6 +6,9 @@
 \usage{
 condition_message_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/condition_message_linter}.
 }

@@ -1,16 +1,18 @@
-# flir (development version)
+# flir 0.5.0
+
+This is the first CRAN release.
 
 ## New features
 
-* Most `fix_*()` functions have a new argument `interactive` (`FALSE` by 
+* Most `fix_*()` functions have a new argument `interactive` (`FALSE` by
   default). When set to `TRUE`, it opens a Shiny app in the Viewer so that the
-  user can review fixes that would be applied to a file. It is therefore 
+  user can review fixes that would be applied to a file. It is therefore
   possible to accept or skip fixes on a file-by-file basis (#76).
 
 ## Changes
 
 * `unreachable_code` is deactivated by default. It can still be activated with
-  the argument `linters` or in `flir/config.yml` after running `setup_flir()` 
+  the argument `linters` or in `flir/config.yml` after running `setup_flir()`
   (#75).
 
 # flir 0.4.2
@@ -27,8 +29,8 @@
 
 * Changes were still directly applied to files that are unstaged
   in Git while there should have been a warning. This is now fixed.
-  
-* Properly skip changes in the user picks "No" in the menu about 
+
+* Properly skip changes in the user picks "No" in the menu about
   modifying unstaged files in Git.
 
 # flir 0.4.0
