@@ -119,8 +119,8 @@ get_external_linters_from_config <- function(path) {
       for (file in new_pkg_linters) {
         yaml <- yaml::read_yaml(file)
         # I could have a rule named "dplyr-superseded" that doesn't come from
-        # dplyr, so I add "custom" too.
-        yaml[["id"]] <- paste0(i, "-custom-", yaml[["id"]])
+        # dplyr, so I add "from" too.
+        yaml[["id"]] <- paste0("from-", i, yaml[["id"]])
         yaml::write_yaml(yaml, file)
       }
 

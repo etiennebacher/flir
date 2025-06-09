@@ -223,7 +223,7 @@ message: Most likely an error
   cat("x <- function() { \nunique(length(x))\nis.na(any(x))\n}", file = "foo.R")
   lints <- lint("foo.R", open = FALSE)
 
-  expect_true(all(endsWith(lints$id, "-custom-foobar")))
+  expect_true(all(startsWith(lints$id, "from-")))
   expect_equal(nrow(lints), 2)
 })
 
@@ -271,7 +271,6 @@ message: Most likely an error
   expect_equal(nrow(lints), 2)
 })
 
-
 ### TODO: support this
 # test_that("config: the user can exclude rules from external packages", {
 #   ### Step 1: create a package that contains some rules
@@ -308,7 +307,7 @@ message: Most likely an error
 #       "from-package:\n  - ",
 #       pkg_with_rules_nm,
 #       "\nexclude:\n  - ",
-#       paste0(pkg_with_rules_nm, "-custom-foo")
+#       paste0("from-", pkg_with_rules_nm, "-foo")
 #     ),
 #     file = "flir/config.yml",
 #     append = TRUE
