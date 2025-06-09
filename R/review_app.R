@@ -61,8 +61,11 @@ review_app <- function(name, old_path, new_path) {
       }
       remaining <- case_index[!handled]
       next_cases <- which(remaining > i())
-      if (length(next_cases) == 0) remaining[[1]] else
+      if (length(next_cases) == 0) {
+        remaining[[1]]
+      } else {
         remaining[[next_cases[[1]]]]
+      }
     }
   }
   rlang::inform(c(
