@@ -1,0 +1,63 @@
+---
+title: "Sharing rules across packages"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Sharing rules across packages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(flir)
+```
+
+Besides helping to detect a built-in list of bad patterns in R code, `flir` can also be used to refactor code, for instance by replacing the use of [deprecated or superseded](https://lifecycle.r-lib.org/articles/stages.html) functions.
+If you work on a project that uses `dplyr`, you could for instance [write your own rules]() to replace the use of `sample_n()` by `slice_sample()` (as described in [this blog post]()).
+
+However, that puts the burden of writing such rules on the end user, who is not necessarily familiar with all the changes in the package they use. Therefore, `flir` provides a way for package developers to define their own rules in the package, so that anyone who uses it will also have access to the same set of rules.
+
+Let's take an example with one of my packages: [`tidypolars`]() (I won't spend time explaining each part of the file, refer to the [Adding rules]() vignette for more details).
+
+## State of the package
+
+At the time of writing, `tidypolars` (0.13.0) contains several deprecated functions, such as `describe()` and `TODO`. Those functions should be replaced by `summary()` and `TODO` respectively.
+
+## For package developers
+
+On the side of package developers (in this example, this is only me), we can define some rules for `tidypolars` and store them in `inst/flir/rules`.
+
+First, I define is to detect the use of `describe()` and replace it with `summary()`:
+
+```yaml
+TODO
+```
+
+And then I do the same with `TODO`:
+
+```yaml
+TODO
+```
+
+This is all that is needed from package developers. When users will install the package, they will have access to those rules.
+
+## For users
+
+To use this feature, you need to set up a `flir` folder with `setup_flir()`. In particular, this will create the file `flir/config.yml` that we will modify to get rules from other packages.
+
+Once this is done, you can add a field `from-package` and list the packages from which you want to import the rules. For instance, to benefit from the rules defined above, we can do:
+
+```yaml
+from-package:
+  - tidypolars
+```
+
+and that's it! From now on, all calls to `lint_*()` or `fix_*()` on the project will also use the rules stored in `tidypolars`.
+Note that those rules are bundled with the package.
+Therefore, if the package developers change or remove some rules and you update the package, the rules you will have access to will also be different.
