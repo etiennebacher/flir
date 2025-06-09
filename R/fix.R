@@ -64,8 +64,7 @@ fix <- function(
   interactive = FALSE
 ) {
   if (isFALSE(verbose) | is_testing()) {
-    withr::local_options(cli.default_handler = function(...) {
-    })
+    withr::local_options(cli.default_handler = function(...) {})
   }
 
   if (isTRUE(interactive)) {

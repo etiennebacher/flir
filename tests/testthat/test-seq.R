@@ -18,13 +18,14 @@ test_that("seq_len(...) or seq_along(...) expressions are fine", {
 
 test_that("finds seq(...) expressions", {
   linter <- seq_linter()
-  lint_msg <- function(want, got)
+  lint_msg <- function(want, got) {
     paste0(
       got,
       " is likely to be wrong in the empty edge case. Use ",
       want,
       " instead"
     )
+  }
 
   expect_lint(
     "seq(length(x))",
@@ -53,13 +54,14 @@ test_that("finds seq(...) expressions", {
 
 test_that("finds 1:length(...) expressions", {
   linter <- seq_linter()
-  lint_msg <- function(want, got)
+  lint_msg <- function(want, got) {
     paste0(
       got,
       " is likely to be wrong in the empty edge case. Use ",
       want,
       " instead"
     )
+  }
 
   expect_lint(
     "1:length(x)",
