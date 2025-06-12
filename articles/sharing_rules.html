@@ -67,13 +67,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flir.etiennebacher.com">flir</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'flir'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:utils':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     fix</span></span></code></pre></div>
 <p>Besides helping to detect a built-in list of bad patterns in R code,
 <code>flir</code> can also be used to refactor code, for instance by
 replacing the use of <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link">deprecated or
@@ -107,26 +100,26 @@ refer to the &lt;a href="https://flir.etiennebacher.com/articles/adding_rules"&g
 rules&lt;/a&gt; vignette for more details.&lt;/p&gt;'><sup>1</sup></a>.</p>
 <p>First, I define a rule to detect the use of <code>describe()</code>
 and replace it with <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> deprecated-describe</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> deprecated-describe</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> describe($$$ARGS)</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> summary(~~ARGS~~)</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> In tidypolars, `describe()` is deprecated. Use `summary()` instead.</span></span></code></pre></div>
+<p>Keep in mind that <code>flir</code> works mainly by using <em>code
+patterns</em>, it doesn’t have information on the R environment.
+Therefore, the rule above doesn’t know which package provides the
+function and it would also replace <code>describe()</code> calls coming
+from other packages.</p>
+<p>I do the same with <code>describe_plan()</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> deprecated-describe_plan</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> describe($$$ARGS)</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> summary(~~ARGS~~)</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> In tidypolars, `describe()` is deprecated. Use `summary()` instead.</span></span></code></pre></div>
-<p>Keep in mind that <code>flir</code> works mainly by using <em>code
-patterns</em>, it doesn’t have information on the R environment.
-Therefore, the rule above doesn’t know from which package the function
-comes from and it would also replace <code>describe()</code> calls
-coming from other packages.</p>
-<p>I do the same with <code>describe_plan()</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> deprecated-describe_plan</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> describe_plan($ARG)</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> explain(~~ARG~~, optimized = FALSE)</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> In tidypolars, `describe_plan()` is deprecated. Use `explain(optimized = FALSE)` instead.</span></span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> describe_plan($ARG)</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> explain(~~ARG~~, optimized = FALSE)</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> In tidypolars, `describe_plan()` is deprecated. Use `explain(optimized = FALSE)` instead.</span></span></code></pre></div>
 <p>This is all that is needed from package developers. When users will
 install the package, they will have access to those rules.</p>
 <p><strong>Note:</strong> it is good practice to have a single name for
@@ -136,7 +129,14 @@ the file <code>deprecated-describe.yml</code>. If you want to store
 several rules related to this deprecation, you could name the other
 rules <code>deprecated-describe_2</code>,
 <code>deprecated-describe_3</code>, etc. and store them in the same
-file, separated by <code>...</code>.</p>
+file, separated by <code>---</code>.</p>
+<p>Overall, the only changes I had to do in <code>tidypolars</code>
+are:</p>
+<pre><code>inst
+└── flir
+    └── rules
+        ├── deprecated-describe.yml
+        └── deprecated-describe_plan.yml</code></pre>
 </div>
 <div class="section level2">
 <h2 id="for-users">For users<a class="anchor" aria-label="anchor" href="#for-users"></a>
