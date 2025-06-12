@@ -39,6 +39,7 @@ quickly experiment with some lints and fixes."></head><body>
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/adding_rules.html">Adding new rules</a></li>
     <li><a class="dropdown-item" href="../articles/automatic_fixes.html">Automatic fixes</a></li>
+    <li><a class="dropdown-item" href="../articles/sharing_rules.html">Sharing rules across packages</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -118,7 +119,10 @@ accepted.</p></dd>
 
 <dt id="arg-linters">linters<a class="anchor" aria-label="anchor" href="#arg-linters"></a></dt>
 <dd><p>A character vector with the names of the rules to apply. See
-the entire list of rules with <code><a href="list_linters.html">list_linters()</a></code>.</p></dd>
+the entire list of rules with <code><a href="list_linters.html">list_linters()</a></code>. If you have set up the
+<code>flir</code> folder with <code><a href="setup_flir.html">setup_flir()</a></code>, you can also list the linters to use
+in the <code>keep</code> field of <code>flir/config.yml</code>. See <code><a href="setup_flir.html">setup_flir()</a></code> for more
+information.</p></dd>
 
 
 <dt id="arg-exclude-path">exclude_path<a class="anchor" aria-label="anchor" href="#arg-exclude-path"></a></dt>
@@ -130,7 +134,9 @@ selection.</p></dd>
 <dd><p>One or several linters that will not be checked.
 Values can be the names of linters (such as <code>"any_is_na"</code>) or its
 associated function, such as <code><a href="any_is_na_linter.html">any_is_na_linter()</a></code> (this is mostly for
-compatibility with <code>lintr</code>).</p></dd>
+compatibility with <code>lintr</code>). If you have set up the <code>flir</code> folder with
+<code><a href="setup_flir.html">setup_flir()</a></code>, you can also list the linters to exclude in the <code>exclude</code>
+field of <code>flir/config.yml</code>. See <code><a href="setup_flir.html">setup_flir()</a></code> for more information.</p></dd>
 
 
 <dt id="arg-force">force<a class="anchor" aria-label="anchor" href="#arg-force"></a></dt>

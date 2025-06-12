@@ -39,6 +39,7 @@ demo, exec.
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/adding_rules.html">Adding new rules</a></li>
     <li><a class="dropdown-item" href="../articles/automatic_fixes.html">Automatic fixes</a></li>
+    <li><a class="dropdown-item" href="../articles/sharing_rules.html">Sharing rules across packages</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -115,7 +116,10 @@ accepted.</p></dd>
 
 <dt id="arg-linters">linters<a class="anchor" aria-label="anchor" href="#arg-linters"></a></dt>
 <dd><p>A character vector with the names of the rules to apply. See
-the entire list of rules with <code><a href="list_linters.html">list_linters()</a></code>.</p></dd>
+the entire list of rules with <code><a href="list_linters.html">list_linters()</a></code>. If you have set up the
+<code>flir</code> folder with <code><a href="setup_flir.html">setup_flir()</a></code>, you can also list the linters to use
+in the <code>keep</code> field of <code>flir/config.yml</code>. See <code><a href="setup_flir.html">setup_flir()</a></code> for more
+information.</p></dd>
 
 
 <dt id="arg-exclude-path">exclude_path<a class="anchor" aria-label="anchor" href="#arg-exclude-path"></a></dt>
@@ -127,7 +131,9 @@ selection.</p></dd>
 <dd><p>One or several linters that will not be checked.
 Values can be the names of linters (such as <code>"any_is_na"</code>) or its
 associated function, such as <code><a href="any_is_na_linter.html">any_is_na_linter()</a></code> (this is mostly for
-compatibility with <code>lintr</code>).</p></dd>
+compatibility with <code>lintr</code>). If you have set up the <code>flir</code> folder with
+<code><a href="setup_flir.html">setup_flir()</a></code>, you can also list the linters to exclude in the <code>exclude</code>
+field of <code>flir/config.yml</code>. See <code><a href="setup_flir.html">setup_flir()</a></code> for more information.</p></dd>
 
 
 <dt id="arg-open">open<a class="anchor" aria-label="anchor" href="#arg-open"></a></dt>
@@ -179,13 +185,13 @@ example, this will not warn:</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># `lint_text()` is convenient to explore with a small example</span></span></span>
 <span class="r-in"><span><span class="fu">lint_text</span><span class="op">(</span><span class="st">"any(duplicated(rnorm(5)))"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4533feed0.R,line=1,col=1::file=/tmp/RtmpnNRdpa/file1ce4533feed0.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf5d15e38b.R,line=1,col=1::file=/tmp/RtmpH0UMbL/file1caf5d15e38b.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">lint_text</span><span class="op">(</span><span class="st">"any(duplicated(rnorm(5)))</span></span></span>
 <span class="r-in"><span><span class="st">any(is.na(x))</span></span></span>
 <span class="r-in"><span><span class="st">"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4663aad18.R,line=1,col=1::file=/tmp/RtmpnNRdpa/file1ce4663aad18.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4663aad18.R,line=2,col=1::file=/tmp/RtmpnNRdpa/file1ce4663aad18.R,line=2,col=1,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf608d449.R,line=1,col=1::file=/tmp/RtmpH0UMbL/file1caf608d449.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf608d449.R,line=2,col=1::file=/tmp/RtmpH0UMbL/file1caf608d449.R,line=2,col=1,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Setup for the example with `lint()`</span></span></span>
 <span class="r-in"><span><span class="va">destfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -207,11 +213,11 @@ example, this will not warn:</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Going to check 1 file.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 5 lints in 1 file.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> 5 of them can be fixed automatically.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=2,col=1::file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=2,col=1,[x = c(1, 2, 3)] Use &lt;-, not =, for assignment.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=3,col=1::file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=3,col=1,[any(duplicated(x), na.rm = TRUE)] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=5,col=1::file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=5,col=1,[any(duplicated(x))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=7,col=5::file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=7,col=5,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=11,col=1::file=/tmp/RtmpnNRdpa/file1ce4512d320c,line=11,col=1,[any(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf355b994b,line=2,col=1::file=/tmp/RtmpH0UMbL/file1caf355b994b,line=2,col=1,[x = c(1, 2, 3)] Use &lt;-, not =, for assignment.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf355b994b,line=3,col=1::file=/tmp/RtmpH0UMbL/file1caf355b994b,line=3,col=1,[any(duplicated(x), na.rm = TRUE)] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf355b994b,line=5,col=1::file=/tmp/RtmpH0UMbL/file1caf355b994b,line=5,col=1,[any(duplicated(x))] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf355b994b,line=7,col=5::file=/tmp/RtmpH0UMbL/file1caf355b994b,line=7,col=5,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ::warning file=/tmp/RtmpH0UMbL/file1caf355b994b,line=11,col=1::file=/tmp/RtmpH0UMbL/file1caf355b994b,line=11,col=1,[any(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   duplicated(x)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> )] anyDuplicated(x, ...) &gt; 0 is better than any(duplicated(x), ...).</span>
 </code></pre></div>
