@@ -114,7 +114,8 @@ get_external_linters_from_config <- function(path) {
       ### copy the external rules to a tempdir first.
       new_pkg_linters <- fs::file_copy(
         pkg_linters,
-        fs::path_temp(paste0("from-", i, "-", basename(pkg_linters)))
+        fs::path_temp(paste0("from-", i, "-", basename(pkg_linters))),
+        overwrite = TRUE
       )
       for (file in new_pkg_linters) {
         yaml <- yaml::read_yaml(file)
