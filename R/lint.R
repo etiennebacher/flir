@@ -96,7 +96,8 @@ lint <- function(
   verbose = TRUE
 ) {
   if (isFALSE(verbose) | is_testing()) {
-    withr::local_options(cli.default_handler = function(...) {})
+    withr::local_options(cli.default_handler = function(...) {
+    })
   }
 
   if (is_testing()) {

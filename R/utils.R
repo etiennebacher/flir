@@ -115,7 +115,11 @@ resolve_linters <- function(path, linters, exclude_linters) {
 
   linters <- setdiff(linters, exclude_linters)
   if (any(fs::is_absolute_path(linters))) {
-    regex <- paste0("/(", paste(exclude_linters, collapse = "|"), ")\\.(yml|yaml)$")
+    regex <- paste0(
+      "/(",
+      paste(exclude_linters, collapse = "|"),
+      ")\\.(yml|yaml)$"
+    )
     linters <- grep(regex, linters, invert = TRUE, value = TRUE)
   }
   linters <- keep_or_exclude_testthat_rules(path, linters)
