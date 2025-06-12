@@ -132,7 +132,7 @@ rule:
 fix: length(unique(~~VAR~~))
 message: Most likely an error
 ",
-    file = "inst/flir/rules/my_rule.yml"
+    file = "inst/flir/rules/foo.yml"
   )
 
   ### The package needs to be installed
@@ -142,7 +142,7 @@ message: Most likely an error
     type = "source",
     quiet = TRUE
   ))
-  withr::defer(remove.packages(pkg_with_rules_nm))
+  withr::defer(suppressMessages(remove.packages(pkg_with_rules_nm)))
 
   ### Step 2: create a package that uses rules from the first package
   create_local_package()
@@ -170,7 +170,7 @@ rule:
 fix: length(unique(~~VAR~~))
 message: Most likely an error
 ",
-    file = "inst/flir/rules/my_rule.yml"
+    file = "inst/flir/rules/foo.yml"
   )
 
   ### The package needs to be installed
@@ -196,7 +196,7 @@ rule:
 fix: any(is.na(~~VAR~~))
 message: Most likely an error
 ",
-    file = "inst/flir/rules/my_rule.yml"
+    file = "inst/flir/rules/foo.yml"
   )
 
   ### The package needs to be installed
@@ -242,7 +242,7 @@ rule:
 fix: length(unique(~~VAR~~))
 message: Most likely an error
 ",
-    file = "inst/flir/rules/my_rule.yml"
+    file = "inst/flir/rules/foo.yml"
   )
 
   ### The package needs to be installed
@@ -271,52 +271,51 @@ message: Most likely an error
   expect_equal(nrow(lints), 2)
 })
 
-### TODO: support this
-# test_that("config: the user can exclude rules from external packages", {
-#   ### Step 1: create a package that contains some rules
-#   pkg_with_rules <- fs::file_temp(pattern = "testpkg")
-#   pkg_with_rules_nm <- basename(pkg_with_rules)
-#   create_local_package(pkg_with_rules)
-#   fs::dir_create("inst/flir/rules")
-#   cat(
-#     "id: foo
-# language: r
-# severity: warning
-# rule:
-#   pattern: unique(length($VAR))
-# fix: length(unique(~~VAR~~))
-# message: Most likely an error
-# ",
-#     file = "inst/flir/rules/my_rule.yml"
-#   )
-#
-#   ### The package needs to be installed
-#   suppressMessages(install.packages(
-#     ".",
-#     repos = NULL,
-#     type = "source",
-#     quiet = TRUE
-#   ))
-#   withr::defer(suppressMessages(remove.packages(pkg_with_rules_nm)))
-#
-#   ### Step 2: create a package that uses rules from the first two packages
-#   create_local_package()
-#   setup_flir()
-#   cat(
-#     paste0(
-#       "from-package:\n  - ",
-#       pkg_with_rules_nm,
-#       "\nexclude:\n  - ",
-#       paste0("from-", pkg_with_rules_nm, "-foo")
-#     ),
-#     file = "flir/config.yml",
-#     append = TRUE
-#   )
-#   cat(
-#     "x <- function() { \nunique(length(x))\nclass(x) == 'a'\n}",
-#     file = "foo.R"
-#   )
-#   lints <- lint("foo.R", open = FALSE)
-#
-#   expect_equal(nrow(lints), 1)
-# })
+test_that("config: the user can exclude rules from external packages", {
+  ### Step 1: create a package that contains some rules
+  pkg_with_rules <- fs::file_temp(pattern = "testpkg")
+  pkg_with_rules_nm <- basename(pkg_with_rules)
+  create_local_package(pkg_with_rules)
+  fs::dir_create("inst/flir/rules")
+  cat(
+    "id: foo
+language: r
+severity: warning
+rule:
+  pattern: unique(length($VAR))
+fix: length(unique(~~VAR~~))
+message: Most likely an error
+",
+    file = "inst/flir/rules/foo.yml"
+  )
+
+  ### The package needs to be installed
+  suppressMessages(install.packages(
+    ".",
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  ))
+  withr::defer(suppressMessages(remove.packages(pkg_with_rules_nm)))
+
+  ### Step 2: create a package that uses rules from the first two packages
+  create_local_package()
+  setup_flir()
+  cat(
+    paste0(
+      "from-package:\n  - ",
+      pkg_with_rules_nm,
+      "\nexclude:\n  - ",
+      paste0("from-", pkg_with_rules_nm, "-foo")
+    ),
+    file = "flir/config.yml",
+    append = TRUE
+  )
+  cat(
+    "x <- function() { \nunique(length(x))\nclass(x) == 'a'\n}",
+    file = "foo.R"
+  )
+  lints <- lint("foo.R", open = FALSE)
+
+  expect_equal(nrow(lints), 1)
+})
