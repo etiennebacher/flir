@@ -13,13 +13,18 @@
 #' @param path A valid path to a file or a directory. Relative paths are
 #'   accepted.
 #' @param linters A character vector with the names of the rules to apply. See
-#'   the entire list of rules with `list_linters()`.
+#'   the entire list of rules with `list_linters()`. If you have set up the
+#'   `flir` folder with `setup_flir()`, you can also list the linters to use
+#'   in the `keep` field of `flir/config.yml`. See [setup_flir()] for more
+#'   information.
 #' @param exclude_path One or several paths that will be ignored from the `path`
 #'   selection.
 #' @param exclude_linters One or several linters that will not be checked.
 #'   Values can be the names of linters (such as `"any_is_na"`) or its
 #'   associated function, such as `any_is_na_linter()` (this is mostly for
-#'   compatibility with `lintr`).
+#'   compatibility with `lintr`). If you have set up the `flir` folder with
+#'   `setup_flir()`, you can also list the linters to exclude in the `exclude`
+#'   field of `flir/config.yml`. See [setup_flir()] for more information.
 #' @param open If `TRUE` (default) and if this is used in the RStudio IDE, lints
 #'   will be shown with markers.
 #' @param use_cache Do not re-parse files that haven't changed since the last
