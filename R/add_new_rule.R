@@ -3,6 +3,7 @@
 #' @param name Name of the rule. Cannot contain white space.
 #' @inheritParams setup_flir
 #'
+#' @return Creates a new file but doesn't return anything.
 #' @export
 add_new_rule <- function(name, path = ".") {
   if (!rlang::is_string(name)) {

@@ -6,6 +6,9 @@
 \usage{
 length_levels_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/length_levels_linter}.
 }

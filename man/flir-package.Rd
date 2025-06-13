@@ -6,7 +6,7 @@
 \alias{flir-package}
 \title{flir: Find and Fix Lints in R Code}
 \description{
-Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. 'flir' provides a small set of functions to detect those lints and automatically fix them. It builds on 'astgrepr', which itself uses the Rust crate 'ast-grep' to parse and navigate R code.
+Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. 'flir' provides a small set of functions to detect those lints and automatically fix them. It builds on 'astgrepr', which itself uses the 'Rust' crate 'ast-grep' to parse and navigate R code.
 }
 \seealso{
 Useful links:

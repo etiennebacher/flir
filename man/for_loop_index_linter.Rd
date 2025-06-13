@@ -6,6 +6,9 @@
 \usage{
 for_loop_index_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/for_loop_index_linter}.
 }

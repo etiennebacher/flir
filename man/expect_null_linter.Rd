@@ -6,6 +6,9 @@
 \usage{
 expect_null_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/expect_null_linter}.
 }
