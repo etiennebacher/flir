@@ -42,9 +42,7 @@ get_linters_from_config <- function(path) {
   ]]
   if (length(linters) == 0 && length(from_package) == 0) {
     cli::cli_abort(paste0(
-      "`",
-      config_file,
-      "` exists but doesn't contain any rule."
+      "{.path {config_file}} exists but doesn't contain any rule."
     ))
   }
   if (anyDuplicated(linters) > 0) {

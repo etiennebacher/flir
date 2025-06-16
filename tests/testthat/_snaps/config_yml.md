@@ -4,7 +4,7 @@
       lint()
     Condition
       Error in `get_linters_from_config()`:
-      ! `flir/config.yml` exists but doesn't contain any rule.
+      ! 'flir/config.yml' exists but doesn't contain any rule.
 
 ---
 
@@ -12,7 +12,7 @@
       lint()
     Condition
       Error in `get_linters_from_config()`:
-      ! `flir/config.yml` exists but doesn't contain any rule.
+      ! 'flir/config.yml' exists but doesn't contain any rule.
 
 # config.yml errors when it contains unknown rules
 
