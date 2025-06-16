@@ -50,3 +50,30 @@ message: Most likely an error
     )
   )
 })
+
+test_that("fix() and lint() work on relative path to a rule", {
+  create_local_project()
+  cat(
+    "id: foobar
+language: r
+severity: warning
+rule:
+  pattern: a = $VAR
+fix: a <- ~~VAR~~
+message: foobar
+",
+    file = "foo.yml"
+  )
+
+  cat("a = 1", file = "foo.R")
+  expect_equal(nrow(lint(linters = "foo.yml")), 1)
+
+  # Works on both extensions
+  fs::file_move("foo.yml", "foo.yaml")
+  expect_equal(nrow(lint(linters = "foo.yaml")), 1)
+
+  # Nested path
+  fs::dir_create("foobar")
+  fs::file_move("foo.yaml", "foobar/foo.yaml")
+  expect_equal(nrow(lint(linters = "foobar/foo.yaml")), 1)
+})

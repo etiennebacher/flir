@@ -28,6 +28,11 @@
 * `T_and_F_symbol` do not detect anymore the use of `F` and `T` when those are
   used in the `:` operation (#81).
 
+## Bug fixes
+
+* `lint_*()` and `fix_*()` now work with relative paths to YAML files, for
+  example `lint(linters = "my_rule.yml")` (#92).
+
 # flir 0.4.2
 
 ## Changes

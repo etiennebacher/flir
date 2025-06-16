@@ -156,6 +156,9 @@ resolve_linters <- function(path, linters, exclude_linters) {
   }
 
   paths_to_yaml <- Filter(function(x) linter_is_path_to_yml(x), linters)
+  if (length(paths_to_yaml) > 0) {
+    paths_to_yaml <- fs::path_abs(paths_to_yaml)
+  }
 
   res <- rules[match(linters, rules_basename_noext)]
   res <- res[!is.na(res)]
@@ -163,13 +166,7 @@ resolve_linters <- function(path, linters, exclude_linters) {
 }
 
 linter_is_path_to_yml <- function(x) {
-  vapply(
-    x,
-    function(y) {
-      fs::is_absolute_path(y) && grepl("\\.yml$", y)
-    },
-    FUN.VALUE = logical(1L)
-  )
+  vapply(x, function(y) grepl("\\.(yaml|yml)$", y), FUN.VALUE = logical(1L))
 }
 
 
