@@ -30,6 +30,7 @@ reference:
 - title: Setup `flir`
   contents:
   - add_new_rule
+  - export_new_rule
   - setup_flir
   - setup_flir_gha
 
