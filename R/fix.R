@@ -71,8 +71,7 @@ fix <- function(
   interactive = FALSE
 ) {
   if (isFALSE(verbose) | is_testing()) {
-    withr::local_options(cli.default_handler = function(...) {
-    })
+    withr::local_options(cli.default_handler = function(...) {})
   }
 
   if (isTRUE(interactive)) {
@@ -93,14 +92,16 @@ fix <- function(
           choices = c("Yes", "No")
         )
         if (choice == 2) {
-          cli::cli_inform(c(i = "No changes applied."))
+          cli::cli_inform("No changes applied.")
           return(invisible())
         }
       } else if (isFALSE(force)) {
-        stop(
-          "It is recommended to commit or discard all modified files before running `fix()`. Therefore, this operation is not allowed by default in
-        a non-interactive setting. Use `force = TRUE` to bypass this behavior."
-        )
+        cli::cli_abort(c(
+          "It is recommended to commit or discard all modified files before running `fix()`.",
+          "i" = "Therefore, this operation is not allowed by default in
+        a non-interactive setting.",
+          "i" = "Use `force = TRUE` to bypass this behavior."
+        ))
       }
     }
   }
@@ -112,13 +113,16 @@ fix <- function(
         choices = c("Yes", "No")
       )
       if (choice == 2) {
-        cli::cli_inform(c(i = "No changes applied."))
+        cli::cli_inform("No changes applied.")
         return(invisible())
       }
     } else if (isFALSE(force)) {
-      stop(
-        "It seems that you are not using Git, but `fix()` will be applied on several R files. This will make it difficult to see the changes in code. Therefore, this operation is not allowed by default in a non-interactive setting. Use `force = TRUE` to bypass this behavior."
-      )
+      cli::cli_abort(c(
+        "It seems that you are not using Git, but `fix()` will be applied on several R files.",
+        "!" = "This will make it difficult to see the changes in code.",
+        "i" = "Therefore, this operation is not allowed by default in a non-interactive setting.",
+        "i" = "Use `force = TRUE` to bypass this behavior."
+      ))
     }
   }
 
@@ -173,7 +177,7 @@ fix_dir <- function(
   interactive = FALSE
 ) {
   if (!fs::is_dir(path)) {
-    stop("`path` must be a directory.")
+    cli::cli_abort("`path` must be a directory.")
   }
   fix(
     path,
@@ -201,7 +205,7 @@ fix_package <- function(
   interactive = FALSE
 ) {
   if (!fs::is_dir(path)) {
-    stop("`path` must be a directory.")
+    cli::cli_abort("`path` must be a directory.")
   }
   paths <- fs::path(
     path,

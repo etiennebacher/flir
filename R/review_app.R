@@ -33,7 +33,9 @@ review_app <- function(name, old_path, new_path) {
       diffviewer::visual_diff(old_path[[i()]], new_path[[i()]])
     })
     shiny::observeEvent(input$accept, {
-      rlang::inform(paste0("Accepting snapshot: '", old_path[[i()]], "'"))
+      cli::cli_inform(paste0(
+        "Accepting snapshot: {.path {old_path[[i()]]}}"
+      ))
       file.rename(new_path[[i()]], old_path[[i()]])
       update_cases()
     })
@@ -55,19 +57,22 @@ review_app <- function(name, old_path, new_path) {
     }
     next_case <- function() {
       if (all(handled)) {
-        rlang::inform("Review complete")
+        cli::cli_inform("Review complete")
         shiny::stopApp()
         return()
       }
       remaining <- case_index[!handled]
       next_cases <- which(remaining > i())
-      if (length(next_cases) == 0) remaining[[1]] else
+      if (length(next_cases) == 0) {
+        remaining[[1]]
+      } else {
         remaining[[next_cases[[1]]]]
+      }
     }
   }
-  rlang::inform(c(
+  cli::cli_inform(c(
     "Starting Shiny app for snapshot review",
-    i = "Use Escape to quit"
+    i = "Use Escape or Ctrl+C to quit"
   ))
   shiny::runApp(
     shiny::shinyApp(ui, server),

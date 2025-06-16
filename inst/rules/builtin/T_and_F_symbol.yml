@@ -11,9 +11,11 @@ rule:
             - pattern: <-
             - pattern: =
             - regex: ^~$
+            - regex: ^:$
       - follows:
           any:
             - pattern: $
+            - regex: ^:$
             - regex: ^~$
       - inside:
           any:
@@ -44,10 +46,12 @@ rule:
             - pattern: <-
             - pattern: =
             - regex: ^~$
+            - regex: ^:$
       - follows:
           any:
             - pattern: $
             - regex: ^~$
+            - regex: ^:$
       - inside:
           any:
             - kind: parameter

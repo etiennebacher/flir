@@ -26,6 +26,17 @@ test_that("T_and_F_symbol_linter is correct in formulas", {
   )
 })
 
+# https://github.com/etiennebacher/flir/issues/80
+test_that("T_and_F_symbol_linter not applied if part of `:`", {
+  linter <- T_and_F_symbol_linter()
+
+  expect_lint("A:T", NULL, linter)
+  expect_lint("A:F", NULL, linter)
+  expect_lint("T:A", NULL, linter)
+  expect_lint("F:A", NULL, linter)
+  expect_lint("f(F:A)", NULL, linter)
+})
+
 test_that("T_and_F_symbol_linter blocks disallowed usages", {
   linter <- T_and_F_symbol_linter()
   msg_true <- "Use TRUE instead of the symbol T."

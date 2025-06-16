@@ -14,7 +14,7 @@ setup_flir_gha <- function(path = ".", overwrite = FALSE) {
   }
   fs::file_copy(src, tar, overwrite = overwrite)
   if (!is_testing()) {
-    message("Created `.github/workflows/flir.yaml.")
+    cli::cli_inform("Created {.path .github/workflows/flir.yaml}.")
   }
 }
 

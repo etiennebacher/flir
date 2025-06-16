@@ -69,11 +69,11 @@ test_that("flir-ignore-start and end work with specific rule", {
 })
 
 test_that("flir-ignore-start and end error if mismatch", {
-  expect_error(
+  expect_snapshot(
     lint_text("# flir-ignore-start\nany(duplicated(x))\nany(duplicated(y))"),
-    "Mismatch: the number of `start` patterns (1) and of `end` patterns (0) must be equal.",
-    fixed = TRUE
+    error = TRUE
   )
+
   expect_error(
     lint_text("any(duplicated(x))\nany(duplicated(y))\n# flir-ignore-end"),
     "Mismatch: the number of `start` patterns (0) and of `end` patterns (1) must be equal.",

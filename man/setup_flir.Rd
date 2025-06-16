@@ -14,7 +14,30 @@ Imports files necessary for \code{flir} to work but doesn't return any
 value in R.
 }
 \description{
-This stores the default rules and internal files in \code{inst/flir}. It also
-imports \code{sgconfig.yml} that is used by \code{ast-grep}. This file must live at the
-root of the project and cannot be renamed.
+This creates a \code{flir} folder that has multiple purposes. It contains:
+\itemize{
+\item the file \code{config.yml} where you can define rules to keep or exclude, as
+well as rules defined in other packages. More on this below;
+\item the file \code{cache_file_state.rds}, which is used when \verb{lint_*()} or \verb{fix_*()}
+have \code{cache = TRUE};
+\item an optional folder \code{rules/custom} where you can store your own rules.
+}
+
+This folder must live at the root of the project and cannot be renamed.
+}
+\details{
+The file \code{flir/config.yml} can contain three fields: \code{keep}, \code{exclude},
+and \code{from-package}.
+
+\code{keep} and \code{exclude} are used to define the rules to keep or to exclude when
+running \verb{lint_*()} or \verb{fix_*()}.
+
+It is possible for other packages to create their own list of rules, for
+instance to detect or replace deprecated functions. In \code{from-package}, you
+can list package names where \code{flir} should look for additional rules. By
+default, if you list package \code{foobar}, then all rules defined in the package
+\code{foobar} will be used. To ignore some of those rules, you can list
+\verb{from-foobar-<rulename>} in the \code{exclude} field.
+
+See the vignette \href{https://flir.etiennebacher.com/articles/sharing_rules.html}{Sharing rules across packages} for more information.
 }

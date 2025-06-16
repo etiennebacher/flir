@@ -59,7 +59,9 @@ get_tests_from_lintr <- function(name) {
   )
   dest <- paste0("tests/testthat/test-", name, ".R")
   utils::download.file(url, destfile = dest)
-  rstudioapi::documentOpen(dest)
+  if (rlang::is_interactive()) {
+    utils::file.edit(dest)
+  }
 }
 
 resolve_linters <- function(path, linters, exclude_linters) {
@@ -77,9 +79,12 @@ resolve_linters <- function(path, linters, exclude_linters) {
   rules_basename_noext <- gsub("\\.yml$", "", rules_basename)
 
   if (anyDuplicated(rules_basename) > 0) {
-    stop(
-      "Some rule files are duplicated: ",
-      toString(rules_basename[duplicated(rules_basename)])
+    cli::cli_abort(
+      paste0(
+        "Some rule files are duplicated: ",
+        toString(rules_basename[duplicated(rules_basename)])
+      ),
+      call = rlang::caller_env()
     )
   }
 
@@ -100,7 +105,9 @@ resolve_linters <- function(path, linters, exclude_linters) {
 
   if (is.null(linters)) {
     if (uses_flir(path_common)) {
+      check_config(path_common)
       linters <- get_linters_from_config(path_common)
+      linters <- c(linters, get_external_linters_from_config(path_common))
     } else {
       linters <- rules_basename_noext
     }
@@ -112,6 +119,14 @@ resolve_linters <- function(path, linters, exclude_linters) {
   }
 
   linters <- setdiff(linters, exclude_linters)
+  if (any(fs::is_absolute_path(linters))) {
+    regex <- paste0(
+      "/(",
+      paste(exclude_linters, collapse = "|"),
+      ")\\.(yml|yaml)$"
+    )
+    linters <- grep(regex, linters, invert = TRUE, value = TRUE)
+  }
   linters <- keep_or_exclude_testthat_rules(path, linters)
 
   # Ignore unreachable_code in tests
@@ -127,17 +142,23 @@ resolve_linters <- function(path, linters, exclude_linters) {
   if (
     !all(linters %in% rules_basename_noext | linter_is_path_to_yml(linters))
   ) {
-    stop(
-      "Unknown linters: ",
-      toString(
-        linters[
-          !linters %in% rules_basename_noext & !linter_is_path_to_yml(linters)
-        ]
-      )
+    cli::cli_abort(
+      paste0(
+        "Unknown linters: ",
+        toString(
+          linters[
+            !linters %in% rules_basename_noext & !linter_is_path_to_yml(linters)
+          ]
+        )
+      ),
+      call = rlang::caller_env()
     )
   }
 
   paths_to_yaml <- Filter(function(x) linter_is_path_to_yml(x), linters)
+  if (length(paths_to_yaml) > 0) {
+    paths_to_yaml <- fs::path_abs(paths_to_yaml)
+  }
 
   res <- rules[match(linters, rules_basename_noext)]
   res <- res[!is.na(res)]
@@ -145,78 +166,9 @@ resolve_linters <- function(path, linters, exclude_linters) {
 }
 
 linter_is_path_to_yml <- function(x) {
-  vapply(
-    x,
-    function(y) {
-      fs::is_absolute_path(y) && grepl("\\.yml$", y)
-    },
-    FUN.VALUE = logical(1L)
-  )
+  vapply(x, function(y) grepl("\\.(yaml|yml)$", y), FUN.VALUE = logical(1L))
 }
 
-get_linters_from_config <- function(path) {
-  if (fs::is_file(path)) {
-    path <- tryCatch(
-      rprojroot::find_root(
-        rprojroot::is_rstudio_project | rprojroot::is_r_package,
-        path = path
-      ),
-      error = function(e) fs::path_dir(path)
-    )
-  }
-  if (is_flir_package(path)) {
-    config_file <- "inst/config.yml"
-  } else {
-    config_file <- "flir/config.yml"
-  }
-  if (fs::file_exists(config_file)) {
-    linters <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["keep"]]
-    if (length(linters) == 0) {
-      stop("`", config_file, "` exists but doesn't contain any rule.")
-    }
-    if (anyDuplicated(linters) > 0) {
-      stop(
-        "In `",
-        config_file,
-        "`, the following linters are duplicated: ",
-        toString(linters[duplicated(linters)])
-      )
-    }
-    linters
-  }
-}
-
-get_excluded_linters_from_config <- function(path) {
-  if (fs::is_file(path)) {
-    path <- tryCatch(
-      rprojroot::find_root(
-        rprojroot::is_rstudio_project | rprojroot::is_r_package,
-        path = path
-      ),
-      error = function(e) fs::path_dir(path)
-    )
-  }
-  if (is_flir_package(path)) {
-    config_file <- file.path(path, "inst/config.yml")
-  } else {
-    config_file <- file.path(path, "flir/config.yml")
-  }
-  if (fs::file_exists(config_file)) {
-    linters <- yaml::read_yaml(config_file, readLines.warn = FALSE)[["exclude"]]
-    if (length(linters) == 0) {
-      return(NULL)
-    }
-    if (anyDuplicated(linters) > 0) {
-      stop(
-        "In `",
-        config_file,
-        "`, the following excluded linters are duplicated: ",
-        toString(linters[duplicated(linters)])
-      )
-    }
-    linters
-  }
-}
 
 resolve_path <- function(path, exclude_path) {
   paths <- lapply(path, function(x) {
@@ -339,8 +291,8 @@ message: ...
 ",
     file = dest
   )
-  if (rstudioapi::isAvailable() && !is_positron()) {
-    rstudioapi::documentOpen(dest)
+  if (rlang::is_interactive()) {
+    utils::file.edit(dest)
   }
 }
 
