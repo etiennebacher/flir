@@ -76,5 +76,4 @@ message: foobar
   fs::dir_create("foobar")
   fs::file_move("foo.yaml", "foobar/foo.yaml")
   expect_equal(nrow(lint(linters = "foobar/foo.yaml")), 1)
-  fs::file_move("foobar/foo.yaml", "foo.yml")
 })
