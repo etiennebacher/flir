@@ -5,7 +5,7 @@ This package may write in the user directory for several reasons:
 1. The objective of some functions (`fix()` and its variants) is to
    automatically modify R files that the user passes as inputs. It is clearly
    described in the documentation that this will modify the files, and it asks
-   for the user confirmation when several files will be modified.
+   for the user confirmation when several files will be modified at once.
 
 2. Some functions are helpers to make it easier to use the package:
   - `setup_flir()` creates a folder `flir`
