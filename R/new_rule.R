@@ -76,7 +76,9 @@ export_new_rule <- function(name, path = ".") {
   }
   name_with_yml <- paste0(name, ".yml")
   if (!is_r_package(path)) {
-    rlang::abort("`export_new_rule()` only works when the project is an R package.")
+    rlang::abort(
+      "`export_new_rule()` only works when the project is an R package."
+    )
   }
   fs::dir_create(fs::path(path, "inst/flir/rules"))
   dest <- fs::path(path, "inst/flir/rules", name_with_yml)
