@@ -63,7 +63,7 @@ message: ...
 #' To create a new rule that you can use in the current project only, use
 #' `add_new_rule()` instead.
 #'
-#' @param name Name of the rule. Cannot contain white space.
+#' @inheritParams add_new_rule
 #' @inheritParams setup_flir
 #'
 #' @export
