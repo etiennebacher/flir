@@ -1,5 +1,9 @@
 #' Create a custom rule
 #'
+#' This function creates a YAML file with the placeholder text to define a new
+#' rule. The file is stored in `flir/rules/custom`. You need to create the
+#' `flir` folder with `setup_flir()` if it doesn't exist.
+#'
 #' @param name Name of the rule. Cannot contain white space.
 #' @inheritParams setup_flir
 #'
