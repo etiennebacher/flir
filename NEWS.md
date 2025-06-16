@@ -6,6 +6,13 @@
   default). When set to `TRUE`, it opens a Shiny app in the Viewer so that the
   user can review fixes that would be applied to a file. It is therefore 
   possible to accept or skip fixes on a file-by-file basis (#76).
+  
+* In R packages, it is now possible to create a list of rules that will be
+  available to the users of the package. This is for example useful to provide 
+  automatic fixes for deprecated or superseded functions. More information is
+  available in the vignette "Sharing rules across packages". Thanks to @maelle
+  and @Bisaloo for the suggestion and early feedback on the implementation (#78,
+  #84).
 
 ## Changes
 
