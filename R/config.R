@@ -29,7 +29,7 @@ check_config <- function(path) {
         "Unknown field in {.path flir/config.yml}: ",
         toString(nms_unexpected)
       ),
-      call = rlang::caller_env()
+      call = rlang::caller_env(2)
     )
   }
 }
@@ -46,7 +46,7 @@ get_linters_from_config <- function(path) {
   if (length(linters) == 0 && length(from_package) == 0) {
     cli::cli_abort(
       "{.path {config_file}} exists but doesn't contain any rule.",
-      call = rlang::caller_env()
+      call = rlang::caller_env(2)
     )
   }
   if (anyDuplicated(linters) > 0) {
@@ -55,7 +55,7 @@ get_linters_from_config <- function(path) {
         "In {.path {config_file}}, the following linters are duplicated: ",
         toString(linters[duplicated(linters)])
       ),
-      call = rlang::caller_env()
+      call = rlang::caller_env(2)
     )
   }
   linters
@@ -77,7 +77,7 @@ get_excluded_linters_from_config <- function(path) {
         "In {.path {config_file}}, the following excluded linters are duplicated: ",
         toString(linters[duplicated(linters)])
       ),
-      call = rlang::caller_env()
+      call = rlang::caller_env(2)
     )
   }
   linters
@@ -99,7 +99,7 @@ get_external_linters_from_config <- function(path) {
         "In {.path {config_file}}, the following packages are duplicated: ",
         toString(pkgs[duplicated(pkgs)])
       ),
-      call = rlang::caller_env()
+      call = rlang::caller_env(2)
     )
   }
 
