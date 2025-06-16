@@ -83,7 +83,8 @@ resolve_linters <- function(path, linters, exclude_linters) {
       paste0(
         "Some rule files are duplicated: ",
         toString(rules_basename[duplicated(rules_basename)])
-      )
+      ),
+      call = rlang::caller_env()
     )
   }
 
@@ -149,7 +150,8 @@ resolve_linters <- function(path, linters, exclude_linters) {
             !linters %in% rules_basename_noext & !linter_is_path_to_yml(linters)
           ]
         )
-      )
+      ),
+      call = rlang::caller_env()
     )
   }
 

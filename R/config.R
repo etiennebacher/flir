@@ -24,10 +24,13 @@ check_config <- function(path) {
   nms <- names(yaml::read_yaml(config_file, readLines.warn = FALSE))
   nms_unexpected <- setdiff(nms, c("keep", "exclude", "from-package"))
   if (length(nms_unexpected) > 0) {
-    cli::cli_abort(sprintf(
-      "Unknown field in {.path flir/config.yml}: %s",
-      toString(nms_unexpected)
-    ))
+    cli::cli_abort(
+      paste0(
+        "Unknown field in {.path flir/config.yml}: ",
+        toString(nms_unexpected)
+      ),
+      call = rlang::caller_env()
+    )
   }
 }
 
@@ -41,16 +44,18 @@ get_linters_from_config <- function(path) {
     "from-package"
   ]]
   if (length(linters) == 0 && length(from_package) == 0) {
-    cli::cli_abort(paste0(
-      "{.path {config_file}} exists but doesn't contain any rule."
-    ))
+    cli::cli_abort(
+      "{.path {config_file}} exists but doesn't contain any rule.",
+      call = rlang::caller_env()
+    )
   }
   if (anyDuplicated(linters) > 0) {
     cli::cli_abort(
       paste0(
         "In {.path {config_file}}, the following linters are duplicated: ",
         toString(linters[duplicated(linters)])
-      )
+      ),
+      call = rlang::caller_env()
     )
   }
   linters
@@ -67,10 +72,13 @@ get_excluded_linters_from_config <- function(path) {
     return(NULL)
   }
   if (anyDuplicated(linters) > 0) {
-    cli::cli_abort(c(
-      "In {.path {config_file}}, the following excluded linters are duplicated: ",
-      toString(linters[duplicated(linters)])
-    ))
+    cli::cli_abort(
+      paste0(
+        "In {.path {config_file}}, the following excluded linters are duplicated: ",
+        toString(linters[duplicated(linters)])
+      ),
+      call = rlang::caller_env()
+    )
   }
   linters
 }
@@ -86,10 +94,13 @@ get_external_linters_from_config <- function(path) {
     return(NULL)
   }
   if (anyDuplicated(pkgs) > 0) {
-    cli::cli_abort(paste0(
-      "In {.path {config_file}}, the following packages are duplicated: ",
-      toString(pkgs[duplicated(pkgs)])
-    ))
+    cli::cli_abort(
+      paste0(
+        "In {.path {config_file}}, the following packages are duplicated: ",
+        toString(pkgs[duplicated(pkgs)])
+      ),
+      call = rlang::caller_env()
+    )
   }
 
   installed <- pkgs[pkgs == basename(pkgs)]
