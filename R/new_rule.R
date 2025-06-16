@@ -27,9 +27,13 @@ add_new_rule <- function(name, path = ".") {
     ))
   }
 
-  dest <- fs::path(path, "flir", "rules", "custom", name_with_yml)
-  fs::dir_create(fs::path_dir(dest))
+  fs::dir_create(fs::path(path, "flir/rules/custom"))
+  dest <- fs::path(path, "flir/rules/custom", name_with_yml)
+  if (fs::file_exists(dest)) {
+    rlang::abort(sprintf("`%s` already exists.", dest))
+  }
   fs::file_create(dest)
+
   cat(
     sprintf(
       "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules

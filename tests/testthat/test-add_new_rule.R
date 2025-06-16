@@ -13,6 +13,17 @@ test_that("add_new_rule() errors", {
   )
 })
 
+test_that("export_new_rule() cannot overwrite files", {
+  create_local_package()
+  setup_flir()
+  add_new_rule("foobar")
+  expect_error(
+    add_new_rule("foobar"),
+    "`./flir/rules/custom/foobar.yml` already exists.",
+    fixed = TRUE
+  )
+})
+
 test_that("create template for new custom rule", {
   create_local_project()
   expect_error(
