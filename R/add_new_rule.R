@@ -1,4 +1,4 @@
-#' Create a custom rule
+#' Create a custom rule for internal use
 #'
 #' @description
 #' This function creates a YAML file with the placeholder text to define a new

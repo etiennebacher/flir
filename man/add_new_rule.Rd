@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_new_rule.R
 \name{add_new_rule}
 \alias{add_new_rule}
-\title{Create a custom rule}
+\title{Create a custom rule for internal use}
 \usage{
 add_new_rule(name, path = ".")
 }
@@ -12,5 +12,10 @@ add_new_rule(name, path = ".")
 \item{path}{Path to package or project root.}
 }
 \description{
-Create a custom rule
+This function creates a YAML file with the placeholder text to define a new
+rule. The file is stored in \code{flir/rules/custom}. You need to create the
+\code{flir} folder with \code{setup_flir()} if it doesn't exist.
+
+If you want to create a rule that users of your package will be able to
+access, use \code{export_new_rule()} instead.
 }
