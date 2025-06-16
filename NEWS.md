@@ -1,23 +1,27 @@
 # flir (development version)
 
+## Breaking changes
+
+* `add_new_rule()` now errors if the file already exists (#87).
+
 ## New features
 
-* Most `fix_*()` functions have a new argument `interactive` (`FALSE` by 
+* Most `fix_*()` functions have a new argument `interactive` (`FALSE` by
   default). When set to `TRUE`, it opens a Shiny app in the Viewer so that the
-  user can review fixes that would be applied to a file. It is therefore 
+  user can review fixes that would be applied to a file. It is therefore
   possible to accept or skip fixes on a file-by-file basis (#76).
-  
+
 * In R packages, it is now possible to create a list of rules that will be
-  available to the users of the package. This can be useful to provide 
-  automatic fixes for deprecated or superseded functions, for example. More 
-  information is available in the vignette "Sharing rules across packages". 
-  Thanks to @maelle and @Bisaloo for the suggestion and early feedback on the 
+  available to the users of the package. This can be useful to provide
+  automatic fixes for deprecated or superseded functions, for example. More
+  information is available in the vignette "Sharing rules across packages".
+  Thanks to @maelle and @Bisaloo for the suggestion and early feedback on the
   implementation (#78, #84).
 
 ## Changes
 
 * `unreachable_code` is deactivated by default. It can still be activated with
-  the argument `linters` or in `flir/config.yml` after running `setup_flir()` 
+  the argument `linters` or in `flir/config.yml` after running `setup_flir()`
   (#75).
 * `T_and_F_symbol` do not detect anymore the use of `F` and `T` when those are
   used in the `:` operation (#81).
@@ -36,8 +40,8 @@
 
 * Changes were still directly applied to files that are unstaged
   in Git while there should have been a warning. This is now fixed.
-  
-* Properly skip changes in the user picks "No" in the menu about 
+
+* Properly skip changes in the user picks "No" in the menu about
   modifying unstaged files in Git.
 
 # flir 0.4.0
