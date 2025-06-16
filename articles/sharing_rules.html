@@ -71,7 +71,7 @@
 <code>flir</code> can also be used to refactor code, for instance by
 replacing the use of <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link">deprecated or
 superseded</a> functions. If you work on a project that uses
-<code>dplyr</code>, you could for instance <a href="https://flir.etiennebacher.com/articles/adding_rules">write your
+<code>dplyr</code>, you could for example <a href="https://flir.etiennebacher.com/articles/adding_rules">write your
 own rules</a> to replace the use of <code>sample_n()</code> by
 <code>slice_sample()</code> (as described in <a href="https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir/" class="external-link">this
 blog post</a>).</p>
@@ -99,7 +99,8 @@ we can define some rules for <code>tidypolars</code> and store them in
 refer to the &lt;a href="https://flir.etiennebacher.com/articles/adding_rules"&gt;Adding
 rules&lt;/a&gt; vignette for more details.&lt;/p&gt;'><sup>1</sup></a>.</p>
 <p>First, I define a rule to detect the use of <code>describe()</code>
-and replace it with <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>:</p>
+and replace it with <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> (you can use
+<code><a href="../reference/export_new_rule.html">export_new_rule()</a></code> to create a placeholder YAML file):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> deprecated-describe</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
