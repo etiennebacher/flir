@@ -79,9 +79,11 @@ resolve_linters <- function(path, linters, exclude_linters) {
   rules_basename_noext <- gsub("\\.yml$", "", rules_basename)
 
   if (anyDuplicated(rules_basename) > 0) {
-    stop(
-      "Some rule files are duplicated: ",
-      toString(rules_basename[duplicated(rules_basename)])
+    cli::cli_abort(
+      paste0(
+        "Some rule files are duplicated: ",
+        toString(rules_basename[duplicated(rules_basename)])
+      )
     )
   }
 
@@ -139,12 +141,14 @@ resolve_linters <- function(path, linters, exclude_linters) {
   if (
     !all(linters %in% rules_basename_noext | linter_is_path_to_yml(linters))
   ) {
-    stop(
-      "Unknown linters: ",
-      toString(
-        linters[
-          !linters %in% rules_basename_noext & !linter_is_path_to_yml(linters)
-        ]
+    cli::cli_abort(
+      paste0(
+        "Unknown linters: ",
+        toString(
+          linters[
+            !linters %in% rules_basename_noext & !linter_is_path_to_yml(linters)
+          ]
+        )
       )
     )
   }

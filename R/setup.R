@@ -40,7 +40,7 @@ setup_flir <- function(path = ".") {
     fs::dir_exists(flir_dir) &&
       length(list.files(flir_dir, recursive = TRUE)) > 0
   ) {
-    stop("Folder `flir` already exists and is not empty.")
+    cli::cli_abort("Folder `flir` already exists and is not empty.")
   } else if (!fs::dir_exists(flir_dir)) {
     fs::dir_create(flir_dir)
   }

@@ -197,7 +197,7 @@ lint <- function(
     github_actions_log_lints(lints)
   } else {
     if (Sys.getenv("FLIR_ERROR_ON_LINT") == "true" && nrow(lints) > 0) {
-      stop("Some lints were found.")
+      cli::cli_abort("Some lints were found.")
     }
     lints
   }
@@ -216,7 +216,7 @@ lint_dir <- function(
   verbose = TRUE
 ) {
   if (!fs::is_dir(path)) {
-    stop("`path` must be a directory.")
+    cli::cli_abort("`path` must be a directory.")
   }
   lint(
     path,
@@ -242,7 +242,7 @@ lint_package <- function(
   verbose = TRUE
 ) {
   if (!fs::is_dir(path)) {
-    stop("`path` must be a directory.")
+    cli::cli_abort("`path` must be a directory.")
   }
   paths <- fs::path(
     path,

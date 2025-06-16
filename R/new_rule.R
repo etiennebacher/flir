@@ -17,7 +17,7 @@ add_new_rule <- function(name, path = ".") {
   name_with_yml <- paste0(name, ".yml")
 
   if (!fs::dir_exists(fs::path(path, "flir"))) {
-    rlang::abort(c(
+    cli::cli_abort(c(
       "Folder `flir` doesn't exist.",
       "i" = "Create it with `setup_flir()` first."
     ))
@@ -26,7 +26,7 @@ add_new_rule <- function(name, path = ".") {
   fs::dir_create(fs::path(path, "flir/rules/custom"))
   dest <- fs::path(path, "flir/rules/custom", name_with_yml)
   if (any(fs::file_exists(dest))) {
-    rlang::abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
+    cli::cli_abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
   }
   fs::file_create(dest)
 
@@ -78,7 +78,7 @@ export_new_rule <- function(name, path = ".") {
   name_with_yml <- paste0(name, ".yml")
 
   if (!is_r_package(path)) {
-    rlang::abort(
+    cli::cli_abort(
       "`export_new_rule()` only works when the project is an R package."
     )
   }
@@ -86,7 +86,7 @@ export_new_rule <- function(name, path = ".") {
   dest <- fs::path(path, "inst/flir/rules", name_with_yml)
 
   if (any(fs::file_exists(dest))) {
-    rlang::abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
+    cli::cli_abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
   }
   fs::file_create(dest)
 
@@ -118,13 +118,13 @@ message: ...
 
 check_name <- function(name) {
   if (!rlang::is_character(name)) {
-    rlang::abort(
+    cli::cli_abort(
       "`name` must be a character vector.",
       call = rlang::caller_env()
     )
   }
   if (any(grepl("\\s", name))) {
-    rlang::abort(
+    cli::cli_abort(
       "`name` must not contain white space.",
       call = rlang::caller_env()
     )

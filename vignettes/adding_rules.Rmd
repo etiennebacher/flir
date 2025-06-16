@@ -18,25 +18,25 @@ knitr::opts_chunk$set(
 library(flir, warn.conflicts = FALSE)
 ```
 
-`flir` comes with an extensive set of rules taken from `lintr`, but if 
+`flir` comes with an extensive set of rules taken from `lintr`, but if
 necessary one can also extend it relatively easily. This will require some
 knowledge of the Rust crate `ast-grep` to write. This crate
 has great documentation on [creating new rules](https://ast-grep.github.io/guide/pattern-syntax.html)
 so you should start there.
 
-In this vignette, our objective is to replace calls to `stop()` by 
-`rlang::abort()`, for instance because we prefer the formatting of the output
+In this vignette, our objective is to replace calls to `stop()` by
+`cli::cli_abort()`, for instance because we prefer the formatting of the output
 with the latter.
 ```{r, error=TRUE}
 stop("this is an error")
 
-rlang::abort("this is an error")
+cli::cli_abort("this is an error")
 ```
 
 # Step 1: setup
 
-First, we need to set up `flir` using `setup_flir()`. This will create a 
-`flir` folder that contains (among other things) a `rules` folder where all 
+First, we need to set up `flir` using `setup_flir()`. This will create a
+`flir` folder that contains (among other things) a `rules` folder where all
 rules are stored. This is divided between `builtin` rules (that shouldn't modified manually) and `custom` rules (where we will store our custom rule).
 
 Then, we can create the structure of a new rule by copying an existing rule, say
@@ -44,13 +44,13 @@ Then, we can create the structure of a new rule by copying an existing rule, say
 specific to this rule, we end up with this structure:
 
 ```yaml
-id: 
+id:
 language: r
 severity: warning
 rule:
-  pattern: 
-fix: 
-message: 
+  pattern:
+fix:
+message:
 ```
 
 
@@ -63,18 +63,18 @@ n <- 10
 stop("Got ", n, " values instead of 1.")
 ```
 
-This is not possible with `rlang::abort()`, which needs everything to be in the
-argument `message`, meaning that we need to manually put all those elements in 
+This is not possible with `cli::cli_abort()`, which needs everything to be in the
+argument `message`, meaning that we need to manually put all those elements in
 `paste0()`:
 
 ```{r, error=TRUE}
 n <- 10
-rlang::abort(paste0("Got ", n, " values instead of 1."))
+cli::cli_abort(paste0("Got ", n, " values instead of 1."))
 ```
 
-Therefore, we can look for the pattern `stop(...)` and replace it by 
-`rlang::abort(paste0(...))`. Capturing all elements in a pattern is done with
-`$$$` and those elements can be used in the `fix` or `message` arguments using 
+Therefore, we can look for the pattern `stop(...)` and replace it by
+`cli::cli_abort(paste0(...))`. Capturing all elements in a pattern is done with
+`$$$` and those elements can be used in the `fix` or `message` arguments using
 by wrapping them in `~~`:
 
 ```yaml
@@ -83,8 +83,8 @@ language: r
 severity: warning
 rule:
   pattern: stop($$$ELEMS)
-fix: rlang::abort(paste0(~~ELEMS~~))
-message: Use `rlang::abort()` instead of `stop()`.
+fix: cli::cli_abort(paste0(~~ELEMS~~))
+message: Use `cli::cli_abort()` instead of `stop()`.
 ```
 
 After storing this rule in `flir/rules/custom/stop_abort.yml`, we can
@@ -101,12 +101,12 @@ Running our example with `lint_text()` now shows the message:
 
 ```{.r}
 flir::lint_text(
-  'stop("Got ", n, " values instead of 1.")', 
+  'stop("Got ", n, " values instead of 1.")',
   linters = "stop_abort"
 )
-#> Original code: stop("Got ", n, " values instead of 1.") 
-#> Suggestion: Use `rlang::abort()` instead of `stop()`. 
-#> Rule ID: stop_abort-1 
+#> Original code: stop("Got ", n, " values instead of 1.")
+#> Suggestion: Use `cli::cli_abort()` instead of `stop()`.
+#> Rule ID: stop_abort-1
 ```
 And `fix_text()` correctly applies the fix:
 
@@ -116,7 +116,7 @@ flir::fix_text(
   linters = "stop_abort"
 )
 #> Old code: stop("Got ", n, " values instead of 1.")
-#> New code: rlang::abort(paste0("Got ", n, " values instead of 1."))
+#> New code: cli::cli_abort(paste0("Got ", n, " values instead of 1."))
 ```
 
 Note that there are still some corner cases to address, such as ignoring the
@@ -142,7 +142,7 @@ Running `lint_text()` or `fix_text()` without `linters` now works:
 ```{r, eval=FALSE}
 flir::fix_text('stop("Got ", n, " values instead of 1.")')
 #> Old code: stop("Got ", n, " values instead of 1.")
-#> New code: rlang::abort(paste0("Got ", n, " values instead of 1."))
+#> New code: cli::cli_abort(paste0("Got ", n, " values instead of 1."))
 ```
 
 # Step 4: enjoy
