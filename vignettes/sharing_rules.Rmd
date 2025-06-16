@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 Besides helping to detect a built-in list of bad patterns in R code, `flir` can also be used to refactor code, for instance by replacing the use of [deprecated or superseded](https://lifecycle.r-lib.org/articles/stages.html) functions.
-If you work on a project that uses `dplyr`, you could for instance [write your own rules](https://flir.etiennebacher.com/articles/adding_rules) to replace the use of `sample_n()` by `slice_sample()` (as described in [this blog post](https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir/)).
+If you work on a project that uses `dplyr`, you could for example [write your own rules](https://flir.etiennebacher.com/articles/adding_rules) to replace the use of `sample_n()` by `slice_sample()` (as described in [this blog post](https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir/)).
 
 However, that puts the burden of writing such rules on the end user, who is not necessarily familiar with all the changes in the package they use. 
 Therefore, `flir` provides a way for package developers to define their own rules in the package so that anyone who uses it will also have access to the same set of rules.
@@ -30,7 +30,7 @@ At the time of writing, `tidypolars` (0.13.0) contains several deprecated functi
 
 On the side of package developers (in this example, this is only me), we can define some rules for `tidypolars` and store them in `inst/flir/rules`^[I won't spend time explaining each part of the file, refer to the [Adding rules](https://flir.etiennebacher.com/articles/adding_rules) vignette for more details.].
 
-First, I define a rule to detect the use of `describe()` and replace it with `summary()`:
+First, I define a rule to detect the use of `describe()` and replace it with `summary()` (you can use `export_new_rule()` to create a placeholder YAML file):
 
 ```yaml
 id: deprecated-describe
