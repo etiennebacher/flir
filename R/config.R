@@ -25,7 +25,7 @@ check_config <- function(path) {
   nms_unexpected <- setdiff(nms, c("keep", "exclude", "from-package"))
   if (length(nms_unexpected) > 0) {
     cli::cli_abort(sprintf(
-      "Unknown field in `flir/config.yml`: %s",
+      "Unknown field in {.path flir/config.yml}: %s",
       toString(nms_unexpected)
     ))
   }
@@ -50,9 +50,7 @@ get_linters_from_config <- function(path) {
   if (anyDuplicated(linters) > 0) {
     cli::cli_abort(
       paste0(
-        "In `",
-        config_file,
-        "`, the following linters are duplicated: ",
+        "In {.path {config_file}}, the following linters are duplicated: ",
         toString(linters[duplicated(linters)])
       )
     )

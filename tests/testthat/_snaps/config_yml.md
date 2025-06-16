@@ -28,7 +28,7 @@
       lint()
     Condition
       Error in `get_linters_from_config()`:
-      ! In `flir/config.yml`, the following linters are duplicated: equal_assignment
+      ! In 'flir/config.yml', the following linters are duplicated: equal_assignment
 
 # config.yml errors with unknown fields
 
@@ -36,7 +36,7 @@
       lint()
     Condition
       Error in `check_config()`:
-      ! Unknown field in `flir/config.yml`: some_field
+      ! Unknown field in 'flir/config.yml': some_field
 
 # config.yml errors with duplicated fields
 
@@ -52,7 +52,7 @@
       lint()
     Condition
       Error in `get_external_linters_from_config()`:
-      ! In `flir/config.yml`, the following packages are duplicated: foo
+      ! In 'flir/config.yml', the following packages are duplicated: foo
 
 # config: `from-package` checks that package is installed
 
