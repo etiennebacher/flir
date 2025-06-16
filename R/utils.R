@@ -59,7 +59,7 @@ get_tests_from_lintr <- function(name) {
   )
   dest <- paste0("tests/testthat/test-", name, ".R")
   utils::download.file(url, destfile = dest)
-  rstudioapi::documentOpen(dest)
+  file.edit(dest)
 }
 
 resolve_linters <- function(path, linters, exclude_linters) {
@@ -286,9 +286,7 @@ message: ...
 ",
     file = dest
   )
-  if (rstudioapi::isAvailable() && !is_positron()) {
-    rstudioapi::documentOpen(dest)
-  }
+  file.edit(dest)
 }
 
 uses_git <- function() {
