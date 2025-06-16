@@ -26,7 +26,7 @@ add_new_rule <- function(name, path = ".") {
   fs::dir_create(fs::path(path, "flir/rules/custom"))
   dest <- fs::path(path, "flir/rules/custom", name_with_yml)
   if (any(fs::file_exists(dest))) {
-    cli::cli_abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
+    cli::cli_abort("{.path {dest[fs::file_exists(dest)]}} already exists.", )
   }
   fs::file_create(dest)
 
@@ -86,7 +86,7 @@ export_new_rule <- function(name, path = ".") {
   dest <- fs::path(path, "inst/flir/rules", name_with_yml)
 
   if (any(fs::file_exists(dest))) {
-    cli::cli_abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
+    cli::cli_abort("{.path {dest[fs::file_exists(dest)]}} already exists.", )
   }
   fs::file_create(dest)
 
