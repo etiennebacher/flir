@@ -47,7 +47,9 @@ message: ...
     ),
     file = dest
   )
-  file.edit(dest)
+  if (!is_testing()) {
+    file.edit(dest)
+  }
   cli::cli_alert_success("Created {.path {dest}}.")
   cli::cli_alert_info(
     "Add {.val {name}} to {.path flir/config.yml} to be able to use it."
@@ -107,8 +109,8 @@ message: ...
     ),
     file = dest
   )
-  if (rstudioapi::isAvailable() && !is_positron() && !is_testing()) {
-    rstudioapi::documentOpen(dest)
+  if (!is_testing()) {
+    file.edit(dest)
   }
   cli::cli_alert_success("Created {.path {dest}}.")
 }
