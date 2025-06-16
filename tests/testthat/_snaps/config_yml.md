@@ -59,6 +59,6 @@
     Code
       lint()
     Condition
-      Error in `get_external_linters_from_config()`:
+      Error in `lint()`:
       ! The package "foo" is required.
 

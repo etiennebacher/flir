@@ -108,7 +108,7 @@ get_external_linters_from_config <- function(path) {
   linters <- NULL
 
   if (length(installed) > 0) {
-    rlang::check_installed(installed)
+    rlang::check_installed(installed, call = rlang::caller_env(2))
     for (i in installed) {
       pkg_linters <- list.files(
         system.file("flir/rules", package = i),
