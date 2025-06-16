@@ -68,6 +68,7 @@ message: ...
 #'
 #' @export
 export_new_rule <- function(name, path = ".") {
+  # TODO: remove this restriction in another PR
   if (!rlang::is_string(name)) {
     rlang::abort("`name` must be a character vector of length 1.")
   }

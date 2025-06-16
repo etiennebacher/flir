@@ -23,3 +23,19 @@ test_that("export_new_rule() cannot overwrite files", {
     fixed = TRUE
   )
 })
+
+test_that("export_new_rule() cannot create file with whitespace", {
+  create_local_package()
+  expect_error(
+    export_new_rule("hi there"),
+    "`name` must not contain white space"
+  )
+})
+
+test_that("export_new_rule() cannot create multiple files at once", {
+  create_local_package()
+  expect_error(
+    export_new_rule(c("a", "b")),
+    "`name` must be a character vector of length 1"
+  )
+})
