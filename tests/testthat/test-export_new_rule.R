@@ -6,6 +6,14 @@ test_that("export_new_rule() only works in packages", {
   )
 })
 
+test_that("export_new_rule() errors on wrong names", {
+  create_local_package()
+  expect_error(
+    export_new_rule(1),
+    "`name` must be a character vector"
+  )
+})
+
 test_that("export_new_rule() can create files", {
   create_local_package()
   export_new_rule("foobar")
@@ -32,10 +40,18 @@ test_that("export_new_rule() cannot create file with whitespace", {
   )
 })
 
-test_that("export_new_rule() cannot create multiple files at once", {
+test_that("export_new_rule() can create several rules at once", {
   create_local_package()
-  expect_error(
-    export_new_rule(c("a", "b")),
-    "`name` must be a character vector of length 1"
-  )
+  setup_flir()
+  export_new_rule(c("foobar", "foobar2"))
+  expect_true(fs::file_exists("inst/flir/rules/foobar.yml"))
+  expect_true(fs::file_exists("inst/flir/rules/foobar2.yml"))
+  expect_true(any(grepl(
+    "id: foobar$",
+    readLines("inst/flir/rules/foobar.yml")
+  )))
+  expect_true(any(grepl(
+    "id: foobar2$",
+    readLines("inst/flir/rules/foobar2.yml")
+  )))
 })

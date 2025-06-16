@@ -5,11 +5,7 @@ test_that("add_new_rule() errors", {
   )
   expect_error(
     add_new_rule(1),
-    "must be a character vector of length 1"
-  )
-  expect_error(
-    add_new_rule(c("a", "b")),
-    "must be a character vector of length 1"
+    "must be a character vector"
   )
 })
 
@@ -38,4 +34,20 @@ test_that("create template for new custom rule", {
   )
 
   expect_snapshot(fs::dir_tree("flir"))
+})
+
+test_that("add_new_rule() can create several rules at once", {
+  create_local_project()
+  setup_flir()
+  add_new_rule(c("foobar", "foobar2"))
+  expect_true(fs::file_exists("flir/rules/custom/foobar.yml"))
+  expect_true(fs::file_exists("flir/rules/custom/foobar2.yml"))
+  expect_true(any(grepl(
+    "id: foobar$",
+    readLines("flir/rules/custom/foobar.yml")
+  )))
+  expect_true(any(grepl(
+    "id: foobar2$",
+    readLines("flir/rules/custom/foobar2.yml")
+  )))
 })

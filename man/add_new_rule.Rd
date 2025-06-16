@@ -7,7 +7,7 @@
 add_new_rule(name, path = ".")
 }
 \arguments{
-\item{name}{Name of the rule. Cannot contain white space.}
+\item{name}{Name(s) of the rule. Cannot contain white space.}
 
 \item{path}{Path to package or project root.}
 }

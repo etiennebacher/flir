@@ -18,6 +18,8 @@
   Thanks to @maelle and @Bisaloo for the suggestion and early feedback on the
   implementation (#78, #84).
 
+* `add_new_rule()` now accepts several `name`s at once (#88).
+
 ## Changes
 
 * `unreachable_code` is deactivated by default. It can still be activated with

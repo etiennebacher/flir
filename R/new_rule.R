@@ -8,18 +8,14 @@
 #' If you want to create a rule that users of your package will be able to
 #' access, use `export_new_rule()` instead.
 #'
-#' @param name Name of the rule. Cannot contain white space.
+#' @param name Name(s) of the rule. Cannot contain white space.
 #' @inheritParams setup_flir
 #'
 #' @export
 add_new_rule <- function(name, path = ".") {
-  if (!rlang::is_string(name)) {
-    rlang::abort("`name` must be a character vector of length 1.")
-  }
-  if (grepl("\\s", name)) {
-    rlang::abort("`name` must not contain white space.")
-  }
+  check_name(name)
   name_with_yml <- paste0(name, ".yml")
+
   if (!fs::dir_exists(fs::path(path, "flir"))) {
     rlang::abort(c(
       "Folder `flir` doesn't exist.",
@@ -29,14 +25,15 @@ add_new_rule <- function(name, path = ".") {
 
   fs::dir_create(fs::path(path, "flir/rules/custom"))
   dest <- fs::path(path, "flir/rules/custom", name_with_yml)
-  if (fs::file_exists(dest)) {
-    rlang::abort(sprintf("`%s` already exists.", dest))
+  if (any(fs::file_exists(dest))) {
+    rlang::abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
   }
   fs::file_create(dest)
 
-  cat(
-    sprintf(
-      "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules
+  for (i in seq_along(dest)) {
+    cat(
+      sprintf(
+        "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules
 # More advanced: https://ast-grep.github.io/guide/rule-config/atomic-rule.html
 
 id: %s
@@ -47,10 +44,12 @@ rule:
 fix: ...
 message: ...
 ",
-      name
-    ),
-    file = dest
-  )
+        name[i]
+      ),
+      file = dest[i]
+    )
+  }
+
   if (rlang::is_interactive()) {
     utils::file.edit(dest)
   }
@@ -75,14 +74,9 @@ message: ...
 #'
 #' @export
 export_new_rule <- function(name, path = ".") {
-  # TODO: remove this restriction in another PR
-  if (!rlang::is_string(name)) {
-    rlang::abort("`name` must be a character vector of length 1.")
-  }
-  if (grepl("\\s", name)) {
-    rlang::abort("`name` must not contain white space.")
-  }
+  check_name(name)
   name_with_yml <- paste0(name, ".yml")
+
   if (!is_r_package(path)) {
     rlang::abort(
       "`export_new_rule()` only works when the project is an R package."
@@ -91,14 +85,15 @@ export_new_rule <- function(name, path = ".") {
   fs::dir_create(fs::path(path, "inst/flir/rules"))
   dest <- fs::path(path, "inst/flir/rules", name_with_yml)
 
-  if (fs::file_exists(dest)) {
-    rlang::abort(sprintf("`%s` already exists.", dest))
+  if (any(fs::file_exists(dest))) {
+    rlang::abort(sprintf("`%s` already exists.", dest[fs::file_exists(dest)]))
   }
   fs::file_create(dest)
 
-  cat(
-    sprintf(
-      "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules
+  for (i in seq_along(dest)) {
+    cat(
+      sprintf(
+        "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules
 # More advanced: https://ast-grep.github.io/guide/rule-config/atomic-rule.html
 
 id: %s
@@ -109,12 +104,23 @@ rule:
 fix: ...
 message: ...
 ",
-      name
-    ),
-    file = dest
-  )
+        name[i]
+      ),
+      file = dest[i]
+    )
+  }
+
   if (rlang::is_interactive()) {
     utils::file.edit(dest)
   }
   cli::cli_alert_success("Created {.path {dest}}.")
+}
+
+check_name <- function(name) {
+  if (!rlang::is_character(name)) {
+    rlang::abort("`name` must be a character vector.")
+  }
+  if (any(grepl("\\s", name))) {
+    rlang::abort("`name` must not contain white space.")
+  }
 }
