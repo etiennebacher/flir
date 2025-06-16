@@ -60,7 +60,7 @@ message: ...
 #' rule. The file is stored in `inst/flir/rules` and will be available to users
 #' of your package if they use `flir`.
 #'
-#' To create a new rule that you can use in the current project, use
+#' To create a new rule that you can use in the current project only, use
 #' `add_new_rule()` instead.
 #'
 #' @param name Name of the rule. Cannot contain white space.
