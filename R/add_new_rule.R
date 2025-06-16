@@ -79,7 +79,13 @@ export_new_rule <- function(name, path = ".") {
     rlang::abort("`export_new_rule()` only works when the project is an R package.")
   }
   fs::dir_create(fs::path(path, "inst/flir/rules"))
+  dest <- fs::path(path, "inst/flir/rules", name_with_yml)
+
+  if (fs::file_exists(dest)) {
+    rlang::abort(sprintf("`%s` already exists.", dest))
+  }
   fs::file_create(dest)
+
   cat(
     sprintf(
       "id: %s
@@ -94,7 +100,7 @@ message: ...
     ),
     file = dest
   )
-  if (rstudioapi::isAvailable() && !is_positron()) {
+  if (rstudioapi::isAvailable() && !is_positron() && !is_testing()) {
     rstudioapi::documentOpen(dest)
   }
   cli::cli_alert_success("Created {.path {dest}}.")
