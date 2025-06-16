@@ -97,13 +97,13 @@ we will store our custom rule).</p>
 existing rule, say <code>flir/rules/builtin/any_is_na.yml</code> for
 instance. After removing the stuff that is specific to this rule, we end
 up with this structure:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> </span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> </span></span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-2-start-exploring">Step 2: start exploring<a class="anchor" aria-label="anchor" href="#step-2-start-exploring"></a>
@@ -145,12 +145,12 @@ using by wrapping them in <code>~~</code>:</p>
 message:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="../reference/lint.html">lint_text</a></span><span class="op">(</span></span>
-<span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>, </span>
+<span>  <span class="st">'stop("Got ", n, " values instead of 1.")'</span>,</span>
 <span>  linters <span class="op">=</span> <span class="st">"stop_abort"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Original code: stop("Got ", n, " values instead of 1.") </span></span>
-<span><span class="co">#&gt; Suggestion: Use `rlang::abort()` instead of `stop()`. </span></span>
-<span><span class="co">#&gt; Rule ID: stop_abort-1 </span></span></code></pre></div>
+<span><span class="co">#&gt; Original code: stop("Got ", n, " values instead of 1.")</span></span>
+<span><span class="co">#&gt; Suggestion: Use `rlang::abort()` instead of `stop()`.</span></span>
+<span><span class="co">#&gt; Rule ID: stop_abort-1</span></span></code></pre></div>
 <p>And <code><a href="../reference/fix.html">fix_text()</a></code> correctly applies the fix:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="../reference/fix.html">fix_text</a></span><span class="op">(</span></span>
