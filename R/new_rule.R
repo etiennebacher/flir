@@ -32,7 +32,10 @@ add_new_rule <- function(name, path = ".") {
   fs::file_create(dest)
   cat(
     sprintf(
-      "id: %s
+      "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules
+# More advanced: https://ast-grep.github.io/guide/rule-config/atomic-rule.html
+
+id: %s
 language: r
 severity: warning
 rule:
@@ -91,7 +94,10 @@ export_new_rule <- function(name, path = ".") {
 
   cat(
     sprintf(
-      "id: %s
+      "# Details on how to fill this template: https://flir.etiennebacher.com/articles/adding_rules
+# More advanced: https://ast-grep.github.io/guide/rule-config/atomic-rule.html
+
+id: %s
 language: r
 severity: warning
 rule:
