@@ -58,14 +58,14 @@ test_that("fix() and lint() work on relative path to a rule", {
 language: r
 severity: warning
 rule:
-  pattern: a = $VAR
-fix: a <- ~~VAR~~
+  pattern: unique(length(a))
+fix: length(unique(a))
 message: foobar
 ",
     file = "foo.yml"
   )
 
-  cat("a = 1", file = "foo.R")
+  cat("unique(length(a))", file = "foo.R")
   expect_equal(nrow(lint(linters = "foo.yml")), 1)
 
   # Works on both extensions
@@ -76,4 +76,5 @@ message: foobar
   fs::dir_create("foobar")
   fs::file_move("foo.yaml", "foobar/foo.yaml")
   expect_equal(nrow(lint(linters = "foobar/foo.yaml")), 1)
+  fs::file_move("foobar/foo.yaml", "foo.yml")
 })
