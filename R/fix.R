@@ -85,7 +85,7 @@ fix <- function(
           choices = c("Yes", "No")
         )
         if (choice == 2) {
-          rlang::inform(c(i = "No changes applied."))
+          cli::cli_inform("No changes applied.")
           return(invisible())
         }
       } else if (isFALSE(force)) {
@@ -106,7 +106,7 @@ fix <- function(
         choices = c("Yes", "No")
       )
       if (choice == 2) {
-        rlang::inform(c(i = "No changes applied."))
+        cli::cli_inform("No changes applied.")
         return(invisible())
       }
     } else if (isFALSE(force)) {
