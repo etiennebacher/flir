@@ -20,7 +20,7 @@
       add_new_rule("foobar")
     Condition
       Error in `add_new_rule()`:
-      ! `./flir/rules/custom/foobar.yml` already exists.
+      ! './flir/rules/custom/foobar.yml' already exists.
 
 # create template for new custom rule
 

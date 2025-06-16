@@ -20,7 +20,7 @@
       export_new_rule("foobar")
     Condition
       Error in `export_new_rule()`:
-      ! `./inst/flir/rules/foobar.yml` already exists.
+      ! './inst/flir/rules/foobar.yml' already exists.
 
 # export_new_rule() cannot create file with whitespace
 
