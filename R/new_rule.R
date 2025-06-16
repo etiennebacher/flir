@@ -118,9 +118,15 @@ message: ...
 
 check_name <- function(name) {
   if (!rlang::is_character(name)) {
-    rlang::abort("`name` must be a character vector.")
+    rlang::abort(
+      "`name` must be a character vector.",
+      call = rlang::caller_env()
+    )
   }
   if (any(grepl("\\s", name))) {
-    rlang::abort("`name` must not contain white space.")
+    rlang::abort(
+      "`name` must not contain white space.",
+      call = rlang::caller_env()
+    )
   }
 }

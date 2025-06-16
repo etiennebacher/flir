@@ -38,11 +38,17 @@ test_that("config.yml errors when it doesn't contain any rule", {
 
   # Only keep one linter, not the one about assignment symbols
   cat("keep:", file = "flir/config.yml")
-  expect_error(lint(), "doesn't contain any rule")
+  expect_snapshot(
+    lint(),
+    error = TRUE
+  )
 
   # commented out linter not taken into account
   cat("keep:\n#  - equal_assignment", file = "flir/config.yml")
-  expect_error(lint(), "doesn't contain any rule")
+  expect_snapshot(
+    lint(),
+    error = TRUE
+  )
 })
 
 test_that("config.yml errors when it contains unknown rules", {
@@ -53,7 +59,10 @@ test_that("config.yml errors when it contains unknown rules", {
     "keep:\n  - equal_assignment\n  - foo\n  - bar",
     file = "flir/config.yml"
   )
-  expect_error(lint(), "Unknown linters: foo, bar")
+  expect_snapshot(
+    lint(),
+    error = TRUE
+  )
 })
 
 test_that("config.yml errors when it contains duplicated rules", {
@@ -64,7 +73,10 @@ test_that("config.yml errors when it contains duplicated rules", {
     "keep:\n  - equal_assignment\n  - class_equals\n  - equal_assignment",
     file = "flir/config.yml"
   )
-  expect_error(lint(), "the following linters are duplicated: equal_assignment")
+  expect_snapshot(
+    lint(),
+    error = TRUE
+  )
 })
 
 test_that("config.yml errors with unknown fields", {
@@ -75,9 +87,9 @@ test_that("config.yml errors with unknown fields", {
     "keep:\n  - equal_assignment\nsome_field: hello",
     file = "flir/config.yml"
   )
-  expect_error(
+  expect_snapshot(
     lint(),
-    "Unknown field in `flir/config.yml`: some_field"
+    error = TRUE
   )
 })
 
@@ -89,7 +101,10 @@ test_that("config.yml errors with duplicated fields", {
     "keep:\n  - equal_assignment\nkeep:\n  - foo",
     file = "flir/config.yml"
   )
-  expect_error(lint(), "Duplicate map key: 'keep'")
+  expect_snapshot(
+    lint(),
+    error = TRUE
+  )
 })
 
 test_that("config: `from-package` checks duplicated package name", {
@@ -100,9 +115,9 @@ test_that("config: `from-package` checks duplicated package name", {
     "from-package:\n  - foo\n  - foo",
     file = "flir/config.yml"
   )
-  expect_error(
+  expect_snapshot(
     lint(),
-    "the following packages are duplicated: foo"
+    error = TRUE
   )
 })
 
@@ -114,7 +129,10 @@ test_that("config: `from-package` checks that package is installed", {
     "from-package:\n  - foo",
     file = "flir/config.yml"
   )
-  expect_error(lint(), "The package \"foo\" is required.")
+  expect_snapshot(
+    lint(),
+    error = TRUE
+  )
 })
 
 test_that("config: `from-package` gets rules from other packages", {

@@ -1,16 +1,16 @@
 test_that("export_new_rule() only works in packages", {
   create_local_project()
-  expect_error(
+  expect_snapshot(
     export_new_rule("foobar"),
-    "only works when the project is an R package"
+    error = TRUE
   )
 })
 
 test_that("export_new_rule() errors on wrong names", {
   create_local_package()
-  expect_error(
+  expect_snapshot(
     export_new_rule(1),
-    "`name` must be a character vector"
+    error = TRUE
   )
 })
 
@@ -25,18 +25,17 @@ test_that("export_new_rule() can create files", {
 test_that("export_new_rule() cannot overwrite files", {
   create_local_package()
   export_new_rule("foobar")
-  expect_error(
+  expect_snapshot(
     export_new_rule("foobar"),
-    "`./inst/flir/rules/foobar.yml` already exists.",
-    fixed = TRUE
+    error = TRUE
   )
 })
 
 test_that("export_new_rule() cannot create file with whitespace", {
   create_local_package()
-  expect_error(
+  expect_snapshot(
     export_new_rule("hi there"),
-    "`name` must not contain white space"
+    error = TRUE
   )
 })
 
