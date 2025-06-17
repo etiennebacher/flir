@@ -690,24 +690,6 @@ makeActiveBinding(
 )
 
 
-#' @inherit lintr::semicolon_linter title
-#' @description
-#' See <https://lintr.r-lib.org/reference/semicolon_linter>.
-
-#' @usage semicolon_linter
-#' @name semicolon_linter
-#' @export
-#' @return The name of the linter
-NULL
-makeActiveBinding(
-  'semicolon_linter',
-  function() {
-    function() 'semicolon'
-  },
-  env = environment()
-)
-
-
 #' @inherit lintr::seq_linter title
 #' @description
 #' See <https://lintr.r-lib.org/reference/seq_linter>.
