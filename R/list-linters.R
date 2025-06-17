@@ -48,7 +48,6 @@ list_linters <- function(path = ".") {
     "rep_len",
     "right_assignment",
     "sample_int",
-    "semicolon",
     "seq",
     "sort",
     "stopifnot_all",

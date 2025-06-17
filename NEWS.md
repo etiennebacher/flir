@@ -28,6 +28,10 @@
 * `T_and_F_symbol` do not detect anymore the use of `F` and `T` when those are
   used in the `:` operation (#81).
 
+* `semicolon_linter` is no longer used. It is a linter related to code
+  formatting only and therefore isn't in the scope of `flir` (and the current
+  implementation was buggy). It is also handled by the `Air` formatter (#93).
+
 ## Bug fixes
 
 * `lint_*()` and `fix_*()` now work with relative paths to YAML files, for
