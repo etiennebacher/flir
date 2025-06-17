@@ -53,10 +53,9 @@
 </ul></div>
 <div class="section level3">
 <h3 id="changes-development-version">Changes<a class="anchor" aria-label="anchor" href="#changes-development-version"></a></h3>
-<ul><li>
-<code>unreachable_code</code> is deactivated by default. It can still be activated with the argument <code>linters</code> or in <code>flir/config.yml</code> after running <code><a href="../reference/setup_flir.html">setup_flir()</a></code> (<a href="https://github.com/etiennebacher/flir/issues/75" class="external-link">#75</a>).</li>
-<li>
-<code>T_and_F_symbol</code> do not detect anymore the use of <code>F</code> and <code>T</code> when those are used in the <code>:</code> operation (<a href="https://github.com/etiennebacher/flir/issues/81" class="external-link">#81</a>).</li>
+<ul><li><p><code>unreachable_code</code> is deactivated by default. It can still be activated with the argument <code>linters</code> or in <code>flir/config.yml</code> after running <code><a href="../reference/setup_flir.html">setup_flir()</a></code> (<a href="https://github.com/etiennebacher/flir/issues/75" class="external-link">#75</a>).</p></li>
+<li><p><code>T_and_F_symbol</code> do not detect anymore the use of <code>F</code> and <code>T</code> when those are used in the <code>:</code> operation (<a href="https://github.com/etiennebacher/flir/issues/81" class="external-link">#81</a>).</p></li>
+<li><p><code>semicolon_linter</code> is no longer used. It is a linter related to code formatting only and therefore isn’t in the scope of <code>flir</code> (and the current implementation was buggy). It is also handled by the <code>Air</code> formatter (<a href="https://github.com/etiennebacher/flir/issues/93" class="external-link">#93</a>).</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
