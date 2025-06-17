@@ -27,6 +27,7 @@ This is the first CRAN release.
 * `unreachable_code` is deactivated by default. It can still be activated with
   the argument `linters` or in `flir/config.yml` after running `setup_flir()`
   (#75).
+
 * `T_and_F_symbol` do not detect anymore the use of `F` and `T` when those are
   used in the `:` operation (#81).
 
