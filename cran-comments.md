@@ -10,6 +10,7 @@ This package may write in the user directory for several reasons:
 2. Some functions are helpers to make it easier to use the package:
   - `setup_flir()` creates a folder `flir`
   - `setup_flir_gha()` creates a YAML file for Github Actions
-  - `add_new_rule()` creates a file in the `flir` directory
+  - `add_new_rule()` creates one or several files in the `flir` directory
+  - `export_new_rule()` creates one or several files in the `inst` directory
 
   Those are similar to functions in other packages, e.g. `usethis`.
