@@ -6,6 +6,9 @@
 \usage{
 todo_comment_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/todo_comment_linter}.
 }

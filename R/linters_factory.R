@@ -5,6 +5,7 @@
 #' @usage any_duplicated_linter
 #' @name any_duplicated_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'any_duplicated_linter',
@@ -22,6 +23,7 @@ makeActiveBinding(
 #' @usage any_is_na_linter
 #' @name any_is_na_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'any_is_na_linter',
@@ -39,6 +41,7 @@ makeActiveBinding(
 #' @usage class_equals_linter
 #' @name class_equals_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'class_equals_linter',
@@ -56,6 +59,7 @@ makeActiveBinding(
 #' @usage condition_message_linter
 #' @name condition_message_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'condition_message_linter',
@@ -71,6 +75,7 @@ makeActiveBinding(
 #' @usage double_assignment_linter
 #' @name double_assignment_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'double_assignment_linter',
@@ -88,6 +93,7 @@ makeActiveBinding(
 #' @usage duplicate_argument_linter
 #' @name duplicate_argument_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'duplicate_argument_linter',
@@ -103,6 +109,7 @@ makeActiveBinding(
 #' @usage empty_assignment_linter
 #' @name empty_assignment_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'empty_assignment_linter',
@@ -118,6 +125,7 @@ makeActiveBinding(
 #' @usage equal_assignment_linter
 #' @name equal_assignment_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'equal_assignment_linter',
@@ -135,6 +143,7 @@ makeActiveBinding(
 #' @usage equals_na_linter
 #' @name equals_na_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'equals_na_linter',
@@ -152,6 +161,7 @@ makeActiveBinding(
 #' @usage expect_comparison_linter
 #' @name expect_comparison_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_comparison_linter',
@@ -169,6 +179,7 @@ makeActiveBinding(
 #' @usage expect_identical_linter
 #' @name expect_identical_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_identical_linter',
@@ -186,6 +197,7 @@ makeActiveBinding(
 #' @usage expect_length_linter
 #' @name expect_length_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_length_linter',
@@ -203,6 +215,7 @@ makeActiveBinding(
 #' @usage expect_named_linter
 #' @name expect_named_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_named_linter',
@@ -220,6 +233,7 @@ makeActiveBinding(
 #' @usage expect_not_linter
 #' @name expect_not_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_not_linter',
@@ -237,6 +251,7 @@ makeActiveBinding(
 #' @usage expect_null_linter
 #' @name expect_null_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_null_linter',
@@ -254,6 +269,7 @@ makeActiveBinding(
 #' @usage expect_true_false_linter
 #' @name expect_true_false_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_true_false_linter',
@@ -271,6 +287,7 @@ makeActiveBinding(
 #' @usage expect_type_linter
 #' @name expect_type_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'expect_type_linter',
@@ -288,6 +305,7 @@ makeActiveBinding(
 #' @usage for_loop_index_linter
 #' @name for_loop_index_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'for_loop_index_linter',
@@ -305,6 +323,7 @@ makeActiveBinding(
 #' @usage function_return_linter
 #' @name function_return_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'function_return_linter',
@@ -320,6 +339,7 @@ makeActiveBinding(
 #' @usage implicit_assignment_linter
 #' @name implicit_assignment_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'implicit_assignment_linter',
@@ -337,6 +357,7 @@ makeActiveBinding(
 #' @usage is_numeric_linter
 #' @name is_numeric_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'is_numeric_linter',
@@ -354,6 +375,7 @@ makeActiveBinding(
 #' @usage length_levels_linter
 #' @name length_levels_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'length_levels_linter',
@@ -371,6 +393,7 @@ makeActiveBinding(
 #' @usage length_test_linter
 #' @name length_test_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'length_test_linter',
@@ -388,6 +411,7 @@ makeActiveBinding(
 #' @usage lengths_linter
 #' @name lengths_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'lengths_linter',
@@ -405,6 +429,7 @@ makeActiveBinding(
 #' @usage library_call_linter
 #' @name library_call_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'library_call_linter',
@@ -422,6 +447,7 @@ makeActiveBinding(
 #' @usage list_comparison_linter
 #' @name list_comparison_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'list_comparison_linter',
@@ -439,6 +465,7 @@ makeActiveBinding(
 #' @usage literal_coercion_linter
 #' @name literal_coercion_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'literal_coercion_linter',
@@ -456,6 +483,7 @@ makeActiveBinding(
 #' @usage matrix_apply_linter
 #' @name matrix_apply_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'matrix_apply_linter',
@@ -473,6 +501,7 @@ makeActiveBinding(
 #' @usage missing_argument_linter
 #' @name missing_argument_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'missing_argument_linter',
@@ -490,6 +519,7 @@ makeActiveBinding(
 #' @usage nested_ifelse_linter
 #' @name nested_ifelse_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'nested_ifelse_linter',
@@ -507,6 +537,7 @@ makeActiveBinding(
 #' @usage numeric_leading_zero_linter
 #' @name numeric_leading_zero_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'numeric_leading_zero_linter',
@@ -524,6 +555,7 @@ makeActiveBinding(
 #' @usage outer_negation_linter
 #' @name outer_negation_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'outer_negation_linter',
@@ -541,6 +573,7 @@ makeActiveBinding(
 #' @usage package_hooks_linter
 #' @name package_hooks_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'package_hooks_linter',
@@ -558,6 +591,7 @@ makeActiveBinding(
 #' @usage paste_linter
 #' @name paste_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'paste_linter',
@@ -575,6 +609,7 @@ makeActiveBinding(
 #' @usage redundant_equals_linter
 #' @name redundant_equals_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'redundant_equals_linter',
@@ -592,6 +627,7 @@ makeActiveBinding(
 #' @usage redundant_ifelse_linter
 #' @name redundant_ifelse_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'redundant_ifelse_linter',
@@ -609,6 +645,7 @@ makeActiveBinding(
 #' @usage rep_len_linter
 #' @name rep_len_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'rep_len_linter',
@@ -624,6 +661,7 @@ makeActiveBinding(
 #' @usage right_assignment_linter
 #' @name right_assignment_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'right_assignment_linter',
@@ -641,6 +679,7 @@ makeActiveBinding(
 #' @usage sample_int_linter
 #' @name sample_int_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'sample_int_linter',
@@ -658,6 +697,7 @@ makeActiveBinding(
 #' @usage seq_linter
 #' @name seq_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'seq_linter',
@@ -675,6 +715,7 @@ makeActiveBinding(
 #' @usage sort_linter
 #' @name sort_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'sort_linter',
@@ -692,6 +733,7 @@ makeActiveBinding(
 #' @usage stopifnot_all_linter
 #' @name stopifnot_all_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'stopifnot_all_linter',
@@ -709,6 +751,7 @@ makeActiveBinding(
 #' @usage T_and_F_symbol_linter
 #' @name T_and_F_symbol_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'T_and_F_symbol_linter',
@@ -726,6 +769,7 @@ makeActiveBinding(
 #' @usage todo_comment_linter
 #' @name todo_comment_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'todo_comment_linter',
@@ -743,6 +787,7 @@ makeActiveBinding(
 #' @usage undesirable_function_linter
 #' @name undesirable_function_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'undesirable_function_linter',
@@ -760,6 +805,7 @@ makeActiveBinding(
 #' @usage undesirable_operator_linter
 #' @name undesirable_operator_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'undesirable_operator_linter',
@@ -777,6 +823,7 @@ makeActiveBinding(
 #' @usage unnecessary_nesting_linter
 #' @name unnecessary_nesting_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'unnecessary_nesting_linter',
@@ -794,6 +841,7 @@ makeActiveBinding(
 #' @usage which_grepl_linter
 #' @name which_grepl_linter
 #' @export
+#' @return The name of the linter
 NULL
 makeActiveBinding(
   'which_grepl_linter',

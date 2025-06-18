@@ -1,21 +1,21 @@
 Package: flir
 Type: Package
 Title: Find and Fix Lints in R Code
-Version: 0.4.2.9000
+Version: 0.5.0
 Authors@R:
     person(given = "Etienne",
            family = "Bacher",
            role = c("aut", "cre", "cph"),
            email = "etienne.bacher@protonmail.com")
 Description: Lints are code patterns that are not optimal because they are
-    inefficient, forget corner cases, or less readable. 'flir' provides a
+    inefficient, forget corner cases, or are less readable. 'flir' provides a
     small set of functions to detect those lints and automatically fix them.
-    It builds on 'astgrepr', which itself uses the Rust crate 'ast-grep' to
+    It builds on 'astgrepr', which itself uses the 'Rust' crate 'ast-grep' to
     parse and navigate R code.
 Depends:
     R (>= 4.2)
 Imports:
-    astgrepr (>= 0.0.10),
+    astgrepr (>= 0.1.0),
     cli,
     crayon,
     data.table,
@@ -40,8 +40,6 @@ Suggests:
     usethis,
     utils,
     withr
-Remotes:
-    etiennebacher/astgrepr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

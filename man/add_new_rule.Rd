@@ -11,6 +11,9 @@ add_new_rule(name, path = ".")
 
 \item{path}{Path to package or project root.}
 }
+\value{
+Create new file(s) but doesn't return anything
+}
 \description{
 This function creates a YAML file with the placeholder text to define a new
 rule. The file is stored in \code{flir/rules/custom}. You need to create the
