@@ -79,7 +79,7 @@ This is the first CRAN release.
 # flir 0.3.0
 
 - **BREAKING**: `flint` is renamed `flir` to avoid namespace conflict with
-  the recent [`flint` package](https://cran.r-project.org/web/packages/flint/)
+  the recent [`flint` package](https://CRAN.R-project.org/package=flint)
   on CRAN. Thanks to Mikael Jagan for the warning (#63).
 
   Consequences:
