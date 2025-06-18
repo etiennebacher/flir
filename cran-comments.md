@@ -1,4 +1,13 @@
-This is the first CRAN release.
+This is the first CRAN release (2nd try).
+
+Thank you for the comments, I have updated the URL in NEWS and fixed the typo 
+in DESCRIPTION.
+
+> Please omit any default path in writing functions.
+
+This was explained in the CRAN comments included in the first submission, which
+I put below (points 1 and 2 were already there, point 3 was added in this 
+submission).
 
 This package may write in the user directory for several reasons:
 
@@ -14,3 +23,6 @@ This package may write in the user directory for several reasons:
   - `export_new_rule()` creates one or several files in the `inst` directory
 
   Those are similar to functions in other packages, e.g. `usethis`.
+  
+3. Some tests modify files, but those are located in a temporary directory so
+   running the test suite doesn't modify anything in the package files.
