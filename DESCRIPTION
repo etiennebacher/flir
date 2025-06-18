@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "etienne.bacher@protonmail.com")
 Description: Lints are code patterns that are not optimal because they are
-    inefficient, forget corner cases, or less readable. 'flir' provides a
+    inefficient, forget corner cases, or are less readable. 'flir' provides a
     small set of functions to detect those lints and automatically fix them.
     It builds on 'astgrepr', which itself uses the 'Rust' crate 'ast-grep' to
     parse and navigate R code.
