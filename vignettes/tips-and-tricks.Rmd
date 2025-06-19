@@ -26,7 +26,7 @@ expect_error(
 ```
 
 Maybe you want to replace the pattern `expect_error(<code>, <message>)` by `expect_snapshot(<code>, error = TRUE)` but you would like to keep this code split on several lines.
-While `rule` will detect the pattern whether it contains new lines or not, it is not possible to manually include new lines in `fix`. 
+While `rule` will detect the pattern whether it contains new lines or not, it is not possible to manually include new lines with `\n` in `fix`. 
 
 Instead, we can write "paragraphs" in the YAML file, such as:
 
