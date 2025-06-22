@@ -11,7 +11,7 @@
 #' `demo`, `exec`.
 #'
 #' @param path A valid path to a file or a directory. Relative paths are
-#'   accepted.
+#'   accepted. If `NULL` (default), uses `"."`.
 #' @param linters A character vector with the names of the rules to apply. See
 #'   the entire list of rules with `list_linters()`. If you have set up the
 #'   `flir` folder with `setup_flir()`, you can also list the linters to use
@@ -92,7 +92,7 @@
 #'
 #' lint(destfile)
 lint <- function(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -100,6 +100,9 @@ lint <- function(
   use_cache = TRUE,
   verbose = TRUE
 ) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   if (isFALSE(verbose) | is_testing()) {
     withr::local_options(cli.default_handler = function(...) {})
   }
@@ -207,7 +210,7 @@ lint <- function(
 #' @export
 
 lint_dir <- function(
-  path = ".",
+  path = NULL,
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -215,6 +218,9 @@ lint_dir <- function(
   use_cache = TRUE,
   verbose = TRUE
 ) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }
@@ -233,7 +239,7 @@ lint_dir <- function(
 #' @export
 
 lint_package <- function(
-  path = ".",
+  path = NULL,
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -241,6 +247,9 @@ lint_package <- function(
   use_cache = TRUE,
   verbose = TRUE
 ) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }

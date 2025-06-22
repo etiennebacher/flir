@@ -6,7 +6,10 @@
 #'
 #' @return Creates `.github/workflows/flir.yaml` but doesn't return any value.
 #' @export
-setup_flir_gha <- function(path = ".", overwrite = FALSE) {
+setup_flir_gha <- function(path = NULL, overwrite = FALSE) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   src <- system.file("gha/flir.yaml", package = "flir")
   tar <- file.path(path, ".github/workflows/flir.yaml")
   if (!fs::dir_exists(dirname(tar))) {

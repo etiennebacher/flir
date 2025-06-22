@@ -8,7 +8,7 @@
 \title{List all lints in a file or a directory}
 \usage{
 lint(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -18,7 +18,7 @@ lint(
 )
 
 lint_dir(
-  path = ".",
+  path = NULL,
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -28,7 +28,7 @@ lint_dir(
 )
 
 lint_package(
-  path = ".",
+  path = NULL,
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -41,7 +41,7 @@ lint_text(text, linters = NULL, exclude_linters = NULL)
 }
 \arguments{
 \item{path}{A valid path to a file or a directory. Relative paths are
-accepted.}
+accepted. If \code{NULL} (default), uses \code{"."}.}
 
 \item{linters}{A character vector with the names of the rules to apply. See
 the entire list of rules with \code{list_linters()}. If you have set up the

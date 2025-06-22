@@ -11,3 +11,4 @@
 ^_pkgdown\.yml$
 ^\.github$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

@@ -8,7 +8,7 @@
 \title{Automatically replace lints}
 \usage{
 fix(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -19,7 +19,7 @@ fix(
 )
 
 fix_dir(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -30,7 +30,7 @@ fix_dir(
 )
 
 fix_package(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -44,7 +44,7 @@ fix_text(text, linters = NULL, exclude_linters = NULL, rerun = TRUE)
 }
 \arguments{
 \item{path}{A valid path to a file or a directory. Relative paths are
-accepted.}
+accepted. If \code{NULL} (default), uses \code{"."}.}
 
 \item{linters}{A character vector with the names of the rules to apply. See
 the entire list of rules with \code{list_linters()}. If you have set up the

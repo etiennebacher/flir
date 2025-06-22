@@ -10,7 +10,7 @@
 #'
 #' This folder must live at the root of the project and cannot be renamed.
 #'
-#' @param path Path to package or project root.
+#' @param path Path to package or project root. If `NULL` (default), uses `"."`.
 #'
 #' @details
 #' The file `flir/config.yml` can contain three fields: `keep`, `exclude`,
@@ -32,7 +32,10 @@
 #' value in R.
 #' @export
 
-setup_flir <- function(path = ".") {
+setup_flir <- function(path = NULL) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   flir_dir <- file.path(path, "flir")
 
   ### Check dir

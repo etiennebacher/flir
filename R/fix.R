@@ -61,7 +61,7 @@
 #' fix(destfile)
 #' cat(paste(readLines(destfile), collapse = "\n"))
 fix <- function(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -70,6 +70,9 @@ fix <- function(
   rerun = TRUE,
   interactive = FALSE
 ) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   if (isFALSE(verbose) | is_testing()) {
     withr::local_options(cli.default_handler = function(...) {})
   }
@@ -167,7 +170,7 @@ fix <- function(
 #' @export
 
 fix_dir <- function(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -176,6 +179,9 @@ fix_dir <- function(
   rerun = TRUE,
   interactive = FALSE
 ) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }
@@ -195,7 +201,7 @@ fix_dir <- function(
 #' @export
 
 fix_package <- function(
-  path = ".",
+  path = NULL,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -204,6 +210,9 @@ fix_package <- function(
   rerun = TRUE,
   interactive = FALSE
 ) {
+  # Required by CRAN review, 2025-06-19
+  path <- path %||% "."
+
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }

@@ -4,12 +4,12 @@
 \alias{add_new_rule}
 \title{Create a custom rule for internal use}
 \usage{
-add_new_rule(name, path = ".")
+add_new_rule(name, path = NULL)
 }
 \arguments{
 \item{name}{Name(s) of the rule. Cannot contain white space.}
 
-\item{path}{Path to package or project root.}
+\item{path}{Path to package or project root. If \code{NULL} (default), uses \code{"."}.}
 }
 \value{
 Create new file(s) but doesn't return anything
