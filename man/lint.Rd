@@ -8,7 +8,7 @@
 \title{List all lints in a file or a directory}
 \usage{
 lint(
-  path = NULL,
+  path = ".",
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -18,7 +18,7 @@ lint(
 )
 
 lint_dir(
-  path = NULL,
+  path = ".",
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -28,7 +28,7 @@ lint_dir(
 )
 
 lint_package(
-  path = NULL,
+  path = ".",
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,

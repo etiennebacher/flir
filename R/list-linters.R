@@ -6,10 +6,10 @@
 #'
 #' @examples
 #' list_linters()
-list_linters <- function(path = NULL) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
+list_linters <- function(path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   out <- c(
     # "absolute_path", # TODO: really broken, too many false positives, e.g #42
     "any_duplicated",

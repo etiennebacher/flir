@@ -92,7 +92,7 @@
 #'
 #' lint(destfile)
 lint <- function(
-  path = NULL,
+  path = ".",
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -100,9 +100,6 @@ lint <- function(
   use_cache = TRUE,
   verbose = TRUE
 ) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
   if (isFALSE(verbose) | is_testing()) {
     withr::local_options(cli.default_handler = function(...) {})
   }
@@ -210,7 +207,7 @@ lint <- function(
 #' @export
 
 lint_dir <- function(
-  path = NULL,
+  path = ".",
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -218,9 +215,6 @@ lint_dir <- function(
   use_cache = TRUE,
   verbose = TRUE
 ) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }
@@ -239,7 +233,7 @@ lint_dir <- function(
 #' @export
 
 lint_package <- function(
-  path = NULL,
+  path = ".",
   linters = NULL,
   open = TRUE,
   exclude_path = NULL,
@@ -247,9 +241,6 @@ lint_package <- function(
   use_cache = TRUE,
   verbose = TRUE
 ) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }

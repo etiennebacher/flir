@@ -32,10 +32,10 @@
 #' value in R.
 #' @export
 
-setup_flir <- function(path = NULL) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
+setup_flir <- function(path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   flir_dir <- file.path(path, "flir")
 
   ### Check dir

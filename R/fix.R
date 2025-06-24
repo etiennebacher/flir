@@ -12,7 +12,8 @@
 #' `fix_text()` takes some text input. Its main interest is to be able to
 #' quickly experiment with some lints and fixes.
 #'
-#' @inheritParams lint
+#' @param path A valid path to a file or a directory. Relative paths are
+#'   accepted. Contrarily to `lint()` and its variants, this must be specified.
 #' @param force Force the application of fixes on the files. This is used only
 #' in the case where Git is not detected, several files will be modified, and
 #' the code is run in a non-interactive setting.
@@ -61,7 +62,7 @@
 #' fix(destfile)
 #' cat(paste(readLines(destfile), collapse = "\n"))
 fix <- function(
-  path = NULL,
+  path,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -70,8 +71,9 @@ fix <- function(
   rerun = TRUE,
   interactive = FALSE
 ) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
 
   if (isFALSE(verbose) | is_testing()) {
     withr::local_options(cli.default_handler = function(...) {})
@@ -170,7 +172,7 @@ fix <- function(
 #' @export
 
 fix_dir <- function(
-  path = NULL,
+  path,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -179,9 +181,9 @@ fix_dir <- function(
   rerun = TRUE,
   interactive = FALSE
 ) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }
@@ -201,7 +203,7 @@ fix_dir <- function(
 #' @export
 
 fix_package <- function(
-  path = NULL,
+  path,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -210,9 +212,9 @@ fix_package <- function(
   rerun = TRUE,
   interactive = FALSE
 ) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   if (!fs::is_dir(path)) {
     cli::cli_abort("`path` must be a directory.")
   }

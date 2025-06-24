@@ -4,7 +4,7 @@
 \alias{setup_flir_gha}
 \title{Create a Github Actions workflow for \code{flir}}
 \usage{
-setup_flir_gha(path = NULL, overwrite = FALSE)
+setup_flir_gha(path, overwrite = FALSE)
 }
 \arguments{
 \item{path}{Path to package or project root. If \code{NULL} (default), uses \code{"."}.}

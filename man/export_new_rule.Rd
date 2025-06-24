@@ -4,7 +4,7 @@
 \alias{export_new_rule}
 \title{Create a custom rule for external use}
 \usage{
-export_new_rule(name, path = NULL)
+export_new_rule(name, path)
 }
 \arguments{
 \item{name}{Name(s) of the rule. Cannot contain white space.}

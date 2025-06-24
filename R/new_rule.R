@@ -14,10 +14,10 @@
 #' @return Create new file(s) but doesn't return anything
 #'
 #' @export
-add_new_rule <- function(name, path = NULL) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
+add_new_rule <- function(name, path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   check_name(name)
   name_with_yml <- paste0(name, ".yml")
 
@@ -80,10 +80,10 @@ message: ...
 #' @inherit add_new_rule return
 #'
 #' @export
-export_new_rule <- function(name, path = NULL) {
-  # Required by CRAN review, 2025-06-19
-  path <- path %||% "."
-
+export_new_rule <- function(name, path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   check_name(name)
   name_with_yml <- paste0(name, ".yml")
 

@@ -4,7 +4,7 @@
 \alias{add_new_rule}
 \title{Create a custom rule for internal use}
 \usage{
-add_new_rule(name, path = NULL)
+add_new_rule(name, path)
 }
 \arguments{
 \item{name}{Name(s) of the rule. Cannot contain white space.}
