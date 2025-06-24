@@ -6,6 +6,11 @@ This is the first CRAN release.
 
 * `add_new_rule()` now errors if the file already exists (#87).
 
+* In all functions that create or modify files (`fix()`, `setup_flir()`, etc.),
+  the argument `path` has to be specified. Linting functions keep using the
+  default path `"."`. This is due to the CRAN policy that a package cannot
+  modify the user file system (#79).
+
 ## New features
 
 * Most `fix_*()` functions have a new argument `interactive` (`FALSE` by
