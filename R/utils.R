@@ -341,7 +341,3 @@ keep_or_exclude_testthat_rules <- function(path, linters) {
   }
   linters
 }
-
-if (!exists("%||%", "package:base")) {
-  `%||%` <- function(x, y) if (is.null(x)) y else x
-}
