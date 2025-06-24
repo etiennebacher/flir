@@ -12,6 +12,7 @@
 #' `fix_text()` takes some text input. Its main interest is to be able to
 #' quickly experiment with some lints and fixes.
 #'
+#' @inheritParams lint
 #' @param path A valid path to a file or a directory. Relative paths are
 #'   accepted. Contrarily to `lint()` and its variants, this must be specified.
 #' @param force Force the application of fixes on the files. This is used only

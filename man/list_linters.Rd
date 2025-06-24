@@ -17,5 +17,5 @@ A character vector
 Get the list of linters in \code{flir}
 }
 \examples{
-list_linters()
+list_linters(".")
 }

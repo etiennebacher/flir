@@ -46,9 +46,27 @@ fix_text(text, linters = NULL, exclude_linters = NULL, rerun = TRUE)
 \item{path}{A valid path to a file or a directory. Relative paths are
 accepted. Contrarily to \code{lint()} and its variants, this must be specified.}
 
+\item{linters}{A character vector with the names of the rules to apply. See
+the entire list of rules with \code{list_linters()}. If you have set up the
+\code{flir} folder with \code{setup_flir()}, you can also list the linters to use
+in the \code{keep} field of \code{flir/config.yml}. See \code{\link[=setup_flir]{setup_flir()}} for more
+information.}
+
+\item{exclude_path}{One or several paths that will be ignored from the \code{path}
+selection.}
+
+\item{exclude_linters}{One or several linters that will not be checked.
+Values can be the names of linters (such as \code{"any_is_na"}) or its
+associated function, such as \code{any_is_na_linter()} (this is mostly for
+compatibility with \code{lintr}). If you have set up the \code{flir} folder with
+\code{setup_flir()}, you can also list the linters to exclude in the \code{exclude}
+field of \code{flir/config.yml}. See \code{\link[=setup_flir]{setup_flir()}} for more information.}
+
 \item{force}{Force the application of fixes on the files. This is used only
 in the case where Git is not detected, several files will be modified, and
 the code is run in a non-interactive setting.}
+
+\item{verbose}{Show messages.}
 
 \item{rerun}{Run the function several times until there are no more fixes to
 apply. This is useful in the case of nested lints. If \code{FALSE}, the function

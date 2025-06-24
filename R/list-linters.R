@@ -5,7 +5,7 @@
 #' @export
 #'
 #' @examples
-#' list_linters()
+#' list_linters(".")
 list_linters <- function(path) {
   if (missing(path) && is_testing()) {
     path <- "."
