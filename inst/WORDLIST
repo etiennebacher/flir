@@ -13,6 +13,7 @@ astgrepr
 coercions
 config
 fleer
+formatter
 grepl
 ints
 lapply

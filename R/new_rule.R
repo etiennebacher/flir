@@ -11,8 +11,13 @@
 #' @param name Name(s) of the rule. Cannot contain white space.
 #' @inheritParams setup_flir
 #'
+#' @return Create new file(s) but doesn't return anything
+#'
 #' @export
-add_new_rule <- function(name, path = ".") {
+add_new_rule <- function(name, path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   check_name(name)
   name_with_yml <- paste0(name, ".yml")
 
@@ -72,8 +77,13 @@ message: ...
 #' @inheritParams add_new_rule
 #' @inheritParams setup_flir
 #'
+#' @inherit add_new_rule return
+#'
 #' @export
-export_new_rule <- function(name, path = ".") {
+export_new_rule <- function(name, path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   check_name(name)
   name_with_yml <- paste0(name, ".yml")
 

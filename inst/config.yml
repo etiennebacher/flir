@@ -46,4 +46,6 @@ keep:
   - undesirable_function
   - undesirable_operator
   - unnecessary_nesting
+  # This can be activated, but it is slow.
+  # - unreachable_code
   - which_grepl

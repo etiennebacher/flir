@@ -4,10 +4,10 @@
 \alias{setup_flir_gha}
 \title{Create a Github Actions workflow for \code{flir}}
 \usage{
-setup_flir_gha(path = ".", overwrite = FALSE)
+setup_flir_gha(path, overwrite = FALSE)
 }
 \arguments{
-\item{path}{Path to package or project root.}
+\item{path}{Path to package or project root. If \code{NULL} (default), uses \code{"."}.}
 
 \item{overwrite}{Whether to overwrite \code{.github/workflows/flir.yaml} if it
 already exists.}

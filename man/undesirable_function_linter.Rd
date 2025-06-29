@@ -6,6 +6,9 @@
 \usage{
 undesirable_function_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/undesirable_function_linter}.
 }

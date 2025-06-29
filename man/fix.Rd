@@ -8,7 +8,7 @@
 \title{Automatically replace lints}
 \usage{
 fix(
-  path = ".",
+  path,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -19,7 +19,7 @@ fix(
 )
 
 fix_dir(
-  path = ".",
+  path,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -30,7 +30,7 @@ fix_dir(
 )
 
 fix_package(
-  path = ".",
+  path,
   linters = NULL,
   exclude_path = NULL,
   exclude_linters = NULL,
@@ -44,7 +44,7 @@ fix_text(text, linters = NULL, exclude_linters = NULL, rerun = TRUE)
 }
 \arguments{
 \item{path}{A valid path to a file or a directory. Relative paths are
-accepted.}
+accepted. Contrarily to \code{lint()} and its variants, this must be specified.}
 
 \item{linters}{A character vector with the names of the rules to apply. See
 the entire list of rules with \code{list_linters()}. If you have set up the
@@ -78,6 +78,13 @@ potential fixes before accepting them. Setting this to \code{TRUE} will disable
 the check on whether Git is used.}
 
 \item{text}{Text to analyze (and to fix if necessary).}
+}
+\value{
+A list with as many elements as there are files to fix (in \code{fix_text()},
+the text is written to a temporary file).
+
+Each element of the list contains the fixed text, where all fixes available
+have been applied.
 }
 \description{
 \code{fix()}, \code{fix_package()}, and \code{fix_dir()} all replace lints in files. The

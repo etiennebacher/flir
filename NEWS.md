@@ -1,8 +1,15 @@
-# flir (development version)
+# flir 0.5.0
+
+This is the first CRAN release.
 
 ## Breaking changes
 
 * `add_new_rule()` now errors if the file already exists (#87).
+
+* In all functions that create or modify files (`fix()`, `setup_flir()`, etc.),
+  the argument `path` has to be specified. Linting functions keep using the
+  default path `"."`. This is due to the CRAN policy that a package cannot
+  modify the user file system (#79).
 
 ## New features
 
@@ -25,6 +32,7 @@
 * `unreachable_code` is deactivated by default. It can still be activated with
   the argument `linters` or in `flir/config.yml` after running `setup_flir()`
   (#75).
+
 * `T_and_F_symbol` do not detect anymore the use of `F` and `T` when those are
   used in the `:` operation (#81).
 
@@ -76,7 +84,7 @@
 # flir 0.3.0
 
 - **BREAKING**: `flint` is renamed `flir` to avoid namespace conflict with
-  the recent [`flint` package](https://cran.r-project.org/web/packages/flint/)
+  the recent [`flint` package](https://CRAN.R-project.org/package=flint)
   on CRAN. Thanks to Mikael Jagan for the warning (#63).
 
   Consequences:

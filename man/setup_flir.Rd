@@ -4,10 +4,10 @@
 \alias{setup_flir}
 \title{Setup flir}
 \usage{
-setup_flir(path = ".")
+setup_flir(path)
 }
 \arguments{
-\item{path}{Path to package or project root.}
+\item{path}{Path to package or project root. If \code{NULL} (default), uses \code{"."}.}
 }
 \value{
 Imports files necessary for \code{flir} to work but doesn't return any

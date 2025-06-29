@@ -33,11 +33,15 @@ message: Most likely an error
 
       expect_equal(
         nrow(
-          lint(use_cache = FALSE, linters = list_linters(), verbose = FALSE)
+          lint(
+            use_cache = FALSE,
+            linters = list_linters(path = "."),
+            verbose = FALSE
+          )
         ),
         0
       )
-      fix(verbose = FALSE)
+      fix(path = ".", verbose = FALSE)
     }
   )
   expect_true(

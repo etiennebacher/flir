@@ -5,8 +5,11 @@
 #' @export
 #'
 #' @examples
-#' list_linters()
-list_linters <- function(path = ".") {
+#' list_linters(".")
+list_linters <- function(path) {
+  if (missing(path) && is_testing()) {
+    path <- "."
+  }
   out <- c(
     # "absolute_path", # TODO: really broken, too many false positives, e.g #42
     "any_duplicated",
@@ -90,7 +93,7 @@ update_linter_factory <- function(path = ".") {
     }
     cat(
       sprintf(
-        "\n\n#' @usage %s_linter\n#' @name %s_linter\n#' @export
+        "\n\n#' @usage %s_linter\n#' @name %s_linter\n#' @export\n#' @return The name of the linter
 NULL
 makeActiveBinding('%s_linter', function() { function() '%s' }, env = environment())\n
 ",

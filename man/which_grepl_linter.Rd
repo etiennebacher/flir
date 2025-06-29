@@ -6,6 +6,9 @@
 \usage{
 which_grepl_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/which_grepl_linter}.
 }

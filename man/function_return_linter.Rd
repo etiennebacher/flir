@@ -6,6 +6,9 @@
 \usage{
 function_return_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/function_return_linter}.
 }

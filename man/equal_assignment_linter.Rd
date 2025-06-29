@@ -6,6 +6,9 @@
 \usage{
 equal_assignment_linter
 }
+\value{
+The name of the linter
+}
 \description{
 equal_assignment
 }

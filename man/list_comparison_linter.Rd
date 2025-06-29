@@ -6,6 +6,9 @@
 \usage{
 list_comparison_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/list_comparison_linter}.
 }

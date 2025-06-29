@@ -6,6 +6,9 @@
 \usage{
 empty_assignment_linter
 }
+\value{
+The name of the linter
+}
 \description{
 empty_assignment
 }

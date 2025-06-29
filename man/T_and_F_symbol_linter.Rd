@@ -6,6 +6,9 @@
 \usage{
 T_and_F_symbol_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/T_and_F_symbol_linter}.
 }

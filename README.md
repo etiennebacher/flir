@@ -8,6 +8,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/etiennebacher/flir/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/etiennebacher/flir/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/flir)](https://CRAN.R-project.org/package=flir)
 <!-- badges: end -->
 
 ------------------------------------------------------------------------
@@ -168,8 +170,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 lintr         1.89s    1.89s     0.530  315.05MB    20.7 
-#> 2 flir       106.59ms 110.28ms     9.02     1.84MB     5.41
+#> 1 lintr         2.08s    2.08s     0.480  315.18MB    21.1 
+#> 2 flir       140.12ms 142.24ms     6.92     1.86MB     3.46
 ```
 
 ## Why the name “flir”?

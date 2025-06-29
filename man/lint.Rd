@@ -41,7 +41,7 @@ lint_text(text, linters = NULL, exclude_linters = NULL)
 }
 \arguments{
 \item{path}{A valid path to a file or a directory. Relative paths are
-accepted.}
+accepted. If \code{NULL} (default), uses \code{"."}.}
 
 \item{linters}{A character vector with the names of the rules to apply. See
 the entire list of rules with \code{list_linters()}. If you have set up the

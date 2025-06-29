@@ -6,6 +6,9 @@
 \usage{
 equals_na_linter
 }
+\value{
+The name of the linter
+}
 \description{
 See \url{https://lintr.r-lib.org/reference/equals_na_linter}.
 }
