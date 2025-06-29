@@ -1,3 +1,10 @@
+# flir (development version)
+
+## New features
+
+* New vignette "Tips and tricks" that lists some solutions for problems one may
+  encounter when writing new rules (#94).
+
 # flir 0.5.0
 
 This is the first CRAN release.
