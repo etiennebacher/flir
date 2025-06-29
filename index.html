@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Find and Fix Lints in R Code">
-<meta name="description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
-<meta property="og:description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
+<meta name="description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or are less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
+<meta property="og:description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or are less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">flir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -194,8 +194,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 lintr         1.89s    1.89s     0.530  315.05MB    20.7 </span></span>
-<span><span class="co">#&gt; 2 flir       106.59ms 110.28ms     9.02     1.84MB     5.41</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 lintr         2.08s    2.08s     0.480  315.18MB    21.1 </span></span>
+<span><span class="co">#&gt; 2 flir       140.12ms 142.24ms     6.92     1.86MB     3.46</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="why-the-name-flir">Why the name “flir”?<a class="anchor" aria-label="anchor" href="#why-the-name-flir"></a>
@@ -218,6 +218,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=flir" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/etiennebacher/flir/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/etiennebacher/flir/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -257,6 +258,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/etiennebacher/flir/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/etiennebacher/flir/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=flir" class="external-link"><img src="https://www.r-pkg.org/badges/version/flir" alt="CRAN status"></a></li>
 </ul>
 </div>
 
