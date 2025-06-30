@@ -77,9 +77,13 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<p>To get the CRAN version (stable):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'flir'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://etiennebacher.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Note:</strong> using <code>remotes::install_github()</code>, <code>devtools::install_github()</code>, or <code><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak::pak()</a></code> without specifying the R-universe repo will require you to <a href="https://www.rust-lang.org/tools/install" class="external-link">setup Rust</a> to build the package.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"flir"</span><span class="op">)</span></span></code></pre></div>
+<p>To get the development version (unstable):</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"etiennebacher/flir"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -98,7 +102,7 @@
 <code><a href="reference/fix.html">fix()</a></code> looks for lints in R files and automatically applies their replacement (if any).</li>
 </ul>
 <p>One can also experiment with <code><a href="reference/lint.html">flir::lint_text()</a></code> and <code><a href="reference/fix.html">flir::fix_text()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">flir</span><span class="fu">::</span><span class="fu"><a href="reference/lint.html">lint_text</a></span><span class="op">(</span></span>
 <span>  <span class="st">"</span></span>
 <span><span class="st">any(is.na(x))</span></span>
@@ -156,7 +160,7 @@
 <p>The most used tool for lints detection in R is <code>lintr</code>. However, <code>lintr</code>’s performance is not optimal when it is applied on medium to large packages. Also, <code>lintr</code> cannot perform automatic replacement of lints.</p>
 <p><code>styler</code> is a package to clean code by fixing indentation and other things, but doesn’t perform code replacement based on lints.</p>
 <p><code>flir</code> is quite fast This is a small benchmark on 3.5k lines of code with a few linters:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"bench/test.R"</span>, package <span class="op">=</span> <span class="st">"flir"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">bench</span><span class="fu">::</span><span class="fu">mark</span><span class="op">(</span></span>
@@ -195,8 +199,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 lintr         2.08s    2.08s     0.480  315.18MB    21.1 </span></span>
-<span><span class="co">#&gt; 2 flir       140.12ms 142.24ms     6.92     1.86MB     3.46</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 lintr         2.01s    2.01s     0.496  315.18MB    21.8 </span></span>
+<span><span class="co">#&gt; 2 flir       116.84ms 120.97ms     7.94     1.85MB     3.97</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="why-the-name-flir">Why the name “flir”?<a class="anchor" aria-label="anchor" href="#why-the-name-flir"></a>
