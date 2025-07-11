@@ -109,9 +109,9 @@ get_external_linters_from_config <- function(path) {
 
   if (length(installed) > 0) {
     rlang::check_installed(installed, call = rlang::caller_env(2))
-    for (i in installed) {
+    for (pkg in installed) {
       pkg_linters <- list.files(
-        system.file("flir/rules", package = i),
+        system.file("flir/rules", package = pkg),
         pattern = "\\.(yml|yaml)",
         full.names = TRUE
       )
@@ -123,15 +123,34 @@ get_external_linters_from_config <- function(path) {
       ### copy the external rules to a tempdir first.
       new_pkg_linters <- fs::file_copy(
         pkg_linters,
-        fs::path_temp(paste0("from-", i, "-", basename(pkg_linters))),
+        fs::path_temp(paste0("from-", pkg, "-", basename(pkg_linters))),
         overwrite = TRUE
       )
+
+      ### yaml::read_yaml() doesn't handle "---" to separate rules so I have
+      ### to read the file as text, split on "---" and
       for (file in new_pkg_linters) {
-        yaml <- yaml::read_yaml(file)
-        # I could have a rule named "dplyr-superseded" that doesn't come from
-        # dplyr, so I add "from" too.
-        yaml[["id"]] <- paste0("from-", i, yaml[["id"]])
-        yaml::write_yaml(yaml, file)
+        yaml_lines <- readLines(file)
+        # We restore it at the end
+        fs::file_delete(file)
+
+        yaml_text <- paste(yaml_lines, collapse = "\n")
+
+        sections <- strsplit(yaml_text, "\n---\n")[[1]]
+        sections <- trimws(sections)
+        sections <- sections[sections != ""]
+
+        out <- list()
+        for (i in seq_along(sections)) {
+          txt <- yaml::yaml.load(sections[i])
+          txt[["id"]] <- paste0("from-", pkg, "-", txt[["id"]])
+          out[[i]] <- yaml::as.yaml(txt)
+          if (i != 1) {
+            out[[i]] <- paste0("---\n\n", out[[i]])
+          }
+        }
+        out <- paste(out, collapse = "\n")
+        cat(out, file = file, append = TRUE)
       }
 
       linters <- append(linters, new_pkg_linters)
