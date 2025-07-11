@@ -4,6 +4,12 @@
 
 * New vignette "Tips and tricks" that lists some solutions for problems one may
   encounter when writing new rules (#94).
+  
+## Bug fixes
+
+* When using external rules with the `with-<pkg>` syntax, if the YAML file
+  contains several rules separated by "---", then `flir` would only use the 
+  first one. This is now fixed (#95). 
 
 # flir 0.5.0
 
