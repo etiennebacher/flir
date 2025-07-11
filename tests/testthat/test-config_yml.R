@@ -173,6 +173,54 @@ message: Most likely an error
   expect_equal(nrow(lint("foo.R", open = FALSE)), 1)
 })
 
+test_that("config: `from-package` works when the external YAML file contains several rules", {
+  ### Step 1: create a package that contains some rules
+  pkg_with_rules <- fs::file_temp(pattern = "testpkg")
+  pkg_with_rules_nm <- basename(pkg_with_rules)
+  create_local_package(pkg_with_rules)
+  fs::dir_create("inst/flir/rules")
+  cat(
+    "id: foobar
+language: r
+severity: warning
+rule:
+  pattern: unique(length($VAR))
+fix: length(unique(~~VAR~~))
+message: Most likely an error
+
+---
+
+id: foobar-2
+language: r
+severity: warning
+rule:
+  pattern: a(b($VAR))
+fix: b(a(~~VAR~~))
+message: Most likely an error
+",
+    file = "inst/flir/rules/foo.yml"
+  )
+
+  ### The package needs to be installed
+  suppressMessages(install.packages(
+    ".",
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  ))
+  withr::defer(suppressMessages(remove.packages(pkg_with_rules_nm)))
+
+  ### Step 2: create a package that uses rules from the first package
+  create_local_package()
+  setup_flir()
+  cat(
+    paste0("from-package:\n  - ", pkg_with_rules_nm),
+    file = "flir/config.yml"
+  )
+  cat("x <- function() { \na(b(x))\n}", file = "foo.R")
+  expect_equal(nrow(lint("foo.R", open = FALSE)), 1)
+})
+
 test_that("config: `from-package` works with multiple packages having rules with same names", {
   ### Step 1: create a package that contains some rules
   pkg_with_rules <- fs::file_temp(pattern = "testpkg")
