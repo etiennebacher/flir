@@ -128,7 +128,8 @@ get_external_linters_from_config <- function(path) {
       )
 
       ### yaml::read_yaml() doesn't handle "---" to separate rules so I have
-      ### to read the file as text, split on "---" and
+      ### to read the file as text, split on "---", modify each section, and
+      ### put it back together.
       for (file in new_pkg_linters) {
         yaml_lines <- readLines(file)
         # We restore it at the end
