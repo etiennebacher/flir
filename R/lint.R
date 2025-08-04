@@ -11,7 +11,7 @@
 #' `demo`, `exec`.
 #'
 #' @param path A valid path to a file or a directory. Relative paths are
-#'   accepted. If `NULL` (default), uses `"."`.
+#'   accepted. Default is `"."`.
 #' @param linters A character vector with the names of the rules to apply. See
 #'   the entire list of rules with `list_linters()`. If you have set up the
 #'   `flir` folder with `setup_flir()`, you can also list the linters to use
