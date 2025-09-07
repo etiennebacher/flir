@@ -29,7 +29,6 @@ Suggests:
     glue,
     knitr,
     patrick,
-    rex,
     rlang,
     rmarkdown,
     rstudioapi,
