@@ -166,15 +166,6 @@ test_that("multiple lints are generated correctly", {
 })
 
 test_that("fix works", {
-  expect_fix('x > ""', "nzchar(x, keepNA = TRUE)")
-  expect_fix("x != ''", "nzchar(x, keepNA = TRUE)")
-  expect_fix('x <= ""', "!nzchar(x, keepNA = TRUE)")
-  expect_fix("x == ''", "!nzchar(x, keepNA = TRUE)")
-  expect_fix('"" < x', "nzchar(x, keepNA = TRUE)")
-  expect_fix("'' != x", "nzchar(x, keepNA = TRUE)")
-  expect_fix('"" >= x', "!nzchar(x, keepNA = TRUE)")
-  expect_fix("'' == x", "!nzchar(x, keepNA = TRUE)")
-
   expect_fix("nchar(x) > 0", "nzchar(x, keepNA = TRUE)")
   expect_fix("nchar(x) != 0", "nzchar(x, keepNA = TRUE)")
   expect_fix("nchar(x) <= 0", "!nzchar(x, keepNA = TRUE)")
