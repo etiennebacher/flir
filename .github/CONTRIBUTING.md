@@ -46,7 +46,15 @@ Adding a rule that exists in `lintr`:
 1. Create a new `.yml` file in `inst` with `new_rule("<rule_name>")`, e.g
    `new_rule("expect_length")`.
 1. Import the tests from `lintr` with `get_tests_from_lintr("<rule_name>")`, e.g
-   `get_tests_from_lintr("expect_length")`.
+   `get_tests_from_lintr("expect_length")`. Note that some tests use the
+   `rex::rex()` function. This is unnecessary in tests for `flir`. Instead of
+   ```r
+   message <- rex::rex("<message>")
+   ```
+   use
+   ```r
+   message <- "<part of message>"
+   ```
 1. Add `"<rule_name>"` in the list of linters located in `R/list-linters.R`.
 1. Load the package with `devtools::load_all()`, and then run `update_linter_factory()`.
    This creates a new entry in `R/linters_factory.R`.
