@@ -9,7 +9,8 @@ test_that("for_loop_index_linter skips allowed usages", {
   expect_no_lint("for (col in DT[, col]) {}", linter)
 
   # make sure symbol check is scoped
-  expect_no_lint(trim_some(
+  expect_no_lint(
+    trim_some(
       "
       {
         for (i in 1:10) {
@@ -18,7 +19,9 @@ test_that("for_loop_index_linter skips allowed usages", {
         i <- 7L
       }
     "
-    ), linter)
+    ),
+    linter
+  )
 })
 
 test_that("for_loop_index_linter blocks simple disallowed usages", {

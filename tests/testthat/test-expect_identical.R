@@ -4,7 +4,10 @@ test_that("expect_identical_linter skips allowed usages", {
   # expect_type doesn't have an inverted version
   expect_no_lint("expect_true(identical(x, y) || identical(y, z))", linter)
   # NB: also applies to tinytest, but it's sufficient to test testthat
-  expect_no_lint("testthat::expect_true(identical(x, y) || identical(y, z))", linter)
+  expect_no_lint(
+    "testthat::expect_true(identical(x, y) || identical(y, z))",
+    linter
+  )
 
   # expect_equal calls with explicit tolerance= are OK
   expect_no_lint("expect_equal(x, y, tolerance = 1e-6)", linter)
@@ -50,7 +53,10 @@ test_that("expect_identical_linter skips cases likely testing numeric equality",
 })
 
 test_that("expect_identical_linter skips 3e cases needing expect_equal", {
-  expect_no_lint("expect_equal(x, y, ignore_attr = 'names')", expect_identical_linter())
+  expect_no_lint(
+    "expect_equal(x, y, ignore_attr = 'names')",
+    expect_identical_linter()
+  )
 })
 
 # this arose where a helper function was wrapping expect_equal() and

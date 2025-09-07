@@ -307,7 +307,8 @@ test_that("unreachable_code_linter finds code after stop()", {
 test_that("unreachable_code_linter ignores code after foo$stop(), which might be stopping a subprocess, for example", {
   linter <- "unreachable_code"
 
-  expect_no_lint(trim_some(
+  expect_no_lint(
+    trim_some(
       "
       foo <- function(x) {
         bar <- get_process()
@@ -315,8 +316,11 @@ test_that("unreachable_code_linter ignores code after foo$stop(), which might be
         TRUE
       }
     "
-    ), linter)
-  expect_no_lint(trim_some(
+    ),
+    linter
+  )
+  expect_no_lint(
+    trim_some(
       "
       foo <- function(x) {
         bar <- get_process()
@@ -324,7 +328,9 @@ test_that("unreachable_code_linter ignores code after foo$stop(), which might be
         TRUE
       }
     "
-    ), linter)
+    ),
+    linter
+  )
 })
 
 test_that("unreachable_code_linter identifies unreachable code in conditional loops", {

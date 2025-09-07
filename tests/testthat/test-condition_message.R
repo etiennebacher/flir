@@ -14,7 +14,8 @@ test_that("condition_message_linter skips allowed usages", {
   expect_no_lint("stop(sprintf('A %s!', 'string'))", linter)
 
   # get multiple sep= in one expression
-  expect_no_lint(trim_some(
+  expect_no_lint(
+    trim_some(
       "
       tryCatch(
         foo(x),
@@ -22,13 +23,18 @@ test_that("condition_message_linter skips allowed usages", {
         warning = function(w) warning(paste0(a, b, recycle0 = TRUE)),
       )
     "
-    ), linter)
+    ),
+    linter
+  )
 })
 
 skip_if_not_installed("tibble")
 patrick::with_parameters_test_that(
   "paste/paste allowed by condition_message_linter when using other seps and/or collapse",
-  expect_no_lint(sprintf("%s(%s(x, %s = '%s'))", condition, fun, parameter, arg), condition_message_linter()),
+  expect_no_lint(
+    sprintf("%s(%s(x, %s = '%s'))", condition, fun, parameter, arg),
+    condition_message_linter()
+  ),
   .cases = tibble::tribble(
     ~.test_name,
     ~condition,
@@ -72,7 +78,10 @@ patrick::with_parameters_test_that(
 )
 
 test_that("do not block usage of paste()", {
-  expect_no_lint("stop(paste('a string', 'another'))", condition_message_linter())
+  expect_no_lint(
+    "stop(paste('a string', 'another'))",
+    condition_message_linter()
+  )
 })
 
 test_that("condition_message_linter blocks simple disallowed usages", {
@@ -137,7 +146,10 @@ test_that("packageStartupMessage usages are also matched", {
     condition_message_linter()
   )
 
-  expect_no_lint("packageStartupMessage(paste('a string ', 'another'))", condition_message_linter())
+  expect_no_lint(
+    "packageStartupMessage(paste('a string ', 'another'))",
+    condition_message_linter()
+  )
 })
 
 # test_that("R>=4.0.0 raw strings are handled", {

@@ -10,10 +10,16 @@ test_that("expect_length_linter skips allowed usages", {
   # expect_lint("expect_equal(nrow(x), length(y))", NULL, linter)
 
   # expect_length() doesn't have info= or label= arguments
-  expect_no_lint("expect_equal(length(x), n, info = 'x should have size n')", linter)
+  expect_no_lint(
+    "expect_equal(length(x), n, info = 'x should have size n')",
+    linter
+  )
   expect_no_lint("expect_equal(length(x), n, label = 'x size')", linter)
   expect_no_lint("expect_equal(length(x), length(y))", linter)
-  expect_no_lint("expect_equal(length(x), n, expected.label = 'target size')", linter)
+  expect_no_lint(
+    "expect_equal(length(x), n, expected.label = 'target size')",
+    linter
+  )
 })
 
 test_that("expect_length_linter blocks simple disallowed usages", {

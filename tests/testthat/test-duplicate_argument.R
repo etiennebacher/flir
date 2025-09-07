@@ -74,23 +74,32 @@ test_that("duplicate_argument_linter blocks disallowed usages", {
 test_that("doesn't lint duplicated arguments in allowed functions", {
   linter <- duplicate_argument_linter()
 
-  expect_no_lint("x %>%
+  expect_no_lint(
+    "x %>%
      dplyr::mutate(
        col = a + b,
        col = col + d
-     )", linter)
+     )",
+    linter
+  )
 
-  expect_no_lint("x %>%
+  expect_no_lint(
+    "x %>%
      dplyr::transmute(
        col = a + b,
        col = col / 2.5
-     )", linter)
+     )",
+    linter
+  )
 
   skip_if_not_r_version("4.1.0")
-  expect_no_lint("x |>
+  expect_no_lint(
+    "x |>
     dplyr::mutate(
       col = col |> str_replace('t', '') |> str_replace('\\\\s+$', 'xxx')
-    )", linter)
+    )",
+    linter
+  )
 })
 
 test_that("interceding comments don't trip up logic", {
