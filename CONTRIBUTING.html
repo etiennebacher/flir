@@ -66,14 +66,21 @@
 <div class="section level3">
 <h3 id="how-to-add-a-new-lint-rule-in-flir">How to add a new lint rule in <code>flir</code>?<a class="anchor" aria-label="anchor" href="#how-to-add-a-new-lint-rule-in-flir"></a></h3>
 <p>Adding a rule that exists in <code>lintr</code>:</p>
-<ol style="list-style-type: decimal"><li>Create a new <code>.yml</code> file in <code>inst</code> with <code>new_rule("&lt;rule_name&gt;")</code>, e.g <code>new_rule("expect_length")</code>.</li>
-<li>Import the tests from <code>lintr</code> with <code>get_tests_from_lintr("&lt;rule_name&gt;")</code>, e.g <code>get_tests_from_lintr("expect_length")</code>.</li>
-<li>Add <code>"&lt;rule_name&gt;"</code> in the list of linters located in <code>R/list-linters.R</code>.</li>
-<li>Load the package with <code>devtools::load_all()</code>, and then run <code>update_linter_factory()</code>. This creates a new entry in <code>R/linters_factory.R</code>.</li>
-<li>Run <code>devtools::document()</code> to register this new entry.</li>
-<li>Tweak the <code>.yml</code> file so that most tests pass (in some cases, some <code>lintr</code> tests can be commented out).</li>
-<li>If the rule comes with a fix, add additional snapshot tests for <code><a href="reference/fix.html">fix_text()</a></code>, e.g.</li>
-</ol><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<ol style="list-style-type: decimal"><li><p>Create a new <code>.yml</code> file in <code>inst</code> with <code>new_rule("&lt;rule_name&gt;")</code>, e.g <code>new_rule("expect_length")</code>.</p></li>
+<li>
+<p>Import the tests from <code>lintr</code> with <code>get_tests_from_lintr("&lt;rule_name&gt;")</code>, e.g <code>get_tests_from_lintr("expect_length")</code>. Note that some tests use the <code>rex::rex()</code> function. This is unnecessary in tests for <code>flir</code>. Instead of</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">message</span> <span class="op">&lt;-</span> <span class="fu">rex</span><span class="fu">::</span><span class="fu">rex</span><span class="op">(</span><span class="st">"&lt;message&gt;"</span><span class="op">)</span></span></code></pre></div>
+<p>use</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">message</span> <span class="op">&lt;-</span> <span class="st">"&lt;part of message&gt;"</span></span></code></pre></div>
+</li>
+<li><p>Add <code>"&lt;rule_name&gt;"</code> in the list of linters located in <code>R/list-linters.R</code>.</p></li>
+<li><p>Load the package with <code>devtools::load_all()</code>, and then run <code>update_linter_factory()</code>. This creates a new entry in <code>R/linters_factory.R</code>.</p></li>
+<li><p>Run <code>devtools::document()</code> to register this new entry.</p></li>
+<li><p>Tweak the <code>.yml</code> file so that most tests pass (in some cases, some <code>lintr</code> tests can be commented out).</p></li>
+<li><p>If the rule comes with a fix, add additional snapshot tests for <code><a href="reference/fix.html">fix_text()</a></code>, e.g.</p></li>
+</ol><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">test_that</span><span class="op">(</span><span class="st">"fix works"</span>, <span class="op">{</span></span>
 <span>  <span class="va">linter</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/expect_length_linter.html">expect_length_linter</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
