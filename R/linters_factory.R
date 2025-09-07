@@ -566,6 +566,24 @@ makeActiveBinding(
 )
 
 
+#' @inherit lintr::nzchar_linter title
+#' @description
+#' See <https://lintr.r-lib.org/reference/nzchar_linter>.
+
+#' @usage nzchar_linter
+#' @name nzchar_linter
+#' @export
+#' @return The name of the linter
+NULL
+makeActiveBinding(
+  'nzchar_linter',
+  function() {
+    function() 'nzchar'
+  },
+  env = environment()
+)
+
+
 #' @inherit lintr::outer_negation_linter title
 #' @description
 #' See <https://lintr.r-lib.org/reference/outer_negation_linter>.

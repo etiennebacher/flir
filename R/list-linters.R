@@ -41,6 +41,7 @@ list_linters <- function(path = ".") {
     "missing_argument",
     "nested_ifelse",
     "numeric_leading_zero",
+    "nzchar",
     "outer_negation",
     "package_hooks",
     "paste",

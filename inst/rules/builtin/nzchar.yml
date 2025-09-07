@@ -1,0 +1,185 @@
+id: nzchar-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $X > ""
+    - pattern: $X > ''
+    - pattern: '"" < $X'
+    - pattern: "'' < $X"
+fix: nzchar(~~X~~, keepNA = TRUE)
+message: Use nzchar(x) instead of x > "".
+  Use nzchar(x, keepNA = TRUE) if missing data is possible.
+  Use nzchar(as.character(x)) if x may not be a character vector.
+
+---
+
+id: nzchar-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $X != ""
+    - pattern: $X != ''
+    - pattern: '"" != $X'
+    - pattern: "'' != $X"
+fix: nzchar(~~X~~, keepNA = TRUE)
+message: Use nzchar(x) instead of x != "".
+  Use nzchar(x, keepNA = TRUE) if missing data is possible.
+  Use nzchar(as.character(x)) if x may not be a character vector.
+
+---
+
+id: nzchar-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $X <= ""
+    - pattern: $X <= ''
+    - pattern: '"" >= $X'
+    - pattern: "'' >= $X"
+fix: "!nzchar(~~X~~, keepNA = TRUE)"
+message: Use !nzchar(x) instead of x <= "".
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+  Use !nzchar(as.character(x)) if x may not be a character vector.
+
+---
+
+id: nzchar-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $X == ""
+    - pattern: $X == ''
+    - pattern: '"" == $X'
+    - pattern: "'' == $X"
+fix: "!nzchar(~~X~~, keepNA = TRUE)"
+message: Use !nzchar(x) instead of x == "".
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+  Use !nzchar(as.character(x)) if x may not be a character vector.
+
+---
+
+id: nzchar-5
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $X >= ""
+    - pattern: $X >= ''
+    - pattern: '"" <= $X'
+    - pattern: "'' <= $X"
+message: x >= "" is always true, maybe you want nzchar(x)?
+  Use nzchar(x, keepNA = TRUE) if missing data is possible.
+  Use nzchar(as.character(x)) if x may not be a character vector.
+
+---
+
+id: nzchar-6
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $X < ""
+    - pattern: $X < ''
+    - pattern: '"" > $X'
+    - pattern: "'' > $X"
+message: x < "" is always false, maybe you want !nzchar(x)?
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+  Use !nzchar(as.character(x)) if x may not be a character vector.
+
+---
+
+id: nzchar-7
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X) > $ZERO
+    - pattern: $ZERO < nchar($X)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+fix: nzchar(~~X~~, keepNA = TRUE)
+message: Use nzchar(x) instead of nchar(x) > 0.
+  Use nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
+id: nzchar-8
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X) != $ZERO
+    - pattern: $ZERO != nchar($X)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+fix: nzchar(~~X~~, keepNA = TRUE)
+message: Use nzchar(x) instead of nchar(x) != 0.
+  Use nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
+id: nzchar-9
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X) <= $ZERO
+    - pattern: $ZERO >= nchar($X)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+fix: "!nzchar(~~X~~, keepNA = TRUE)"
+message: Use !nzchar(x) instead of nchar(x) <= 0.
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
+id: nzchar-10
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X) == $ZERO
+    - pattern: $ZERO == nchar($X)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+fix: "!nzchar(~~X~~, keepNA = TRUE)"
+message: Use !nzchar(x) instead of nchar(x) == 0.
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
+id: nzchar-11
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X) >= $ZERO
+    - pattern: $ZERO <= nchar($X)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+message: nchar(x) >= 0 is always true, maybe you want nzchar(x)?
+  Use nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
+id: nzchar-12
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X) < $ZERO
+    - pattern: $ZERO > nchar($X)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+message: nchar(x) < 0 is always false, maybe you want !nzchar(x)?
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
