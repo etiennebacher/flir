@@ -1,10 +1,10 @@
 test_that("assignment_linter skips allowed usages", {
   linter <- NULL
 
-  expect_lint("blah", NULL, linter)
-  expect_lint("blah <- 1", NULL, linter)
-  expect_lint("blah<-1", NULL, linter)
-  expect_lint("fun(blah=1)", NULL, linter)
+  expect_no_lint("blah", linter)
+  expect_no_lint("blah <- 1", linter)
+  expect_no_lint("blah<-1", linter)
+  expect_no_lint("fun(blah=1)", linter)
 })
 
 test_that("assignment_linter blocks disallowed usages", {

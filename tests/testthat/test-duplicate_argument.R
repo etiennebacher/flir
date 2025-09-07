@@ -1,12 +1,12 @@
 test_that("duplicate_argument_linter doesn't block allowed usages", {
   linter <- duplicate_argument_linter()
 
-  expect_lint("fun(arg = 1)", NULL, linter)
-  expect_lint("fun('arg' = 1)", NULL, linter)
-  expect_lint("fun(`arg` = 1)", NULL, linter)
-  expect_lint("'fun'(arg = 1)", NULL, linter)
-  expect_lint("(function(x, y) x + y)(x = 1)", NULL, linter)
-  expect_lint("dt[i = 1]", NULL, linter)
+  expect_no_lint("fun(arg = 1)", linter)
+  expect_no_lint("fun('arg' = 1)", linter)
+  expect_no_lint("fun(`arg` = 1)", linter)
+  expect_no_lint("'fun'(arg = 1)", linter)
+  expect_no_lint("(function(x, y) x + y)(x = 1)", linter)
+  expect_no_lint("dt[i = 1]", linter)
 })
 
 test_that("duplicate_argument_linter blocks disallowed usages", {
@@ -74,35 +74,23 @@ test_that("duplicate_argument_linter blocks disallowed usages", {
 test_that("doesn't lint duplicated arguments in allowed functions", {
   linter <- duplicate_argument_linter()
 
-  expect_lint(
-    "x %>%
+  expect_no_lint("x %>%
      dplyr::mutate(
        col = a + b,
        col = col + d
-     )",
-    NULL,
-    linter
-  )
+     )", linter)
 
-  expect_lint(
-    "x %>%
+  expect_no_lint("x %>%
      dplyr::transmute(
        col = a + b,
        col = col / 2.5
-     )",
-    NULL,
-    linter
-  )
+     )", linter)
 
   skip_if_not_r_version("4.1.0")
-  expect_lint(
-    "x |>
+  expect_no_lint("x |>
     dplyr::mutate(
       col = col |> str_replace('t', '') |> str_replace('\\\\s+$', 'xxx')
-    )",
-    NULL,
-    linter
-  )
+    )", linter)
 })
 
 test_that("interceding comments don't trip up logic", {
@@ -289,6 +277,6 @@ test_that("lints vectorize", {
 test_that("do not block when argument values and argument names are duplicated", {
   linter <- duplicate_argument_linter()
 
-  expect_lint("fun(arg = x, x = 1)", NULL, linter)
-  expect_lint("intersect(names(a), names(b))", NULL, linter)
+  expect_no_lint("fun(arg = x, x = 1)", linter)
+  expect_no_lint("intersect(names(a), names(b))", linter)
 })

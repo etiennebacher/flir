@@ -1,21 +1,21 @@
 test_that("is_numeric_linter skips allowed usages involving ||", {
   linter <- is_numeric_linter()
 
-  expect_lint("is.numeric(x) || is.integer(y)", NULL, linter)
+  expect_no_lint("is.numeric(x) || is.integer(y)", linter)
   # x is used, but not identically
-  expect_lint("is.numeric(x) || is.integer(foo(x))", NULL, linter)
+  expect_no_lint("is.numeric(x) || is.integer(foo(x))", linter)
   # not totally crazy, e.g. if input accepts a vector or a list
-  expect_lint("is.numeric(x) || is.integer(x[[1]])", NULL, linter)
+  expect_no_lint("is.numeric(x) || is.integer(x[[1]])", linter)
 })
 
 test_that("is_numeric_linter skips allowed usages involving %in%", {
   linter <- is_numeric_linter()
 
   # false positives for class(x) %in% c('integer', 'numeric') style
-  expect_lint("class(x) %in% 1:10", NULL, linter)
-  expect_lint("class(x) %in% 'numeric'", NULL, linter)
-  expect_lint("class(x) %in% c('numeric', 'integer', 'factor')", NULL, linter)
-  expect_lint("class(x) %in% c('numeric', 'integer', y)", NULL, linter)
+  expect_no_lint("class(x) %in% 1:10", linter)
+  expect_no_lint("class(x) %in% 'numeric'", linter)
+  expect_no_lint("class(x) %in% c('numeric', 'integer', 'factor')", linter)
+  expect_no_lint("class(x) %in% c('numeric', 'integer', y)", linter)
 })
 
 test_that("is_numeric_linter blocks disallowed usages involving ||", {
@@ -69,12 +69,8 @@ test_that("raw strings are handled properly when testing in class", {
   linter <- is_numeric_linter()
   lint_msg <- "can be simplified to is.numeric"
 
-  expect_lint(
-    "class(x) %in% c(R'(numeric)', 'integer', 'factor')",
-    NULL,
-    linter
-  )
-  expect_lint("class(x) %in% c('numeric', R'--(integer)--', y)", NULL, linter)
+  expect_no_lint("class(x) %in% c(R'(numeric)', 'integer', 'factor')", linter)
+  expect_no_lint("class(x) %in% c('numeric', R'--(integer)--', y)", linter)
 
   # TODO: fix that
   # expect_lint("class(x) %in% c(R'(integer)', 'numeric')", lint_msg, linter)

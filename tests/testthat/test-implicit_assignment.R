@@ -1,98 +1,69 @@
 test_that("implicit_assignment_linter skips allowed usages", {
   linter <- implicit_assignment_linter()
 
-  expect_lint("x <- 1L", NULL, linter)
-  expect_lint("1L -> x", NULL, linter)
-  expect_lint("x <<- 1L", NULL, linter)
-  expect_lint("1L ->> x", NULL, linter)
-  expect_lint("y <- if (is.null(x)) z else x", NULL, linter)
-  expect_lint("for (x in 1:10) x <- x + 1", NULL, linter)
+  expect_no_lint("x <- 1L", linter)
+  expect_no_lint("1L -> x", linter)
+  expect_no_lint("x <<- 1L", linter)
+  expect_no_lint("1L ->> x", linter)
+  expect_no_lint("y <- if (is.null(x)) z else x", linter)
+  expect_no_lint("for (x in 1:10) x <- x + 1", linter)
 
-  expect_lint("abc <- mean(1:4)", NULL, linter)
-  expect_lint("mean(1:4) -> abc", NULL, linter)
+  expect_no_lint("abc <- mean(1:4)", linter)
+  expect_no_lint("mean(1:4) -> abc", linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     x <- 1:4
     mean(x)"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     x <- 1L
     if (x) TRUE"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     0L -> abc
     while (abc) {
       FALSE
     }"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     if (x > 20L) {
       x <- x / 2.0
     }"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     i <- 1
     while (i < 6L) {
       print(i)
       i <- i + 1
     }"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     foo <- function(x) {
       x <- x + 1
       return(x)
     }"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     f <- function() {
       p <- g()
       p <- if (is.null(p)) x else p
     }"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       map(
         .x = 1:4,
@@ -101,35 +72,24 @@ test_that("implicit_assignment_linter skips allowed usages", {
           x
         }
       )"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       lapply(1:4, function(x) {
         x <- x + 1
         x
       })"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
   skip_if_not_r_version("4.1.0")
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       map(1:4, \\(x) {
         x <- x + 1
         x
       })"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 })
 
 # test_that("implicit_assignment_linter respects except argument", {
@@ -167,93 +127,65 @@ test_that("implicit_assignment_linter skips allowed usages", {
 test_that("implicit_assignment_linter skips allowed usages with braces", {
   linter <- implicit_assignment_linter()
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     foo({
       a <- 1L
     })
     "
-    ),
-    NULL,
-    linter
-  )
-  expect_lint(
-    trim_some(
+    ), linter)
+  expect_no_lint(trim_some(
       "
     output <- capture.output({
       x <- f()
     })
     "
-    ),
-    NULL,
-    linter
-  )
-  expect_lint(
-    trim_some(
+    ), linter)
+  expect_no_lint(trim_some(
       "
     quote({
       a <- 1L
     })
     "
-    ),
-    NULL,
-    linter
-  )
-  expect_lint(
-    trim_some(
+    ), linter)
+  expect_no_lint(trim_some(
       "
     bquote({
       a <- 1L
     })
     "
-    ),
-    NULL,
-    linter
-  )
-  expect_lint(
-    trim_some(
+    ), linter)
+  expect_no_lint(trim_some(
       "
     expression({
       a <- 1L
     })
     "
-    ),
-    NULL,
-    linter
-  )
-  expect_lint(
-    trim_some(
+    ), linter)
+  expect_no_lint(trim_some(
       "
     local({
       a <- 1L
     })
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 })
 
 test_that("implicit_assignment_linter makes exceptions for functions that capture side-effects", {
   linter <- implicit_assignment_linter()
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
     test_that('my test', {
       a <- 1L
       expect_equal(a, 1L)
     })"
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
   # rlang
-  expect_lint("expr(a <- 1L)", NULL, linter)
-  expect_lint("quo(a <- 1L)", NULL, linter)
-  expect_lint("quos(a <- 1L)", NULL, linter)
+  expect_no_lint("expr(a <- 1L)", linter)
+  expect_no_lint("quo(a <- 1L)", linter)
+  expect_no_lint("quos(a <- 1L)", linter)
 })
 
 test_that("implicit_assignment_linter blocks disallowed usages in simple conditional statements", {
@@ -374,15 +306,15 @@ test_that("implicit_assignment_linter blocks disallowed usages in nested conditi
 test_that("implicit_assignment_linter works as expected with pipes and walrus operator", {
   linter <- implicit_assignment_linter()
 
-  expect_lint("data %>% mutate(a := b)", NULL, linter)
-  expect_lint("dt %>% .[, z := x + y]", NULL, linter)
-  expect_lint("data %<>% mutate(a := b)", NULL, linter)
+  expect_no_lint("data %>% mutate(a := b)", linter)
+  expect_no_lint("dt %>% .[, z := x + y]", linter)
+  expect_no_lint("data %<>% mutate(a := b)", linter)
 
-  expect_lint("DT[i, x := i]", NULL, linter)
+  expect_no_lint("DT[i, x := i]", linter)
 
   skip_if_not_r_version("4.1.0")
 
-  expect_lint("data |> mutate(a := b)", NULL, linter)
+  expect_no_lint("data |> mutate(a := b)", linter)
 })
 
 test_that("parenthetical assignments are caught", {

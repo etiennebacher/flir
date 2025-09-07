@@ -1,19 +1,19 @@
 test_that("other : expressions are fine", {
   linter <- seq_linter()
-  expect_lint("1:10", NULL, linter)
-  expect_lint("2:length(x)", NULL, linter)
-  expect_lint("1:(length(x) || 1)", NULL, linter)
-  expect_lint("2L:length(x)", NULL, linter)
+  expect_no_lint("1:10", linter)
+  expect_no_lint("2:length(x)", linter)
+  expect_no_lint("1:(length(x) || 1)", linter)
+  expect_no_lint("2L:length(x)", linter)
 })
 
 test_that("seq_len(...) or seq_along(...) expressions are fine", {
   linter <- seq_linter()
 
-  expect_lint("seq_len(x)", NULL, linter)
-  expect_lint("seq_along(x)", NULL, linter)
+  expect_no_lint("seq_len(x)", linter)
+  expect_no_lint("seq_along(x)", linter)
 
-  expect_lint("seq(2, length(x))", NULL, linter)
-  expect_lint("seq(length(x), 2)", NULL, linter)
+  expect_no_lint("seq(2, length(x))", linter)
+  expect_no_lint("seq(length(x), 2)", linter)
 })
 
 test_that("finds seq(...) expressions", {
@@ -74,28 +74,28 @@ test_that("finds 1:length(...) expressions", {
     lint_msg("seq_len(nrow(...))", "1:nrow(...)"),
     linter
   )
-  expect_lint("2:nrow(x)", NULL, linter)
+  expect_no_lint("2:nrow(x)", linter)
 
   expect_lint(
     "1:ncol(x)",
     lint_msg("seq_len(ncol(...))", "1:ncol(...)"),
     linter
   )
-  expect_lint("2:ncol(x)", NULL, linter)
+  expect_no_lint("2:ncol(x)", linter)
 
   expect_lint(
     "1:NROW(x)",
     lint_msg("seq_len(NROW(...))", "1:NROW(...)"),
     linter
   )
-  expect_lint("2:NROW(x)", NULL, linter)
+  expect_no_lint("2:NROW(x)", linter)
 
   expect_lint(
     "1:NCOL(x)",
     lint_msg("seq_len(NCOL(...))", "1:NCOL(...)"),
     linter
   )
-  expect_lint("2:NCOL(x)", NULL, linter)
+  expect_no_lint("2:NCOL(x)", linter)
 
   # expect_lint(
   #   "1:dim(x)[1L]",
@@ -203,10 +203,10 @@ test_that("seq(1, x) is blocked if x > 0", {
   linter <- seq_linter()
   msg <- "is more efficient"
 
-  expect_lint("seq(1, NA)", NULL, linter)
-  expect_lint("seq(1, -1)", NULL, linter)
-  expect_lint("seq(1, 0)", NULL, linter)
-  expect_lint("seq(2, 5)", NULL, linter)
+  expect_no_lint("seq(1, NA)", linter)
+  expect_no_lint("seq(1, -1)", linter)
+  expect_no_lint("seq(1, 0)", linter)
+  expect_no_lint("seq(2, 5)", linter)
 
   expect_lint("seq(1, 1)", msg, linter)
   expect_lint("seq(1, 1L)", msg, linter)

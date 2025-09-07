@@ -1,17 +1,17 @@
 test_that("missing_argument_linter skips allowed usages", {
   linter <- missing_argument_linter()
 
-  expect_lint("fun(x, a = 1)", NULL, linter)
-  expect_lint("fun(x = 1, a = 1)", NULL, linter)
-  expect_lint("dt[, 1]", NULL, linter)
-  expect_lint("dt[, 'col']", NULL, linter)
-  expect_lint("array[, , 1]", NULL, linter)
-  expect_lint("switch(a =, b =, c = 1, 0)", NULL, linter)
-  expect_lint("alist(a =, b =, c = 1, 0)", NULL, linter)
-  expect_lint("pairlist(path = quote(expr = ))", NULL, linter) # 1889
+  expect_no_lint("fun(x, a = 1)", linter)
+  expect_no_lint("fun(x = 1, a = 1)", linter)
+  expect_no_lint("dt[, 1]", linter)
+  expect_no_lint("dt[, 'col']", linter)
+  expect_no_lint("array[, , 1]", linter)
+  expect_no_lint("switch(a =, b =, c = 1, 0)", linter)
+  expect_no_lint("alist(a =, b =, c = 1, 0)", linter)
+  expect_no_lint("pairlist(path = quote(expr = ))", linter) # 1889
 
   # always allow this missing usage
-  expect_lint("foo()", NULL, linter)
+  expect_no_lint("foo()", linter)
 })
 
 test_that("missing_argument_linter blocks disallowed usages", {
@@ -89,8 +89,8 @@ test_that("missing_argument_linter blocks disallowed usages", {
 test_that("except list can be empty", {
   linter <- missing_argument_linter()
 
-  expect_lint("switch(a =, b = 1, 0)", NULL, linter)
-  expect_lint("alist(a =)", NULL, linter)
+  expect_no_lint("switch(a =, b = 1, 0)", linter)
+  expect_no_lint("alist(a =)", linter)
 })
 
 # test_that("allow_trailing can allow trailing empty args also for non-excepted functions", {

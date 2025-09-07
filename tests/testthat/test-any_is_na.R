@@ -3,16 +3,16 @@ lint_message <- "anyNA(x) is better than any(is.na(x))."
 test_that("any_is_na_linter skips allowed usages", {
   linter <- any_is_na_linter()
 
-  expect_lint("x <- any(y)", NULL, linter)
-  expect_lint("y <- is.na(z)", NULL, linter)
+  expect_no_lint("x <- any(y)", linter)
+  expect_no_lint("y <- is.na(z)", linter)
 
   # negation shouldn't list
-  expect_lint("any(!is.na(x))", NULL, linter)
-  expect_lint("any(!is.na(foo(x)))", NULL, linter)
+  expect_no_lint("any(!is.na(x))", linter)
+  expect_no_lint("any(!is.na(foo(x)))", linter)
 
   # extended usage of ... arguments to any is not covered
-  expect_lint("any(is.na(y), b)", NULL, linter)
-  expect_lint("any(b, is.na(y))", NULL, linter)
+  expect_no_lint("any(is.na(y), b)", linter)
+  expect_no_lint("any(b, is.na(y))", linter)
 })
 
 test_that("any_is_na_linter blocks disallowed usages", {
@@ -34,5 +34,5 @@ test_that("NA %in% x is also found", {
 
   expect_lint("NA %in% x", lint_message, linter)
   expect_lint("NA_real_ %in% x", lint_message, linter)
-  expect_lint("NA_not_a_sentinel_ %in% x", NULL, linter)
+  expect_no_lint("NA_not_a_sentinel_ %in% x", linter)
 })

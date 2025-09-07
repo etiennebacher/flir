@@ -2,13 +2,9 @@ test_that("package_hooks_linter skips allowed usages of packageStartupMessage() 
   linter <- package_hooks_linter()
 
   # allowed in .onAttach, not .onLoad
-  expect_lint(
-    ".onAttach <- function(lib, pkg) packageStartupMessage('hi')",
-    NULL,
-    linter
-  )
+  expect_no_lint(".onAttach <- function(lib, pkg) packageStartupMessage('hi')", linter)
   # allowed in .onLoad, not .onAttach
-  expect_lint(".onLoad <- function(lib, pkg) library.dynam()", NULL, linter)
+  expect_no_lint(".onLoad <- function(lib, pkg) library.dynam()", linter)
 })
 
 test_that("package_hooks_linter blocks simple disallowed usages of packageStartupMessage() & library.dynam()", {
@@ -51,11 +47,7 @@ test_that("package_hooks_linter blocks simple disallowed usages of packageStartu
 test_that("package_hooks_linter blocks simple disallowed usages of other blocked messaging functions", {
   linter <- package_hooks_linter()
 
-  expect_lint(
-    ".onLoad <- function(lib, pkg) catr('hi')",
-    NULL,
-    linter
-  )
+  expect_no_lint(".onLoad <- function(lib, pkg) catr('hi')", linter)
 
   for (fn in c(
     "cat",
@@ -151,16 +143,8 @@ test_that("package_hooks_linter blocks simple disallowed usages of other blocked
 test_that("package_hooks_linter skips valid namespace loading", {
   linter <- package_hooks_linter()
 
-  expect_lint(
-    ".onAttach <- function(lib, pkg) { requireNamespace('foo') }",
-    NULL,
-    linter
-  )
-  expect_lint(
-    ".onLoad <- function(lib, pkg) {  requireNamespace('foo') }",
-    NULL,
-    linter
-  )
+  expect_no_lint(".onAttach <- function(lib, pkg) { requireNamespace('foo') }", linter)
+  expect_no_lint(".onLoad <- function(lib, pkg) {  requireNamespace('foo') }", linter)
 })
 
 test_that("package_hooks_linter blocks attaching namespaces", {
@@ -215,11 +199,11 @@ test_that("package_hooks_linter blocks attaching namespaces", {
 test_that("package_hooks_linter skips valid .onDetach() and .Last.lib()", {
   linter <- package_hooks_linter()
 
-  expect_lint(".onDetach <- function(lib) { }", NULL, linter)
-  expect_lint(".onDetach <- function(libname) { }", NULL, linter)
+  expect_no_lint(".onDetach <- function(lib) { }", linter)
+  expect_no_lint(".onDetach <- function(libname) { }", linter)
 
-  expect_lint(".Last.lib <- function(lib) { }", NULL, linter)
-  expect_lint(".Last.lib <- function(libname) { }", NULL, linter)
+  expect_no_lint(".Last.lib <- function(lib) { }", linter)
+  expect_no_lint(".Last.lib <- function(libname) { }", linter)
 })
 
 test_that("package_hooks_linter catches usage of library.dynam.unload()", {
@@ -236,11 +220,7 @@ test_that("package_hooks_linter catches usage of library.dynam.unload()", {
     linter
   )
   # expected usage is in .onUnload
-  expect_lint(
-    ".onUnload <- function(lib) { library.dynam.unload() }",
-    NULL,
-    linter
-  )
+  expect_no_lint(".onUnload <- function(lib) { library.dynam.unload() }", linter)
 })
 
 # test_that("package_hooks_linter detects bad argument names in .onDetach()/.Last.lib()", {

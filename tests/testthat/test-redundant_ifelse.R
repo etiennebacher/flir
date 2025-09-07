@@ -1,13 +1,13 @@
 test_that("redundant_ifelse_linter skips allowed usages", {
   linter <- redundant_ifelse_linter()
 
-  expect_lint("ifelse(x > 5, 0, 2)", NULL, linter)
-  expect_lint("ifelse(x > 5, TRUE, NA)", NULL, linter)
-  expect_lint("ifelse(x > 5, FALSE, NA)", NULL, linter)
-  expect_lint("ifelse(x > 5, TRUE, TRUE)", NULL, linter)
+  expect_no_lint("ifelse(x > 5, 0, 2)", linter)
+  expect_no_lint("ifelse(x > 5, TRUE, NA)", linter)
+  expect_no_lint("ifelse(x > 5, FALSE, NA)", linter)
+  expect_no_lint("ifelse(x > 5, TRUE, TRUE)", linter)
 
-  expect_lint("ifelse(x > 5, 0L, 2L)", NULL, linter)
-  expect_lint("ifelse(x > 5, 0L, 10L)", NULL, linter)
+  expect_no_lint("ifelse(x > 5, 0L, 2L)", linter)
+  expect_no_lint("ifelse(x > 5, 0L, 10L)", linter)
 })
 
 test_that("redundant_ifelse_linter blocks simple disallowed usages", {

@@ -2,9 +2,9 @@ test_that("returns the correct linting", {
   linter <- todo_comment_linter()
   lint_msg <- "Remove TODO comments."
 
-  expect_lint('a <- "you#need#to#fixme"', NULL, linter)
-  expect_lint("# tadatodo", NULL, linter)
-  expect_lint("# something todo", NULL, linter)
+  expect_no_lint('a <- "you#need#to#fixme"', linter)
+  expect_no_lint("# tadatodo", linter)
+  expect_no_lint("# something todo", linter)
   expect_lint("#todo", lint_msg, linter)
   expect_lint("cat(x) ### fixme", lint_msg, linter)
   expect_lint(

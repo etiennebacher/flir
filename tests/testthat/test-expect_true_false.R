@@ -1,10 +1,6 @@
 test_that("expect_true_false_linter skips allowed usages", {
   # expect_true is a scalar test; testing logical vectors with expect_equal is OK
-  expect_lint(
-    "expect_equal(x, c(TRUE, FALSE))",
-    NULL,
-    expect_true_false_linter()
-  )
+  expect_no_lint("expect_equal(x, c(TRUE, FALSE))", expect_true_false_linter())
 })
 
 test_that("expect_true_false_linter blocks simple disallowed usages", {

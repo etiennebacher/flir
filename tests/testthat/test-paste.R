@@ -1,13 +1,13 @@
 test_that("paste_linter skips allowed usages for sep=''", {
   linter <- paste_linter()
 
-  expect_lint("paste('a', 'b', 'c')", NULL, linter)
-  expect_lint("paste('a', 'b', 'c', sep = ',')", NULL, linter)
-  expect_lint("paste('a', 'b', collapse = '')", NULL, linter)
-  expect_lint("cat(paste('a', 'b'), sep = '')", NULL, linter)
-  expect_lint("sep <- ''; paste('a', sep)", NULL, linter)
-  expect_lint("paste(sep = ',', '', 'a')", NULL, linter)
-  expect_lint("paste0('a', 'b', 'c')", NULL, linter)
+  expect_no_lint("paste('a', 'b', 'c')", linter)
+  expect_no_lint("paste('a', 'b', 'c', sep = ',')", linter)
+  expect_no_lint("paste('a', 'b', collapse = '')", linter)
+  expect_no_lint("cat(paste('a', 'b'), sep = '')", linter)
+  expect_no_lint("sep <- ''; paste('a', sep)", linter)
+  expect_no_lint("paste(sep = ',', '', 'a')", linter)
+  expect_no_lint("paste0('a', 'b', 'c')", linter)
 })
 
 test_that("paste_linter blocks simple disallowed usages for sep=''", {
@@ -27,23 +27,23 @@ test_that("paste_linter blocks simple disallowed usages for sep=''", {
 test_that("paste_linter skips allowed usages for collapse=', '", {
   linter <- paste_linter()
 
-  expect_lint("paste('a', 'b', 'c')", NULL, linter)
-  expect_lint("paste(x, sep = ', ')", NULL, linter)
-  expect_lint("paste(x, collapse = ',')", NULL, linter)
-  expect_lint("paste(foo(x), collapse = '/')", NULL, linter)
+  expect_no_lint("paste('a', 'b', 'c')", linter)
+  expect_no_lint("paste(x, sep = ', ')", linter)
+  expect_no_lint("paste(x, collapse = ',')", linter)
+  expect_no_lint("paste(foo(x), collapse = '/')", linter)
   # harder to catch statically
-  expect_lint("collapse <- ', '; paste(x, collapse = collapse)", NULL, linter)
+  expect_no_lint("collapse <- ', '; paste(x, collapse = collapse)", linter)
 
   # paste(..., sep=sep, collapse=", ") is not a trivial swap to toString
-  expect_lint("paste(x, y, sep = '.', collapse = ', ')", NULL, linter)
+  expect_no_lint("paste(x, y, sep = '.', collapse = ', ')", linter)
   # any call involving ...length() > 1 will implicitly use the default sep
-  expect_lint("paste(x, y, collapse = ', ')", NULL, linter)
-  expect_lint("paste0(x, y, collapse = ', ')", NULL, linter)
+  expect_no_lint("paste(x, y, collapse = ', ')", linter)
+  expect_no_lint("paste0(x, y, collapse = ', ')", linter)
 
-  expect_lint("toString(x)", NULL, linter)
+  expect_no_lint("toString(x)", linter)
 
   # string match of ", " is OK -- lint only _exact_ match
-  expect_lint('paste(x, collapse = ", \n")', NULL, linter)
+  expect_no_lint('paste(x, collapse = ", \n")', linter)
 })
 
 test_that("paste_linter blocks simple disallowed usages for collapse=', '", {
@@ -63,14 +63,14 @@ test_that("paste_linter blocks simple disallowed usages for collapse=', '", {
 
 test_that("paste_linter works for raw strings", {
   skip_if_not_r_version("4.0.0")
-  expect_lint("paste(a, b, sep = R'(xyz)')", NULL, paste_linter())
+  expect_no_lint("paste(a, b, sep = R'(xyz)')", paste_linter())
   # expect_lint(
   #   'paste(a, b, sep = R"---[]---")',
   #   'paste0(...) is better than paste(..., sep = "").',
   #   paste_linter()
   # )
 
-  expect_lint("paste(x, collapse = R'(,,)')", NULL, paste_linter())
+  expect_no_lint("paste(x, collapse = R'(,,)')", paste_linter())
   # expect_lint(
   #   'paste(c(a, b, c), collapse = R"-{, }-")',
   #   'toString(.) is more expressive than paste(., collapse = ", ")',
@@ -137,18 +137,18 @@ test_that("paste_linter catches use of paste0 with sep=", {
 test_that("paste_linter ignores non-path cases with paste0", {
   linter <- paste_linter()
 
-  expect_lint("paste0(x, y)", NULL, linter)
-  expect_lint("paste0('abc', 'def')", NULL, linter)
-  expect_lint("paste0('/abc', 'def/')", NULL, linter)
-  expect_lint("paste0(x, 'def/')", NULL, linter)
-  expect_lint("paste0('/abc', y)", NULL, linter)
-  expect_lint("paste0(foo(x), y)", NULL, linter)
-  expect_lint("paste0(foo(x), 'def')", NULL, linter)
+  expect_no_lint("paste0(x, y)", linter)
+  expect_no_lint("paste0('abc', 'def')", linter)
+  expect_no_lint("paste0('/abc', 'def/')", linter)
+  expect_no_lint("paste0(x, 'def/')", linter)
+  expect_no_lint("paste0('/abc', y)", linter)
+  expect_no_lint("paste0(foo(x), y)", linter)
+  expect_no_lint("paste0(foo(x), 'def')", linter)
 
   # these might be a different lint (as.character instead, e.g.) but not here
-  expect_lint("paste0(x)", NULL, linter)
-  expect_lint("paste0('a')", NULL, linter)
-  expect_lint("paste0('a', 1)", NULL, linter)
+  expect_no_lint("paste0(x)", linter)
+  expect_no_lint("paste0('a')", linter)
+  expect_no_lint("paste0('a', 1)", linter)
 })
 
 # test_that("paste_linter detects paths built with '/' and paste0", {
@@ -164,10 +164,10 @@ test_that("paste_linter ignores non-path cases with paste0", {
 test_that("paste_linter skips initial/terminal '/' and repeated '/' for paths", {
   linter <- paste_linter()
 
-  expect_lint("paste0('/', x)", NULL, linter)
-  expect_lint("paste0(x, '/')", NULL, linter)
-  expect_lint("paste0(x, '//hey/', y)", NULL, linter)
-  expect_lint("paste0(x, '/hey//', y)", NULL, linter)
+  expect_no_lint("paste0('/', x)", linter)
+  expect_no_lint("paste0(x, '/')", linter)
+  expect_no_lint("paste0(x, '//hey/', y)", linter)
+  expect_no_lint("paste0(x, '/hey//', y)", linter)
 })
 
 # test_that("paste_linter doesn't skip all initial/terminal '/' for paths", {
@@ -240,8 +240,8 @@ test_that("paste0(collapse=...) is caught", {
   linter <- paste_linter()
   lint_msg <- "Use paste(), not paste0(), to collapse a character vector when sep= is not used."
 
-  expect_lint("paste(x, collapse = '')", NULL, linter)
-  expect_lint("paste0(a, b, collapse = '')", NULL, linter)
+  expect_no_lint("paste(x, collapse = '')", linter)
+  expect_no_lint("paste0(a, b, collapse = '')", linter)
   # pass-through can pass any number of arguments
   # expect_lint("paste0(..., collapse = '')", NULL, linter)
   expect_lint("paste0(x, collapse = '')", lint_msg, linter)

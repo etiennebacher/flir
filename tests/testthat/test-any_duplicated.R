@@ -1,8 +1,8 @@
 test_that("any_duplicated_linter skips allowed usages", {
   linter <- any_duplicated_linter()
 
-  expect_lint("x <- any(y)", NULL, linter)
-  expect_lint("y <- duplicated(z)", NULL, linter)
+  expect_no_lint("x <- any(y)", linter)
+  expect_no_lint("y <- duplicated(z)", linter)
 })
 
 test_that("any_duplicated_linter blocks simple disallowed usages", {
@@ -30,10 +30,10 @@ test_that("any_duplicated_linter catches length(unique()) equivalencies too", {
 
   # non-matches
   ## different variable
-  expect_lint("length(unique(x)) == length(y)", NULL, linter)
+  expect_no_lint("length(unique(x)) == length(y)", linter)
   ## different table
-  expect_lint("length(unique(DF$x)) == nrow(DT)", NULL, linter)
-  expect_lint("length(unique(l1$DF$x)) == nrow(l2$DF)", NULL, linter)
+  expect_no_lint("length(unique(DF$x)) == nrow(DT)", linter)
+  expect_no_lint("length(unique(l1$DF$x)) == nrow(l2$DF)", linter)
 
   # lintable usage
   expect_lint("length(unique(x)) == length(x)", lint_msg_x, linter)

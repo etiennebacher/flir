@@ -20,6 +20,10 @@ expect_lint <- function(x, message, linter, ...) {
   }
 }
 
+expect_no_lint <- function(x, linter, ...) {
+  expect_lint(x, message = NULL, linter, ...)
+}
+
 expect_fix <- function(x, replacement, ...) {
   out <- fix_text(x, ...)
   testthat::expect_equal(as.character(out), replacement)

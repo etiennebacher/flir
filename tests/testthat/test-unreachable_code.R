@@ -1,9 +1,5 @@
 test_that("unreachable_code_linter works in simple function", {
-  expect_lint(
-    "foo <- function(bar) { \nreturn(bar)\n }",
-    NULL,
-    "unreachable_code"
-  )
+  expect_no_lint("foo <- function(bar) { \nreturn(bar)\n }", "unreachable_code")
 })
 
 test_that("unreachable_code_linter works in sub expressions", {
@@ -157,15 +153,11 @@ test_that("unreachable_code_linter works with next and break in sub expressions"
 })
 
 test_that("unreachable_code_linter ignores expressions that aren't functions", {
-  expect_lint("x + 1", NULL, "unreachable_code")
+  expect_no_lint("x + 1", "unreachable_code")
 })
 
 test_that("unreachable_code_linter ignores anonymous/inline functions", {
-  expect_lint(
-    "lapply(rnorm(10), function(x) x + 1)",
-    NULL,
-    "unreachable_code"
-  )
+  expect_no_lint("lapply(rnorm(10), function(x) x + 1)", "unreachable_code")
 })
 
 test_that("unreachable_code_linter passes on multi-line functions", {
@@ -175,7 +167,7 @@ test_that("unreachable_code_linter passes on multi-line functions", {
       return(y)
     }
   "
-  expect_lint(lines, NULL, "unreachable_code")
+  expect_no_lint(lines, "unreachable_code")
 })
 
 # TODO
@@ -315,8 +307,7 @@ test_that("unreachable_code_linter finds code after stop()", {
 test_that("unreachable_code_linter ignores code after foo$stop(), which might be stopping a subprocess, for example", {
   linter <- "unreachable_code"
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       foo <- function(x) {
         bar <- get_process()
@@ -324,12 +315,8 @@ test_that("unreachable_code_linter ignores code after foo$stop(), which might be
         TRUE
       }
     "
-    ),
-    NULL,
-    linter
-  )
-  expect_lint(
-    trim_some(
+    ), linter)
+  expect_no_lint(trim_some(
       "
       foo <- function(x) {
         bar <- get_process()
@@ -337,10 +324,7 @@ test_that("unreachable_code_linter ignores code after foo$stop(), which might be
         TRUE
       }
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 })
 
 test_that("unreachable_code_linter identifies unreachable code in conditional loops", {
@@ -521,14 +505,14 @@ test_that("unreachable_code_linter identifies unreachable code in mixed conditio
 # })
 
 test_that("Do not lint inline else after stop", {
-  expect_lint("if (x > 3L) stop() else x + 3", NULL, "unreachable_code")
+  expect_no_lint("if (x > 3L) stop() else x + 3", "unreachable_code")
 })
 
 test_that("Do not lint inline else after stop in inline function", {
   linter <- "unreachable_code"
 
-  expect_lint("function(x) if (x > 3L) stop() else x + 3", NULL, linter)
-  expect_lint("function(x) if (x > 3L) { stop() } else {x + 3}", NULL, linter)
+  expect_no_lint("function(x) if (x > 3L) stop() else x + 3", linter)
+  expect_no_lint("function(x) if (x > 3L) { stop() } else {x + 3}", linter)
 })
 
 # test_that("Do not lint inline else after stop in inline lambda function", {
@@ -546,11 +530,7 @@ test_that("unreachable_code is deactivated by default", {
     "Code and comments coming after",
     "unreachable_code"
   )
-  expect_lint(
-    "foo <- function(bar) { \nreturn(bar)\n 1 + 1}",
-    NULL,
-    NULL
-  )
+  expect_no_lint("foo <- function(bar) { \nreturn(bar)\n 1 + 1}", NULL)
 
   create_local_package()
   setup_flir()

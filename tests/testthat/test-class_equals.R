@@ -1,19 +1,19 @@
 test_that("class_equals_linter skips allowed usages", {
   linter <- class_equals_linter()
 
-  expect_lint("class(x) <- 'character'", NULL, linter)
-  expect_lint("class(x) = 'character'", NULL, linter)
+  expect_no_lint("class(x) <- 'character'", linter)
+  expect_no_lint("class(x) = 'character'", linter)
 
   # proper way to test exact class
-  expect_lint("identical(class(x), c('glue', 'character'))", NULL, linter)
-  expect_lint("is_lm <- inherits(x, 'lm')", NULL, linter)
+  expect_no_lint("identical(class(x), c('glue', 'character'))", linter)
+  expect_no_lint("is_lm <- inherits(x, 'lm')", linter)
 })
 
 # https://github.com/vincentarelbundock/marginaleffects/pull/1171#issuecomment-2228497287
 # inherits() returns TRUE if any of the classes match
 test_that("all(inherits()) not the same as all(x %in% y)", {
   linter <- class_equals_linter()
-  expect_lint("isTRUE(all(sup %in% class(model)))", NULL, linter)
+  expect_no_lint("isTRUE(all(sup %in% class(model)))", linter)
 })
 
 test_that("class_equals_linter blocks simple disallowed usages", {
@@ -51,7 +51,7 @@ test_that("class_equals_linter blocks class(x) != 'klass'", {
 test_that("class_equals_linter skips usage for subsetting", {
   linter <- class_equals_linter()
 
-  expect_lint("class(x)[class(x) == 'foo']", NULL, linter)
+  expect_no_lint("class(x)[class(x) == 'foo']", linter)
 
   # but not further nesting
   expect_lint(

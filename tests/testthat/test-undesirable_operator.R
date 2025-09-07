@@ -2,7 +2,7 @@ test_that("linter returns correct linting", {
   linter <- undesirable_operator_linter()
   msg_assign <- "Avoid undesirable operators `<<-` and `->>`"
 
-  expect_lint("cat(\"10$\")", NULL, linter)
+  expect_no_lint("cat(\"10$\")", linter)
   expect_lint(
     "a <<- log(10)",
     msg_assign,
@@ -18,7 +18,7 @@ test_that("linter returns correct linting", {
 test_that(":: is ok, ::: is not", {
   linter <- undesirable_operator_linter()
   expect_lint("a:::b", "Operator `:::` is undesirable", linter)
-  expect_lint("a::b", NULL, linter)
+  expect_no_lint("a::b", linter)
 })
 
 test_that("undesirable_operator_linter vectorizes messages", {

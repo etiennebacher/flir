@@ -1,57 +1,37 @@
 test_that("library_call_linter skips allowed usages", {
   linter <- library_call_linter()
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       library(dplyr)
       print('test')
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    "print('test')",
-    NULL,
-    linter
-  )
+  expect_no_lint("print('test')", linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       # comment
       library(dplyr)
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       print('test')
       # library(dplyr)
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       suppressPackageStartupMessages({
         library(dplyr)
         library(knitr)
       })
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 })
 
 test_that("library_call_linter warns on disallowed usages", {
@@ -115,16 +95,12 @@ test_that("require() treated the same as library()", {
   lint_message_library <- "Move all library/require calls to the top of the script."
   lint_message_require <- "Move all require calls to the top of the script."
 
-  expect_lint(
-    trim_some(
+  expect_no_lint(trim_some(
       "
       library(dplyr)
       require(tidyr)
     "
-    ),
-    NULL,
-    linter
-  )
+    ), linter)
 
   expect_lint(
     trim_some(
@@ -155,13 +131,9 @@ test_that("require() treated the same as library()", {
 test_that("skips allowed usages of library()/character.only=TRUE", {
   linter <- library_call_linter()
 
-  expect_lint("library(data.table)", NULL, linter)
-  expect_lint("function(pkg) library(pkg, character.only = TRUE)", NULL, linter)
-  expect_lint(
-    "function(pkgs) sapply(pkgs, require, character.only = TRUE)",
-    NULL,
-    linter
-  )
+  expect_no_lint("library(data.table)", linter)
+  expect_no_lint("function(pkg) library(pkg, character.only = TRUE)", linter)
+  expect_no_lint("function(pkgs) sapply(pkgs, require, character.only = TRUE)", linter)
 })
 
 patrick::with_parameters_test_that(
@@ -169,15 +141,14 @@ patrick::with_parameters_test_that(
   {
     linter <- library_call_linter()
 
-    expect_lint(sprintf("%s(x)", call), NULL, linter)
-    expect_lint(sprintf("%s(x, y, z)", call), NULL, linter)
+    expect_no_lint(sprintf("%s(x)", call), linter)
+    expect_no_lint(sprintf("%s(x, y, z)", call), linter)
 
     # intervening expression
-    expect_lint(sprintf("%1$s(x); y; %1$s(z)", call), NULL, linter)
+    expect_no_lint(sprintf("%1$s(x); y; %1$s(z)", call), linter)
 
     # inline or potentially with gaps don't matter
-    expect_lint(
-      trim_some(
+    expect_no_lint(trim_some(
         glue::glue(
           "
         {call}(x)
@@ -186,24 +157,17 @@ patrick::with_parameters_test_that(
         stopifnot(z)
       "
         )
-      ),
-      NULL,
-      linter
-    )
+      ), linter)
 
     # only suppressing calls with library()
-    expect_lint(
-      trim_some(
+    expect_no_lint(trim_some(
         glue::glue(
           "
         {call}(x)
         {call}(y)
       "
         )
-      ),
-      NULL,
-      linter
-    )
+      ), linter)
   },
   .test_name = c("suppressMessages", "suppressPackageStartupMessages"),
   call = c("suppressMessages", "suppressPackageStartupMessages")
@@ -270,9 +234,5 @@ patrick::with_parameters_test_that(
 # })
 
 test_that("Consecutive calls to different blocked calls is OK", {
-  expect_lint(
-    "suppressPackageStartupMessages(library(x)); suppressMessages(library(y))",
-    NULL,
-    library_call_linter()
-  )
+  expect_no_lint("suppressPackageStartupMessages(library(x)); suppressMessages(library(y))", library_call_linter())
 })
