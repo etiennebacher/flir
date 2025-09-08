@@ -7,7 +7,9 @@ Authors@R:
              family = "Bacher",
              role = c("aut", "cre", "cph"),
              email = "etienne.bacher@protonmail.com"),
-      person("lintr authors", role = "aut"))
+      person("lintr authors", role = "aut"),
+      person("Trevor L.", "Davis", role = c("ctb"),
+             comment = c(ORCID = "0000-0001-6341-4639")))
 Description: Lints are code patterns that are not optimal because they are
     inefficient, forget corner cases, or are less readable. 'flir' provides a
     small set of functions to detect those lints and automatically fix them.
