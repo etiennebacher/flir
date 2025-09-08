@@ -1,0 +1,21 @@
+id: expect_s4_class-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: expect_true(is($X, $K))
+    - pattern: expect_true(methods::is($X, $K))
+fix: expect_s4_class(~~X~~, ~~K~~)
+message: expect_s4_class(x, k) is better than expect_true(is(x, k)).
+
+---
+
+id: expect_s4_class-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: testthat::expect_true(is($X, $K))
+    - pattern: testthat::expect_true(methods::is($X, $K))
+fix: testthat::expect_s4_class(~~X~~, ~~K~~)
+message: expect_s4_class(x, k) is better than expect_true(is(x, k)).

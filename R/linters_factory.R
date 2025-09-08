@@ -262,6 +262,24 @@ makeActiveBinding(
 )
 
 
+#' @inherit lintr::expect_s4_class_linter title
+#' @description
+#' See <https://lintr.r-lib.org/reference/expect_s4_class_linter>.
+
+#' @usage expect_s4_class_linter
+#' @name expect_s4_class_linter
+#' @export
+#' @return The name of the linter
+NULL
+makeActiveBinding(
+  'expect_s4_class_linter',
+  function() {
+    function() 'expect_s4_class'
+  },
+  env = environment()
+)
+
+
 #' @inherit lintr::expect_true_false_linter title
 #' @description
 #' See <https://lintr.r-lib.org/reference/expect_true_false_linter>.

@@ -334,6 +334,7 @@ keep_or_exclude_testthat_rules <- function(path, linters) {
       "expect_named",
       "expect_not",
       "expect_null",
+      "expect_s4_class",
       "expect_true_false",
       "expect_type"
     )
