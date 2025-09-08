@@ -32,22 +32,6 @@ test_that("expect_s4_class blocks simple disallowed usages", {
   )
 })
 
-# test_that("lints vectorize", {
-#   lint_msg <- "expect_s4_class(x, k) is better than expect_true(is(x, k))"
-#
-#   expect_lint(
-#     trim_some("{
-#       expect_true(is(x, 'data.frame'))
-#       expect_true(is(x, 'SpatialPolygonsDataFrame'))
-#     }"),
-#     list(
-#       list(lint_msg, line_number = 2L),
-#       list(lint_msg, line_number = 3L)
-#     ),
-#     expect_s4_class_linter()
-#   )
-# })
-
 test_that("fix works", {
   linter <- expect_s4_class_linter()
 
