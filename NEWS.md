@@ -2,7 +2,7 @@
 
 ## New features
 
-* New linters: `expect_s4_class_linter()` (@trevorld)
+* New linters: `expect_s4_class_linter()` (@trevorld, #109)
 * New vignette "Tips and tricks" that lists some solutions for problems one may
   encounter when writing new rules (#94).
   
