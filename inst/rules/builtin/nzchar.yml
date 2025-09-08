@@ -1,3 +1,11 @@
+# we don't fix the string comparison cases like `x != ""` with `nzchar(x)`
+# since it will fail for factors (string comparison coerces whereas `nzchar()` errors)
+# <https://github.com/etiennebacher/flir/pull/102#discussion_r2328611044>
+#
+# `nzchar(x, keepNA = TRUE)` and `nchar(x, keepNA = TRUE) > 0` are equivalent
+# `nzchar(x, keepNA = NA)` and `nchar(x, keepNA = NA) > 0` are not equivalent
+# `nchar(x, type = "width")` also not strictly compatible with `nzchar(x)`
+
 id: nzchar-1
 language: r
 severity: warning
@@ -7,11 +15,9 @@ rule:
     - pattern: $X > ''
     - pattern: '"" < $X'
     - pattern: "'' < $X"
-# fix: nzchar(~~X~~, keepNA = TRUE)
 message: Use nzchar(x) instead of x > "".
   Use nzchar(x, keepNA = TRUE) if missing data is possible.
   Use nzchar(as.character(x)) if x may not be a character vector.
-
 ---
 
 id: nzchar-2
@@ -23,11 +29,17 @@ rule:
     - pattern: $X != ''
     - pattern: '"" != $X'
     - pattern: "'' != $X"
-# fix: nzchar(~~X~~, keepNA = TRUE)
+  not:
+    inside:
+      any:
+        - kind: if_statement
+        - kind: while_statement
+      field: condition
+      stopBy:
+        kind: call
 message: Use nzchar(x) instead of x != "".
   Use nzchar(x, keepNA = TRUE) if missing data is possible.
   Use nzchar(as.character(x)) if x may not be a character vector.
-
 ---
 
 id: nzchar-3
@@ -39,11 +51,9 @@ rule:
     - pattern: $X <= ''
     - pattern: '"" >= $X'
     - pattern: "'' >= $X"
-# fix: "!nzchar(~~X~~, keepNA = TRUE)"
 message: Use !nzchar(x) instead of x <= "".
   Use !nzchar(x, keepNA = TRUE) if missing data is possible.
   Use !nzchar(as.character(x)) if x may not be a character vector.
-
 ---
 
 id: nzchar-4
@@ -55,11 +65,17 @@ rule:
     - pattern: $X == ''
     - pattern: '"" == $X'
     - pattern: "'' == $X"
-# fix: "!nzchar(~~X~~, keepNA = TRUE)"
+  not:
+    inside:
+      any:
+        - kind: if_statement
+        - kind: while_statement
+      field: condition
+      stopBy:
+        kind: call
 message: Use !nzchar(x) instead of x == "".
   Use !nzchar(x, keepNA = TRUE) if missing data is possible.
   Use !nzchar(as.character(x)) if x may not be a character vector.
-
 ---
 
 id: nzchar-5
@@ -108,6 +124,21 @@ message: Use nzchar(x) instead of nchar(x) > 0.
 
 ---
 
+id: nzchar-7b
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X, keepNA = $KNA) > $ZERO
+    - pattern: $ZERO < nchar($X, keepNA = $KNA)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+message: Use nzchar(x) instead of nchar(x) > 0.
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
 id: nzchar-8
 language: r
 severity: warning
@@ -124,6 +155,22 @@ message: Use nzchar(x) instead of nchar(x) != 0.
 
 ---
 
+# only lint since `nzchar()` and `nchar()` don't treat `keepNA = NA` consistently
+id: nzchar-8b
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X, keepNA = $KNA) != $ZERO
+    - pattern: $ZERO != nchar($X, keepNA = $KNA)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+message: Use nzchar(x) instead of nchar(x) != 0.
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
 id: nzchar-9
 language: r
 severity: warning
@@ -135,6 +182,21 @@ constraints:
   ZERO:
     regex: ^0?+\.0*$|^0+L?$
 fix: "!nzchar(~~X~~, keepNA = TRUE)"
+message: Use !nzchar(x) instead of nchar(x) <= 0.
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
+id: nzchar-9b
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X, keepNA = $KNA) <= $ZERO
+    - pattern: $ZERO <= nchar($X, keepNA = $KNA)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
 message: Use !nzchar(x) instead of nchar(x) <= 0.
   Use !nzchar(x, keepNA = TRUE) if missing data is possible.
 
@@ -156,13 +218,28 @@ message: Use !nzchar(x) instead of nchar(x) == 0.
 
 ---
 
+id: nzchar-10b
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nchar($X, keepNA = $KNA) == $ZERO
+    - pattern: $ZERO == nchar($X, keepNA = $KNA)
+constraints:
+  ZERO:
+    regex: ^0?+\.0*$|^0+L?$
+message: Use !nzchar(x) instead of nchar(x) == 0.
+  Use !nzchar(x, keepNA = TRUE) if missing data is possible.
+
+---
+
 id: nzchar-11
 language: r
 severity: warning
 rule:
   any:
-    - pattern: nchar($X) >= $ZERO
-    - pattern: $ZERO <= nchar($X)
+    - pattern: nchar($$$X) >= $ZERO
+    - pattern: $ZERO <= nchar($$$X)
 constraints:
   ZERO:
     regex: ^0?+\.0*$|^0+L?$
@@ -176,8 +253,8 @@ language: r
 severity: warning
 rule:
   any:
-    - pattern: nchar($X) < $ZERO
-    - pattern: $ZERO > nchar($X)
+    - pattern: nchar($$$X) < $ZERO
+    - pattern: $ZERO > nchar($$$X)
 constraints:
   ZERO:
     regex: ^0?+\.0*$|^0+L?$

@@ -13,11 +13,9 @@ test_that("nzchar_linter skips allowed usages", {
   expect_no_lint('nchar(x, type = "width") != 0', linter)
   expect_no_lint('nchar(x, type = "width") <= 0', linter)
   expect_no_lint('nchar(x, type = "width") == 0', linter)
-  expect_no_lint('nchar(x, type = "width") >= 0', linter)
-  expect_no_lint('nchar(x, type = "width") < 0', linter)
-  expect_no_lint('nchar(x) >= 02', linter)
-  expect_no_lint('nchar(x) >= 02L', linter)
-  expect_no_lint('nchar(x) == 0.5', linter)
+  expect_no_lint("nchar(x) >= 02", linter)
+  expect_no_lint("nchar(x) >= 02L", linter)
+  expect_no_lint("nchar(x) == 0.5", linter)
 })
 
 test_that("nzchar_linter skips as appropriate for other nchar args", {
@@ -34,8 +32,8 @@ test_that("nzchar_linter skips as appropriate for other nchar args", {
   #   NA in each element with an invalid entry, while nzchar returns TRUE.
   expect_no_lint("nchar(x, allowNA=TRUE) == 0L", linter)
 
-  skip("`nzchar_linter()` currently only handles `nchar(x)` with single arg")
   # nzchar also has keepNA argument so a drop-in switch is easy
+  # although `keepNA = NA` is treated differently
   expect_lint(
     "nchar(x, keepNA=TRUE) == 0",
     "Use !nzchar(x) instead of nchar(x) == 0",
@@ -61,6 +59,13 @@ test_that("nzchar_linter blocks simple disallowed usages", {
   )
 
   # not from {lintr}
+  # always true
+  lint_message <- "nchar(x) >= 0 is always true"
+  expect_lint('nchar(x, type = "width") >= 0', lint_message, linter)
+  # always false
+  lint_message <- "nchar(x) < 0 is always false"
+  expect_lint('nchar(x, type = "width") < 0', lint_message, linter)
+
   lint_msg <- 'Use nzchar(x) instead of x > "".'
   expect_lint('x > ""', lint_msg, linter)
   expect_lint("x > ''", lint_msg, linter)
@@ -103,19 +108,6 @@ test_that("nzchar_linter blocks simple disallowed usages", {
   lint_msg <- 'nchar(x) < 0 is always false, maybe you want !nzchar(x)?'
   expect_lint('nchar(x) < 0', lint_msg, linter)
   expect_lint('0 > nchar(x)', lint_msg, linter)
-
-  skip("`nzchar_linter()` fails adversarial comment")
-  # adversarial comment
-  expect_lint(
-    trim_some(
-      "
-      all(nchar(x) #comment
-      == 0L)
-    "
-    ),
-    lint_msg,
-    linter
-  )
 })
 
 test_that("nzchar_linter skips comparison to '' in if/while statements", {
@@ -125,44 +117,17 @@ test_that("nzchar_linter skips comparison to '' in if/while statements", {
   # still lint nchar() comparisons
   expect_lint("if (nchar(x) > 0) TRUE", lint_msg_nchar, linter)
   expect_lint('if (any(x == "")) TRUE', lint_msg_quote, linter)
+  expect_lint('if (x == "" && any(y == "")) TRUE', lint_msg_quote, linter)
   expect_lint('if (TRUE || any(x == "" | FALSE)) TRUE', lint_msg_quote, linter)
 
-  skip(
-    "`nzchar_linter()` does not skip comparison to '' in if/while statements"
-  )
   expect_no_lint('if (x == "") TRUE', linter)
   expect_no_lint('while (x == "") TRUE', linter)
 
   # nested versions, a la nesting issues with vector_logic_linter
   expect_no_lint('if (TRUE || (x == "" && FALSE)) TRUE', linter)
   expect_no_lint('if (TRUE && x == "" && FALSE) TRUE', linter)
+  expect_no_lint('if (TRUE && any(boo) && x == "" && FALSE) TRUE', linter)
   expect_no_lint('foo(if (x == "") y else z)', linter)
-})
-
-test_that("multiple lints are generated correctly", {
-  # `lint_text(x, nzchar_linter())` suggests multiple lints **are** generated correctly
-  # unsure how to modify this auto-generated multiple lint test so it passes
-  skip("`nzchar_linter()` fails auto-generated multiple lint test")
-  expect_lint(
-    trim_some(
-      "{
-      a == ''
-      '' < b
-      nchar(c) != 0
-      0.0 > nchar(d)
-    }"
-    ),
-    list(
-      list('Use !nzchar(x) instead of x == ""', line_number = 2L),
-      list('Use nzchar(x) instead of x > ""', line_number = 3L),
-      list("Use nzchar(x) instead of nchar(x) != 0.", line_number = 4L),
-      list(
-        "nchar(x) < 0 is always false, maybe you want !nzchar(x)?",
-        line_number = 5L
-      )
-    ),
-    nzchar_linter()
-  )
 })
 
 test_that("fix works", {
