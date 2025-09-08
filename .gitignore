@@ -44,4 +44,7 @@ inst/doc
 ^docs$
 docs
 
+# Vim
+*.swp
+
 /.quarto/
