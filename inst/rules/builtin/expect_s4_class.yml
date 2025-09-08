@@ -1,8 +1,22 @@
+# Note technically the second argument of `methods::is()` is "class2" not "class"
+# but we'll support both "class2" and the abbreviated "class"
 id: expect_s4_class-1
 language: r
 severity: warning
 rule:
   any:
+    - pattern: expect_true(is(object = $X, class2 = $K))
+    - pattern: expect_true(methods::is(object = $X, class2 = $K))
+    - pattern: expect_true(is(object = $X, class = $K))
+    - pattern: expect_true(methods::is(object = $X, class = $K))
+    - pattern: expect_true(is(class2 = $K, object = $X))
+    - pattern: expect_true(methods::is(class2 = $K, object = $X))
+    - pattern: expect_true(is(class = $K, object = $X))
+    - pattern: expect_true(methods::is(class = $K, object = $X))
+    - pattern: expect_true(is($X, class2 = $K))
+    - pattern: expect_true(methods::is($X, class2 = $K))
+    - pattern: expect_true(is($X, class = $K))
+    - pattern: expect_true(methods::is($X, class = $K))
     - pattern: expect_true(is($X, $K))
     - pattern: expect_true(methods::is($X, $K))
 fix: expect_s4_class(~~X~~, ~~K~~)
@@ -15,6 +29,18 @@ language: r
 severity: warning
 rule:
   any:
+    - pattern: testthat::expect_true(is(object = $X, class2 = $K))
+    - pattern: testthat::expect_true(methods::is(object = $X, class2 = $K))
+    - pattern: testthat::expect_true(is(object = $X, class = $K))
+    - pattern: testthat::expect_true(methods::is(object = $X, class = $K))
+    - pattern: testthat::expect_true(is(class2 = $K, object = $X))
+    - pattern: testthat::expect_true(methods::is(class2 = $K, object = $X))
+    - pattern: testthat::expect_true(is(class = $K, object = $X))
+    - pattern: testthat::expect_true(methods::is(class = $K, object = $X))
+    - pattern: testthat::expect_true(is($X, class2 = $K))
+    - pattern: testthat::expect_true(methods::is($X, class2 = $K))
+    - pattern: testthat::expect_true(is($X, class = $K))
+    - pattern: testthat::expect_true(methods::is($X, class = $K))
     - pattern: testthat::expect_true(is($X, $K))
     - pattern: testthat::expect_true(methods::is($X, $K))
 fix: testthat::expect_s4_class(~~X~~, ~~K~~)
