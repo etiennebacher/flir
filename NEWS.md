@@ -4,6 +4,7 @@
 
 * New linters: 
 
+  + `expect_s3_class_linter()` (@trevorld, #110)
   + `expect_s4_class_linter()` (@trevorld, #109)
   + `nzchar_linter()` (@trevorld, #102)
 
@@ -17,6 +18,11 @@
   first one. This is now fixed (#95). 
   
 * `list_linters()` now uses `path = "."` by default (#99).
+
+## Changes
+
+* `expect_type_linter()` now has less false positives for non-type `is.*()` functions
+  and also provides more fixes (@trevorld, #110).
 
 # flir 0.5.0
 

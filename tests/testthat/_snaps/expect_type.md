@@ -49,7 +49,34 @@
 ---
 
     Code
-      fix_text("expect_true(is.complex(foo(x)))", linters = linter)
+      fix_text("expect_true(is.call(x))", linters = linter)
+    Output
+      Old code: expect_true(is.call(x)) 
+      New code: expect_type(x, "language") 
+
+---
+
+    Code
+      fix_text("expect_true(is.function(x))", linters = linter)
+    Output
+      Old code: expect_true(is.function(x)) 
+      New code: expect_type(x, "closure") 
+
+---
+
+    Code
+      fix_text("expect_true(is.name(x))", linters = linter)
+    Output
+      Old code: expect_true(is.name(x)) 
+      New code: expect_type(x, "symbol") 
+
+---
+
+    Code
+      fix_text("expect_true(is.primitive(x))", linters = linter)
+    Output
+      Old code: expect_true(is.primitive(x)) 
+      New code: expect_type(x, "builtin") 
 
 # no double replacement
 

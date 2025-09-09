@@ -1,0 +1,125 @@
+id: expect_s3_class-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: expect_true(inherits(what = $CLASS, x = $X))
+    - pattern: expect_true(inherits(x = $X, what = $CLASS))
+    - pattern: expect_true(inherits($X, what = $CLASS))
+    - pattern: expect_true(inherits($X, $CLASS))
+fix: expect_s3_class(~~X~~, ~~CLASS~~)
+message: expect_s3_class(x, k) is better than expect_true(inherits(x, k))
+
+---
+
+id: expect_s3_class-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: testthat::expect_true(inherits(what = $CLASS, x = $X))
+    - pattern: testthat::expect_true(inherits(x = $X, what = $CLASS))
+    - pattern: testthat::expect_true(inherits($X, what = $CLASS))
+    - pattern: testthat::expect_true(inherits($X, $CLASS))
+fix: testthat::expect_s3_class(~~X~~, ~~CLASS~~)
+message: expect_s3_class(x, k) is better than expect_true(inherits(x, k))
+
+---
+
+id: expect_s3_class-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: expect_equal(class($X), $CLASS)
+    - pattern: expect_equal($CLASS, class($X))
+fix: expect_s3_class(~~X~~, ~~CLASS~~, exact = TRUE)
+message: expect_s3_class(x, k) is better than expect_equal(class(x), k)
+
+---
+
+id: expect_s3_class-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: testthat::expect_equal(class($X), $CLASS)
+    - pattern: testthat::expect_equal($CLASS, class($X))
+fix: testthat::expect_s3_class(~~X~~, ~~CLASS~~, exact = TRUE)
+message: expect_s3_class(x, k) is better than expect_equal(class(x), k)
+
+---
+
+id: expect_s3_class-5
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: expect_identical(class($X), $CLASS)
+    - pattern: expect_identical($CLASS, class($X))
+fix: expect_s3_class(~~X~~, ~~CLASS~~, exact = TRUE)
+message: expect_s3_class(x, k) is better than expect_identical(class(x), k)
+
+---
+
+id: expect_s3_class-6
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: testthat::expect_identical(class($X), $CLASS)
+    - pattern: testthat::expect_identical($CLASS, class($X))
+fix: testthat::expect_s3_class(~~X~~, ~~CLASS~~, exact = TRUE)
+message: expect_s3_class(x, k) is better than expect_identical(class(x), k)
+
+---
+
+# no easy way to make exhaustive list of places where
+# is.<x> call can be relpaced by expect_s3_class()
+# this list was manually populated by lintr authors
+# from default R packages by inspection
+# e.g. is.matrix(x) cannot be replcaed by expect_s3_class(x, "matrix")
+# because it is not an S3 class
+id: expect_s3_class-7
+language: r
+severity: warning
+rule:
+  pattern: expect_true($ISF($X))
+constraints:
+  ISF:
+    any:
+      - regex: "^is\\.data\\.frame$"
+      - regex: "^is\\.factor$"
+      - regex: "^is\\.numeric_version$"
+      - regex: "^is\\.ordered$"
+      - regex: "^is\\.package_version$"
+      - regex: "^is\\.qr$"
+      - regex: "^is\\.table$"
+      - regex: "^is\\.relistable$"
+      - regex: "^utils::is\\.relistable$"
+      - regex: "^is\\.raster$"
+      - regex: "^grDevices::is\\.raster$"
+      - regex: "^is\\.tclObj$"
+      - regex: "^tcltk::is\\.tclObj$"
+      - regex: "^is\\.tkwin$"
+      - regex: "^tcltk::is\\.tkwin$"
+      - regex: "^is\\.grob$"
+      - regex: "^grid::is\\.grob$"
+      - regex: "^is\\.unit$"
+      - regex: "^grid::is\\.unit$"
+      - regex: "^is\\.mts$"
+      - regex: "^stats::is\\.mts$"
+      - regex: "^is\\.stepfun$"
+      - regex: "^stats::is\\.stepfun$"
+      - regex: "^is\\.ts$"
+      - regex: "^stats::is\\.ts$"
+      - regex: "^is\\.tskernel$"
+      - regex: "^stats::is\\.tskernel$"
+# transform:
+#   CLASS:
+#     replace:
+#       source: $ISF
+#       replace: "is\\.(?<ISFCLASS>.*)"
+#       by: "$ISFCLASS"
+# fix: expect_s3_class(~~X~~, ~~CLASS~~)
+message: expect_s3_class(x, k) is better than expect_true(is.<k>(x))

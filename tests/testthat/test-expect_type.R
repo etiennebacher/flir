@@ -129,9 +129,26 @@ test_that("fix works", {
   expect_snapshot(
     fix_text("expect_identical('double', typeof(x))", linters = linter)
   )
+  expect_snapshot(
+    fix_text('expect_true(is.call(x))', linters = linter)
+  )
+  expect_snapshot(
+    fix_text('expect_true(is.function(x))', linters = linter)
+  )
+  expect_snapshot(
+    fix_text('expect_true(is.name(x))', linters = linter)
+  )
+  expect_snapshot(
+    fix_text('expect_true(is.primitive(x))', linters = linter)
+  )
 
-  # Don't fix for this
-  expect_snapshot(fix_text("expect_true(is.complex(foo(x)))", linters = linter))
+  skip("Do transform statements work?")
+  expect_snapshot(
+    fix_text("expect_true(is.complex(foo(x)))", linters = linter)
+  )
+  expect_snapshot(
+    fix_text('expect_true(is.double(x))', linters = linter)
+  )
 })
 
 # Replacement could be mixed up to suggest both expect_type and expect_identical

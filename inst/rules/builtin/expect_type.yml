@@ -38,6 +38,8 @@ message: expect_type(x, t) is better than expect_equal(typeof(x), t).
 
 ---
 
+# these are `is.TYPE(x)` functions checked in {lintr}
+# where `TYPE` matches that returned by `typeof(x)`
 id: expect_type-3
 language: r
 severity: warning
@@ -45,7 +47,75 @@ rule:
   pattern: expect_true($FUN($OBJ))
 constraints:
   FUN:
-    regex: ^is\.
-    not:
-      regex: data\.frame$
+    any:
+      - regex: ^is\.raw$
+      - regex: ^is\.logical$
+      - regex: ^is\.integer$
+      - regex: ^is\.double$
+      - regex: ^is\.complex$
+      - regex: ^is\.character$
+      - regex: ^is\.list$
+      - regex: ^is\.environment$
+      - regex: ^is\.pairlist$
+      - regex: ^is\.promise$
+      - regex: ^is\.symbol$
+      - regex: ^is\.expression$
+# transform:
+#   TYPE:
+#     replace:
+#       source: $FUN
+#       replace: "is\\.(?<FUNTYPE>.*)"
+#       by: "$FUNTYPE"
+# fix: expect_type(~~OBJ~~, "~~TYPE~~")
+message: expect_type(x, t) is better than expect_true(is.<t>(x)).
+
+---
+
+# other `is.TYPE(x)` functions checked in {lintr}
+# where `TYPE` does not necessarily match `typeof(x)`
+id: expect_type-4
+language: r
+severity: warning
+rule:
+  pattern: expect_true($FUN($OBJ))
+constraints:
+  FUN:
+    any:
+      - regex: ^is\.language$ # type either "language", "symbol", "expression"
+      - regex: ^is\.numeric$ # type either "double" or "integer"
+message: expect_type(x, t) is better than expect_true(is.<t>(x)).
+
+---
+id: expect_type-5
+language: r
+severity: warning
+rule: { pattern: expect_true(is.primitive($OBJ)) }
+fix: expect_type(~~OBJ~~, "builtin")
+message: expect_type(x, t) is better than expect_true(is.<t>(x)).
+
+---
+
+id: expect_type-6
+language: r
+severity: warning
+rule: { pattern: expect_true(is.function($OBJ)) }
+fix: expect_type(~~OBJ~~, "closure")
+message: expect_type(x, t) is better than expect_true(is.<t>(x)).
+
+---
+
+id: expect_type-7
+language: r
+severity: warning
+rule: { pattern: expect_true(is.call($OBJ)) }
+fix: expect_type(~~OBJ~~, "language")
+message: expect_type(x, t) is better than expect_true(is.<t>(x)).
+
+---
+
+id: expect_type-8
+language: r
+severity: warning
+rule: { pattern: expect_true(is.name($OBJ)) }
+fix: expect_type(~~OBJ~~, "symbol")
 message: expect_type(x, t) is better than expect_true(is.<t>(x)).

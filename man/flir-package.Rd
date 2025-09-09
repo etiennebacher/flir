@@ -20,5 +20,15 @@ Useful links:
 \author{
 \strong{Maintainer}: Etienne Bacher \email{etienne.bacher@protonmail.com} [copyright holder]
 
+Authors:
+\itemize{
+  \item lintr authors
+}
+
+Other contributors:
+\itemize{
+  \item Trevor L. Davis (\href{https://orcid.org/0000-0001-6341-4639}{ORCID}) [contributor]
+}
+
 }
 \keyword{internal}

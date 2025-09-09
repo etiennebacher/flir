@@ -24,6 +24,7 @@ list_linters <- function(path = ".") {
     "expect_named",
     "expect_not",
     "expect_null",
+    "expect_s3_class",
     "expect_s4_class",
     "expect_true_false",
     "expect_type",
