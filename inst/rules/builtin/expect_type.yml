@@ -77,12 +77,9 @@ id: expect_type-4
 language: r
 severity: warning
 rule:
-  pattern: expect_true($FUN($OBJ))
-constraints:
-  FUN:
-    any:
-      - regex: ^is\.language$ # type either "language", "symbol", "expression"
-      - regex: ^is\.numeric$ # type either "double" or "integer"
+  any:
+    - pattern: expect_true(is.language($OBJ)) # type either "language", "symbol", "expression"
+    - pattern: expect_true(is.numeric($OBJ)) # type either "double" or "integer"
 message: expect_type(x, t) is better than expect_true(is.<t>(x)).
 
 ---
