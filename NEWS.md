@@ -7,6 +7,7 @@
   + `expect_s3_class_linter()` (@trevorld, #110)
   + `expect_s4_class_linter()` (@trevorld, #109)
   + `nzchar_linter()` (@trevorld, #102)
+  + `vector_logic_linter()` (@trevorld, #111)
 
 * New vignette "Tips and tricks" that lists some solutions for problems one may
   encounter when writing new rules (#94).

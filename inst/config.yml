@@ -51,4 +51,5 @@ keep:
   - unnecessary_nesting
   # This can be activated, but it is slow.
   # - unreachable_code
+  - vector_logic
   - which_grepl

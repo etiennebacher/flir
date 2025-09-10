@@ -62,6 +62,7 @@ list_linters <- function(path = ".") {
     # TODO: I think it should be removed eventually, ast-grep tools is just not
     # the right tool for this. For now, I just leave it opt-in.
     # "unreachable_code",
+    "vector_logic",
     "which_grepl"
   )
   keep_or_exclude_testthat_rules(path, out)
