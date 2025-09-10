@@ -46,6 +46,8 @@
 <ul><li>
 <p>New linters:</p>
 <ul><li>
+<code><a href="../reference/expect_s3_class_linter.html">expect_s3_class_linter()</a></code> (<a href="https://github.com/trevorld" class="external-link">@trevorld</a>, <a href="https://github.com/etiennebacher/flir/issues/110" class="external-link">#110</a>)</li>
+<li>
 <code><a href="../reference/expect_s4_class_linter.html">expect_s4_class_linter()</a></code> (<a href="https://github.com/trevorld" class="external-link">@trevorld</a>, <a href="https://github.com/etiennebacher/flir/issues/109" class="external-link">#109</a>)</li>
 <li>
 <code><a href="../reference/nzchar_linter.html">nzchar_linter()</a></code> (<a href="https://github.com/trevorld" class="external-link">@trevorld</a>, <a href="https://github.com/etiennebacher/flir/issues/102" class="external-link">#102</a>)</li>
@@ -56,6 +58,11 @@
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
 <ul><li><p>When using external rules with the <code>with-&lt;pkg&gt;</code> syntax, if the YAML file contains several rules separated by “—”, then <code>flir</code> would only use the first one. This is now fixed (<a href="https://github.com/etiennebacher/flir/issues/95" class="external-link">#95</a>).</p></li>
 <li><p><code><a href="../reference/list_linters.html">list_linters()</a></code> now uses <code>path = "."</code> by default (<a href="https://github.com/etiennebacher/flir/issues/99" class="external-link">#99</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="changes-development-version">Changes<a class="anchor" aria-label="anchor" href="#changes-development-version"></a></h3>
+<ul><li>
+<code><a href="../reference/expect_type_linter.html">expect_type_linter()</a></code> now has less false positives for non-type <code>is.*()</code> functions and also provides more fixes (<a href="https://github.com/trevorld" class="external-link">@trevorld</a>, <a href="https://github.com/etiennebacher/flir/issues/110" class="external-link">#110</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">
