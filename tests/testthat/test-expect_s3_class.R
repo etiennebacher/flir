@@ -13,20 +13,17 @@ test_that("expect_s3_class_linter skips allowed usages", {
   expect_no_lint("expect_true(is.data.table(x))", linter)
 
   # expect_s3_class() doesn't have info= or label= arguments
-  expect_lint(
+  expect_no_lint(
     "expect_equal(class(x), k, info = 'x should have class k')",
-    NULL,
     linter
   )
-  expect_lint("expect_equal(class(x), k, label = 'x class')", NULL, linter)
-  expect_lint(
+  expect_no_lint("expect_equal(class(x), k, label = 'x class')", linter)
+  expect_no_lint(
     "expect_equal(class(x), k, expected.label = 'target class')",
-    NULL,
     linter
   )
-  expect_lint(
+  expect_no_lint(
     "expect_true(is.data.frame(x), info = 'x should be a data.frame')",
-    NULL,
     linter
   )
 })
@@ -79,21 +76,21 @@ local({
   is_classes <- c(
     "data.frame",
     "factor",
+    "grob",
+    "mts",
     "numeric_version",
     "ordered",
     "package_version",
     "qr",
-    "table",
-    "relistable",
     "raster",
+    "relistable",
+    "stepfun",
+    "table",
     "tclObj",
     "tkwin",
-    "grob",
-    "unit",
-    "mts",
-    "stepfun",
     "ts",
-    "tskernel"
+    "tskernel",
+    "unit"
   )
   patrick::with_parameters_test_that(
     "expect_true(is.<base class>) is caught",
@@ -107,16 +104,16 @@ local({
   )
 
   is_classes <- c(
-    "utils::is.relistable",
     "grDevices::is.raster",
-    "tcltk::is.tclObj",
-    "tcltk::is.tkwin",
     "grid::is.grob",
     "grid::is.unit",
     "stats::is.mts",
     "stats::is.stepfun",
     "stats::is.ts",
-    "stats::is.tskernel"
+    "stats::is.tskernel",
+    "tcltk::is.tclObj",
+    "tcltk::is.tkwin",
+    "utils::is.relistable"
   )
   patrick::with_parameters_test_that(
     "expect_true(is.<base class>) is caught",
@@ -144,13 +141,13 @@ test_that("fix works", {
     'expect_s3_class(x, "data.frame")'
   )
 
-  skip("Do transform statements work?")
-  expect_fix(
-    'expect_true(is.data.frame(x))',
-    'expect_s3_class(x, "data.frame")'
-  )
-  expect_fix(
-    'expect_true(grid::is.grob(x))',
-    'expect_s3_class(x, "grob")'
-  )
+  # TODO: https://github.com/etiennebacher/astgrepr/issues/17
+  # expect_fix(
+  #   'expect_true(is.data.frame(x))',
+  #   'expect_s3_class(x, "data.frame")'
+  # )
+  # expect_fix(
+  #   'expect_true(grid::is.grob(x))',
+  #   'expect_s3_class(x, "grob")'
+  # )
 })

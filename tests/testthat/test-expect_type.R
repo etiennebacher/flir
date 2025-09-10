@@ -142,13 +142,13 @@ test_that("fix works", {
     fix_text('expect_true(is.primitive(x))', linters = linter)
   )
 
-  skip("Do transform statements work?")
-  expect_snapshot(
-    fix_text("expect_true(is.complex(foo(x)))", linters = linter)
-  )
-  expect_snapshot(
-    fix_text('expect_true(is.double(x))', linters = linter)
-  )
+  # TODO: https://github.com/etiennebacher/astgrepr/issues/17
+  # expect_snapshot(
+  #   fix_text("expect_true(is.complex(foo(x)))", linters = linter)
+  # )
+  # expect_snapshot(
+  #   fix_text('expect_true(is.double(x))', linters = linter)
+  # )
 })
 
 # Replacement could be mixed up to suggest both expect_type and expect_identical

@@ -75,10 +75,10 @@ message: expect_s3_class(x, k) is better than expect_identical(class(x), k)
 ---
 
 # no easy way to make exhaustive list of places where
-# is.<x> call can be relpaced by expect_s3_class()
+# is.<x> call can be replaced by expect_s3_class()
 # this list was manually populated by lintr authors
 # from default R packages by inspection
-# e.g. is.matrix(x) cannot be replcaed by expect_s3_class(x, "matrix")
+# e.g. is.matrix(x) cannot be replaced by expect_s3_class(x, "matrix")
 # because it is not an S3 class
 id: expect_s3_class-7
 language: r
@@ -115,6 +115,7 @@ constraints:
       - regex: "^stats::is\\.ts$"
       - regex: "^is\\.tskernel$"
       - regex: "^stats::is\\.tskernel$"
+# TODO: https://github.com/etiennebacher/astgrepr/issues/17
 # transform:
 #   CLASS:
 #     replace:

@@ -60,6 +60,7 @@ constraints:
       - regex: ^is\.promise$
       - regex: ^is\.symbol$
       - regex: ^is\.expression$
+# TODO: https://github.com/etiennebacher/astgrepr/issues/17
 # transform:
 #   TYPE:
 #     replace:
