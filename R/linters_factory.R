@@ -888,6 +888,24 @@ makeActiveBinding(
 )
 
 
+#' @inherit lintr::vector_logic_linter title
+#' @description
+#' See <https://lintr.r-lib.org/reference/vector_logic_linter>.
+
+#' @usage vector_logic_linter
+#' @name vector_logic_linter
+#' @export
+#' @return The name of the linter
+NULL
+makeActiveBinding(
+  'vector_logic_linter',
+  function() {
+    function() 'vector_logic'
+  },
+  env = environment()
+)
+
+
 #' @inherit lintr::which_grepl_linter title
 #' @description
 #' See <https://lintr.r-lib.org/reference/which_grepl_linter>.

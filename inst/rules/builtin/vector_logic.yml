@@ -1,0 +1,103 @@
+# TODO: subsetting expressions for filter/subset
+
+id: vector_logic-1
+language: r
+severity: warning
+rule:
+  all:
+    - pattern: "$LEFT & $RIGHT"
+    - any:
+      - inside:
+          any:
+            - kind: if_statement
+            - kind: while_statement
+          field: condition
+          stopBy:
+            any:
+              - kind: call
+              - kind: subset
+      - inside:
+          any:
+            - pattern: expect_true($X)
+            - pattern: expect_false($X)
+            - pattern: testthat::expect_true($X)
+            - pattern: testthat::expect_false($X)
+            - pattern: tinytest::expect_true($X)
+            - pattern: tinytest::expect_false($X)
+          field: arguments
+          stopBy:
+            any:
+              - kind: call
+              - kind: subset
+constraints:
+  LEFT:
+    not:
+      any:
+        - regex: "^as.raw\\("
+        - regex: "^as.hexmode\\("
+        - regex: "^as.octmode\\("
+        - kind: integer
+        - kind: float
+        - regex: string
+  RIGHT:
+    not:
+      any:
+        - regex: "^as.raw\\("
+        - regex: "^as.hexmode\\("
+        - regex: "^as.octmode\\("
+        - kind: integer
+        - kind: float
+        - kind: string
+message: 'Use `&&` in conditional expressions.'
+
+---
+
+id: vector_logic-2
+language: r
+severity: warning
+rule:
+  all:
+    - pattern: "$LEFT | $RIGHT"
+    - any:
+      - inside:
+          any:
+            - kind: if_statement
+            - kind: while_statement
+          field: condition
+          stopBy:
+            any:
+              - kind: call
+              - kind: subset
+      - inside:
+          any:
+            - pattern: expect_true($X)
+            - pattern: expect_false($X)
+            - pattern: testthat::expect_true($X)
+            - pattern: testthat::expect_false($X)
+            - pattern: tinytest::expect_true($X)
+            - pattern: tinytest::expect_false($X)
+          field: arguments
+          stopBy:
+            any:
+              - kind: call
+              - kind: subset
+constraints:
+  LEFT:
+    not:
+      any:
+        - regex: "^as.raw\\("
+        - regex: "^as.hexmode\\("
+        - regex: "^as.octmode\\("
+        - kind: integer
+        - kind: float
+        - kind: string
+  RIGHT:
+    not:
+      any:
+        - regex: "^as.raw\\("
+        - regex: "^as.hexmode\\("
+        - regex: "^as.octmode\\("
+        - kind: integer
+        - kind: float
+        - kind: string
+message: 'Use `||` in conditional expressions.'
