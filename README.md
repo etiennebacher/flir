@@ -12,19 +12,17 @@
 status](https://www.r-pkg.org/badges/version/flir)](https://CRAN.R-project.org/package=flir)
 <!-- badges: end -->
 
-------------------------------------------------------------------------
-
-:information_source: Until v0.2.1 (included), this package was named
-`flint`. In v0.3.0, it was renamed `flir`.
-
-------------------------------------------------------------------------
-
-`flir` is a small R package to find and replace lints in R code.
-
-- Lints detection with `lint()`
-- Automatic replacement of lints with `fix()`
-- Compatibility with (some) `{lintr}` rules
-- Fast
+`flir` is an R package to detect and rewrite code patterns. It was
+originally created to be an R linter and an alternative to
+[`lintr`](https://lintr.r-lib.org/). However, it may be better to view
+it as a tool to refactor any type of code by detecting and rewriting
+custom patterns (see [Adding new
+rules](https://flir.etiennebacher.com/articles/adding_rules)). `flir`
+comes with a list of built-in rules and therefore can still be used as a
+linter (see the “Usage” section below), but I now concentrate my efforts
+on a new R linter entirely written in Rust:
+[Jarl](https://jarl.etiennebacher.com/). Therefore, I will not add new
+rules in `flir`.
 
 `flir` is powered by
 [`astgrepr`](https://github.com/etiennebacher/astgrepr/), which is
@@ -61,9 +59,9 @@ custom rules for your project/package.
 
 The everyday usage consists of two functions:
 
-- `lint()` looks for lints in R files;
-- `fix()` looks for lints in R files and automatically applies their
-  replacement (if any).
+- `lint()` looks for rule violations in R files;
+- `fix()` looks for rule violations in R files and automatically applies
+  their replacement (if any).
 
 One can also experiment with `flir::lint_text()` and `flir::fix_text()`:
 
@@ -169,13 +167,12 @@ bench::mark(
   ),
   check = FALSE
 )
-#> Warning: Some expressions had a GC in every iteration; so filtering is
-#> disabled.
+#> Warning: Some expressions had a GC in every iteration; so filtering is disabled.
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 lintr         2.01s    2.01s     0.496  315.18MB    21.8 
-#> 2 flir       116.84ms 120.97ms     7.94     1.85MB     3.97
+#> 1 lintr         3.44s    3.44s     0.291   313.5MB    12.2 
+#> 2 flir       153.77ms 172.76ms     5.89      1.8MB     1.96
 ```
 
 ## Why the name “flir”?
