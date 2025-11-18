@@ -1,0 +1,124 @@
+# Sharing rules across packages
+
+Besides helping to detect a built-in list of bad patterns in R code,
+`flir` can also be used to refactor code, for instance by replacing the
+use of [deprecated or
+superseded](https://lifecycle.r-lib.org/articles/stages.html) functions.
+If you work on a project that uses `dplyr`, you could for example [write
+your own rules](https://flir.etiennebacher.com/articles/adding_rules) to
+replace the use of `sample_n()` by `slice_sample()` (as described in
+[this blog
+post](https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir/)).
+
+However, that puts the burden of writing such rules on the end user, who
+is not necessarily familiar with all the changes in the package they
+use. Therefore, `flir` provides a way for package developers to define
+their own rules in the package so that anyone who uses it will also have
+access to the same set of rules.
+
+Let’s take an example with one of my packages:
+[`tidypolars`](https://tidypolars.etiennebacher.com/).
+
+## State of the package
+
+At the time of writing, `tidypolars` (0.13.0) contains several
+deprecated functions, such as `describe()` and `describe_plan()`. Those
+functions should be replaced by
+[`summary()`](https://rdrr.io/r/base/summary.html) and
+`explain(optimized = FALSE)` respectively.
+
+## For package developers
+
+On the side of package developers (in this example, this is only me), we
+can define some rules for `tidypolars` and store them in
+`inst/flir/rules`[¹](#fn1).
+
+First, I define a rule to detect the use of `describe()` and replace it
+with [`summary()`](https://rdrr.io/r/base/summary.html) (you can use
+[`export_new_rule()`](https://flir.etiennebacher.com/reference/export_new_rule.md)
+to create a placeholder YAML file):
+
+``` yaml
+id: deprecated-describe
+language: r
+severity: warning
+rule:
+  pattern: describe($$$ARGS)
+fix: summary(~~ARGS~~)
+message: In tidypolars, `describe()` is deprecated. Use `summary()` instead.
+```
+
+Keep in mind that `flir` works mainly by using *code patterns*, it
+doesn’t have information on the R environment. Therefore, the rule above
+doesn’t know which package provides the function and it would also
+replace `describe()` calls coming from other packages.
+
+I do the same with `describe_plan()`:
+
+``` yaml
+id: deprecated-describe_plan
+language: r
+severity: warning
+rule:
+  pattern: describe_plan($ARG)
+fix: explain(~~ARG~~, optimized = FALSE)
+message: In tidypolars, `describe_plan()` is deprecated. Use `explain(optimized = FALSE)` instead.
+```
+
+This is all that is needed from package developers. When users will
+install the package, they will have access to those rules.
+
+**Note:** it is good practice to have a single name for a family of
+rules and to use this name as filename. For instance, the first rule has
+`id: deprecated-describe`, so I should name the file
+`deprecated-describe.yml`. If you want to store several rules related to
+this deprecation, you could name the other rules
+`deprecated-describe_2`, `deprecated-describe_3`, etc. and store them in
+the same file, separated by `---`.
+
+Overall, the only changes I had to do in `tidypolars` are:
+
+    inst
+    └── flir
+        └── rules
+            ├── deprecated-describe.yml
+            └── deprecated-describe_plan.yml
+
+## For users
+
+To use rules defined in other packages, you need to set up a `flir`
+folder with
+[`setup_flir()`](https://flir.etiennebacher.com/reference/setup_flir.md).
+This will create the file `flir/config.yml` that we will modify to get
+rules from other packages.
+
+Once this is done, you can add a field `from-package` and list the
+packages from which you want to import the rules. For instance, to
+benefit from the rules defined above, we can do:
+
+``` yaml
+from-package:
+  - tidypolars
+```
+
+and that’s it! From now on, all calls to `lint_*()` or `fix_*()` on the
+project will also use the rules stored in `tidypolars`. Note that those
+rules are bundled with the package, meaning that if the package
+developers change or remove some rules and you update the package, the
+rules you will have access to will be different.
+
+As before, you can also list rules to exclude in the `exclude` field of
+`flir/config.yml` but you will need to prefix them with
+`from-<pkgname>-`. For instance, to ignore the rule about the
+deprecation of `describe()`, you can set:
+
+``` yaml
+exclude:
+  - from-tidypolars-deprecated-describe
+```
+
+------------------------------------------------------------------------
+
+1.  I won’t spend time explaining each part of the file, refer to the
+    [Adding rules](https://flir.etiennebacher.com/articles/adding_rules)
+    vignette for more details.

@@ -61,18 +61,7 @@
 <p>(pronounced “fleer” as in “beer”)</p>
 <!-- badges: start -->
 
-<hr>
-<p><span class="emoji" data-emoji="information_source">ℹ️</span> Until v0.2.1 (included), this package was named <code>flint</code>. In v0.3.0, it was renamed <code>flir</code>.</p>
-<hr>
-<p><code>flir</code> is a small R package to find and replace lints in R code.</p>
-<ul>
-<li>Lints detection with <code><a href="reference/lint.html">lint()</a></code>
-</li>
-<li>Automatic replacement of lints with <code><a href="reference/fix.html">fix()</a></code>
-</li>
-<li>Compatibility with (some) <a href="https://lintr.r-lib.org" class="external-link">lintr</a> rules</li>
-<li>Fast</li>
-</ul>
+<p><code>flir</code> is an R package to detect and rewrite code patterns. It was originally created to be an R linter and an alternative to <a href="https://lintr.r-lib.org/" class="external-link"><code>lintr</code></a>. However, it may be better to view it as a tool to refactor any type of code by detecting and rewriting custom patterns (see <a href="https://flir.etiennebacher.com/articles/adding_rules">Adding new rules</a>). <code>flir</code> comes with a list of built-in rules and therefore can still be used as a linter (see the “Usage” section below), but I now concentrate my efforts on a new R linter entirely written in Rust: <a href="https://jarl.etiennebacher.com/" class="external-link">Jarl</a>. Therefore, I will not add new rules in <code>flir</code>.</p>
 <p><code>flir</code> is powered by <a href="https://github.com/etiennebacher/astgrepr/" class="external-link"><code>astgrepr</code></a>, which is itself built on the Rust crate <a href="https://ast-grep.github.io/" class="external-link"><code>ast-grep</code></a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -97,9 +86,9 @@
 <p>The everyday usage consists of two functions:</p>
 <ul>
 <li>
-<code><a href="reference/lint.html">lint()</a></code> looks for lints in R files;</li>
+<code><a href="reference/lint.html">lint()</a></code> looks for rule violations in R files;</li>
 <li>
-<code><a href="reference/fix.html">fix()</a></code> looks for lints in R files and automatically applies their replacement (if any).</li>
+<code><a href="reference/fix.html">fix()</a></code> looks for rule violations in R files and automatically applies their replacement (if any).</li>
 </ul>
 <p>One can also experiment with <code><a href="reference/lint.html">flir::lint_text()</a></code> and <code><a href="reference/fix.html">flir::fix_text()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -194,13 +183,12 @@
 <span>  <span class="op">)</span>,</span>
 <span>  check <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Some expressions had a GC in every iteration; so filtering is</span></span>
-<span><span class="co">#&gt; disabled.</span></span>
+<span><span class="co">#&gt; Warning: Some expressions had a GC in every iteration; so filtering is disabled.</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 lintr         2.01s    2.01s     0.496  315.18MB    21.8 </span></span>
-<span><span class="co">#&gt; 2 flir       116.84ms 120.97ms     7.94     1.85MB     3.97</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 lintr         3.44s    3.44s     0.291   313.5MB    12.2 </span></span>
+<span><span class="co">#&gt; 2 flir       153.77ms 172.76ms     5.89      1.8MB     1.96</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="why-the-name-flir">Why the name “flir”?<a class="anchor" aria-label="anchor" href="#why-the-name-flir"></a>
@@ -278,7 +266,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

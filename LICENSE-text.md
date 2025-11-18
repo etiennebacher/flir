@@ -1,0 +1,7 @@
+# License
+
+    YEAR: 2025
+    COPYRIGHT HOLDER: flir authors
+
+    YEAR: 2025
+    COPYRIGHT HOLDER: lintr authors
