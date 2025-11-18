@@ -38,20 +38,10 @@ patrick::with_parameters_test_that(
     expect_lint(code, lint_msg, redundant_equals_linter())
   },
   .cases = tibble::tribble(
-    ~.test_name,
-    ~op,
-    ~bool,
-    "==, TRUE",
-    "==",
-    "TRUE",
-    "==, FALSE",
-    "==",
-    "FALSE",
-    "!=, TRUE",
-    "!=",
-    "TRUE",
-    "!=, FALSE",
-    "!=",
-    "FALSE"
+    ~.test_name , ~op  , ~bool   ,
+    "==, TRUE"  , "==" , "TRUE"  ,
+    "==, FALSE" , "==" , "FALSE" ,
+    "!=, TRUE"  , "!=" , "TRUE"  ,
+    "!=, FALSE" , "!=" , "FALSE"
   )
 )
