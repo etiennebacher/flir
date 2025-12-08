@@ -229,10 +229,12 @@ uses_flir <- function(path = ".") {
     }
   }
   tryCatch(
-    path <- rprojroot::find_root(
-      rprojroot::is_rstudio_project | rprojroot::is_r_package,
-      path = path
-    ),
+    {
+      path <- rprojroot::find_root(
+        rprojroot::is_rstudio_project | rprojroot::is_r_package,
+        path = path
+      )
+    },
     error = function(e) return(FALSE)
   )
   flir_dir <- fs::path(path, "flir")
@@ -248,11 +250,15 @@ get_custom_linters <- function(path = ".") {
     }
   }
   tryCatch(
-    path <- rprojroot::find_root(
-      rprojroot::is_rstudio_project | rprojroot::is_r_package,
-      path = path
-    ),
-    error = function(e) return(FALSE)
+    {
+      path <- rprojroot::find_root(
+        rprojroot::is_rstudio_project | rprojroot::is_r_package,
+        path = path
+      )
+    },
+    error = function(e) {
+      path <<- "."
+    }
   )
   flir_dir <- fs::path(path, "flir")
   if (

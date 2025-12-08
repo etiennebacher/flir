@@ -2,7 +2,7 @@
 
 ## New features
 
-* New linters: 
+* New linters:
 
   + `expect_s3_class_linter()` (@trevorld, #110)
   + `expect_s4_class_linter()` (@trevorld, #109)
@@ -11,14 +11,17 @@
 
 * New vignette "Tips and tricks" that lists some solutions for problems one may
   encounter when writing new rules (#94).
-  
+
 ## Bug fixes
 
 * When using external rules with the `with-<pkg>` syntax, if the YAML file
-  contains several rules separated by "---", then `flir` would only use the 
-  first one. This is now fixed (#95). 
-  
+  contains several rules separated by "---", then `flir` would only use the
+  first one. This is now fixed (#95).
+
 * `list_linters()` now uses `path = "."` by default (#99).
+
+* `lint_text()` and `fix_text()` now work correctly with custom rules when the
+  working directory is neither an R package nor an RStudio project (#119).
 
 ## Changes
 
