@@ -34,6 +34,12 @@
   now uses `path = "."` by default
   ([\#99](https://github.com/etiennebacher/flir/issues/99)).
 
+- [`lint_text()`](https://flir.etiennebacher.com/reference/lint.md) and
+  [`fix_text()`](https://flir.etiennebacher.com/reference/fix.md) now
+  work correctly with custom rules when the working directory is neither
+  an R package nor an RStudio project
+  ([\#119](https://github.com/etiennebacher/flir/issues/119)).
+
 ### Changes
 
 - [`expect_type_linter()`](https://flir.etiennebacher.com/reference/expect_type_linter.md)
