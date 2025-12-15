@@ -1,4 +1,4 @@
-# flir (development version)
+# flir 0.6.0
 
 ## New features
 

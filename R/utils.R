@@ -58,7 +58,7 @@ get_tests_from_lintr <- function(name) {
     "_linter.R"
   )
   dest <- paste0("tests/testthat/test-", name, ".R")
-  utils::download.file(url, destfile = dest)
+  utils::download.file(url, destfile = dest, mode = "wb")
   if (rlang::is_interactive()) {
     utils::file.edit(dest)
   }

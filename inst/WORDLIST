@@ -4,14 +4,14 @@ Bundock
 CMD
 Github
 Jagan
+Jarl
 Linters
 Mikael
+ORCID
 RStudio
-YAML
 ast
 astgrepr
 coercions
-config
 fleer
 formatter
 grepl
@@ -20,8 +20,9 @@ lapply
 len
 linter
 linters
+lintr
 nlevels
-repo
+nzchar
 sourceMarkers
 stopifnot
 unstaged

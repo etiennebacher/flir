@@ -12,3 +12,5 @@
 ^\.github$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+
+^jarl\.toml$
