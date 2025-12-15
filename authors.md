@@ -13,7 +13,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/etiennebacher/flir/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/etiennebacher/flir/blob/v0.6.0/DESCRIPTION)
 
 Bacher E, lintr authors (2025). *flir: Find and Fix Lints in R Code*. R
 package version 0.6.0, <https://flir.etiennebacher.com>.

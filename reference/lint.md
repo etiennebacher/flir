@@ -138,13 +138,13 @@ To ignore more than one line of code, use `# flir-ignore-start` and
 ``` r
 # `lint_text()` is convenient to explore with a small example
 lint_text("any(duplicated(rnorm(5)))")
-#> ::warning file=/tmp/RtmpVb6IKG/file1981745899fa.R,line=1,col=1::file=/tmp/RtmpVb6IKG/file1981745899fa.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
+#> ::warning file=/tmp/RtmpInDuck/file1954356d0c53.R,line=1,col=1::file=/tmp/RtmpInDuck/file1954356d0c53.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
 
 lint_text("any(duplicated(rnorm(5)))
 any(is.na(x))
 ")
-#> ::warning file=/tmp/RtmpVb6IKG/file198123cec303.R,line=1,col=1::file=/tmp/RtmpVb6IKG/file198123cec303.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
-#> ::warning file=/tmp/RtmpVb6IKG/file198123cec303.R,line=2,col=1::file=/tmp/RtmpVb6IKG/file198123cec303.R,line=2,col=1,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).
+#> ::warning file=/tmp/RtmpInDuck/file19545cdfe632.R,line=1,col=1::file=/tmp/RtmpInDuck/file19545cdfe632.R,line=1,col=1,[any(duplicated(rnorm(5)))] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
+#> ::warning file=/tmp/RtmpInDuck/file19545cdfe632.R,line=2,col=1::file=/tmp/RtmpInDuck/file19545cdfe632.R,line=2,col=1,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).
 
 # Setup for the example with `lint()`
 destfile <- tempfile()
@@ -166,11 +166,11 @@ lint(destfile)
 #> ℹ Going to check 1 file.
 #> ✔ Found 5 lints in 1 file.
 #> ℹ 5 of them can be fixed automatically.
-#> ::warning file=/tmp/RtmpVb6IKG/file198143b6f195,line=2,col=1::file=/tmp/RtmpVb6IKG/file198143b6f195,line=2,col=1,[x = c(1, 2, 3)] Use <-, not =, for assignment.
-#> ::warning file=/tmp/RtmpVb6IKG/file198143b6f195,line=3,col=1::file=/tmp/RtmpVb6IKG/file198143b6f195,line=3,col=1,[any(duplicated(x), na.rm = TRUE)] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
-#> ::warning file=/tmp/RtmpVb6IKG/file198143b6f195,line=5,col=1::file=/tmp/RtmpVb6IKG/file198143b6f195,line=5,col=1,[any(duplicated(x))] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
-#> ::warning file=/tmp/RtmpVb6IKG/file198143b6f195,line=7,col=5::file=/tmp/RtmpVb6IKG/file198143b6f195,line=7,col=5,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).
-#> ::warning file=/tmp/RtmpVb6IKG/file198143b6f195,line=11,col=1::file=/tmp/RtmpVb6IKG/file198143b6f195,line=11,col=1,[any(
+#> ::warning file=/tmp/RtmpInDuck/file195439978ccd,line=2,col=1::file=/tmp/RtmpInDuck/file195439978ccd,line=2,col=1,[x = c(1, 2, 3)] Use <-, not =, for assignment.
+#> ::warning file=/tmp/RtmpInDuck/file195439978ccd,line=3,col=1::file=/tmp/RtmpInDuck/file195439978ccd,line=3,col=1,[any(duplicated(x), na.rm = TRUE)] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
+#> ::warning file=/tmp/RtmpInDuck/file195439978ccd,line=5,col=1::file=/tmp/RtmpInDuck/file195439978ccd,line=5,col=1,[any(duplicated(x))] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
+#> ::warning file=/tmp/RtmpInDuck/file195439978ccd,line=7,col=5::file=/tmp/RtmpInDuck/file195439978ccd,line=7,col=5,[any(is.na(x))] anyNA(x) is better than any(is.na(x)).
+#> ::warning file=/tmp/RtmpInDuck/file195439978ccd,line=11,col=1::file=/tmp/RtmpInDuck/file195439978ccd,line=11,col=1,[any(
 #>   duplicated(x)
 #> )] anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
 ```
