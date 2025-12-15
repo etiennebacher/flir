@@ -1,6 +1,8 @@
 # Changelog
 
-## flir (development version)
+## flir 0.6.0
+
+CRAN release: 2025-12-14
 
 ### New features
 
