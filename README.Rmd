@@ -24,10 +24,16 @@ knitr::opts_chunk$set(
 
 
 `flir` is an R package to detect and rewrite code patterns.
-It was originally created to be an R linter and an alternative to [`lintr`](https://lintr.r-lib.org/).
-However, it may be better to view it as a tool to refactor any type of code by detecting and rewriting custom patterns (see [Adding new rules](https://flir.etiennebacher.com/articles/adding_rules)).
-`flir` comes with a list of built-in rules and therefore can still be used as a linter (see the "Usage" section below), but I now concentrate my efforts on a new R linter entirely written in Rust: [Jarl](https://jarl.etiennebacher.com/).
-Therefore, I will not add new rules in `flir`.
+
+---
+
+**NOTE:** this package was originally created to be an R linter and an alternative to [`lintr`](https://lintr.r-lib.org/).
+However, its purpose evolved and it is now better to view it as a tool to refactor any type of code by detecting and rewriting custom patterns (see [Adding new rules](https://flir.etiennebacher.com/articles/adding_rules)).
+
+`flir` still comes with a list of built-in rules and therefore can technically still be used as a linter (see the "Usage" section below), but I now concentrate my efforts on a new R linter entirely written in Rust: [Jarl](https://jarl.etiennebacher.com/).
+Therefore, I will not add new rules in `flir` and maintenance for the existing rules will be kept to a minimum.
+
+---
 
 `flir` is powered by [`astgrepr`](https://github.com/etiennebacher/astgrepr/), which is itself built on the Rust crate [`ast-grep`](https://ast-grep.github.io/).
 

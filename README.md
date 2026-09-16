@@ -12,17 +12,24 @@
 status](https://www.r-pkg.org/badges/version/flir)](https://CRAN.R-project.org/package=flir)
 <!-- badges: end -->
 
-`flir` is an R package to detect and rewrite code patterns. It was
-originally created to be an R linter and an alternative to
-[`lintr`](https://lintr.r-lib.org/). However, it may be better to view
-it as a tool to refactor any type of code by detecting and rewriting
-custom patterns (see [Adding new
-rules](https://flir.etiennebacher.com/articles/adding_rules)). `flir`
-comes with a list of built-in rules and therefore can still be used as a
-linter (see the “Usage” section below), but I now concentrate my efforts
-on a new R linter entirely written in Rust:
-[Jarl](https://jarl.etiennebacher.com/). Therefore, I will not add new
-rules in `flir`.
+`flir` is an R package to detect and rewrite code patterns.
+
+------------------------------------------------------------------------
+
+**NOTE:** this package was originally created to be an R linter and an
+alternative to [`lintr`](https://lintr.r-lib.org/). However, its purpose
+evolved and it is now better to view it as a tool to refactor any type
+of code by detecting and rewriting custom patterns (see [Adding new
+rules](https://flir.etiennebacher.com/articles/adding_rules)).
+
+`flir` still comes with a list of built-in rules and therefore can
+technically still be used as a linter (see the “Usage” section below),
+but I now concentrate my efforts on a new R linter entirely written in
+Rust: [Jarl](https://jarl.etiennebacher.com/). Therefore, I will not add
+new rules in `flir` and maintenance for the existing rules will be kept
+to a minimum.
+
+------------------------------------------------------------------------
 
 `flir` is powered by
 [`astgrepr`](https://github.com/etiennebacher/astgrepr/), which is
@@ -171,8 +178,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 lintr         3.44s    3.44s     0.291   313.5MB    12.2 
-#> 2 flir       153.77ms 172.76ms     5.89      1.8MB     1.96
+#> 1 lintr         1.93s    1.93s     0.519  322.87MB    16.6 
+#> 2 flir        94.98ms 104.88ms     9.36     1.86MB     3.74
 ```
 
 ## Why the name “flir”?
