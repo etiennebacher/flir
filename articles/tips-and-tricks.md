@@ -8,6 +8,7 @@ know when using `flir` and that don’t really fit in other vignettes.
 Suppose you have some code like this:
 
 ``` r
+
 expect_error(
   my_super_function(with, some, parameters),
   "a very detailed error message"
@@ -37,6 +38,7 @@ message: ...
 ```
 
 ``` r
+
 ### Store the rule in a file
 my_rule <- tempfile(fileext = ".yml")
 cat("id: snapshot
@@ -93,6 +95,7 @@ message: ...
 then it will replace occurrences with double quotes only:
 
 ``` r
+
 ### Store the rule in a file
 my_rule <- tempfile(fileext = ".yml")
 cat("id: quotes
@@ -113,6 +116,7 @@ fix_text('my_function(value = "deprecated_value")', linters = my_rule)
     ## New code: my_function(value = "replacement_value")
 
 ``` r
+
 ### Doesn't work when code has single quotes
 fix_text("my_function(value = 'deprecated_value')", linters = my_rule)
 ```
@@ -134,6 +138,7 @@ message: ...
 ```
 
 ``` r
+
 ### Store the rule in a file
 my_rule <- tempfile(fileext = ".yml")
 cat("id: quotes
@@ -156,6 +161,7 @@ fix_text('my_function(value = "deprecated_value")', linters = my_rule)
     ## New code: my_function(value = "replacement_value")
 
 ``` r
+
 ### Works when code has single quotes
 fix_text("my_function(value = 'deprecated_value')", linters = my_rule)
 ```

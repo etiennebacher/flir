@@ -31,7 +31,7 @@ functions should be replaced by
 
 On the side of package developers (in this example, this is only me), we
 can define some rules for `tidypolars` and store them in
-`inst/flir/rules`[¹](#fn1).
+`inst/flir/rules`[^1].
 
 First, I define a rule to detect the use of `describe()` and replace it
 with [`summary()`](https://rdrr.io/r/base/summary.html) (you can use
@@ -117,8 +117,6 @@ exclude:
   - from-tidypolars-deprecated-describe
 ```
 
-------------------------------------------------------------------------
-
-1.  I won’t spend time explaining each part of the file, refer to the
+[^1]: I won’t spend time explaining each part of the file, refer to the
     [Adding rules](https://flir.etiennebacher.com/articles/adding_rules)
     vignette for more details.

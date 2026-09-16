@@ -13,15 +13,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/etiennebacher/flir/blob/v0.6.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/etiennebacher/flir/blob/main/DESCRIPTION)
 
-Bacher E, lintr authors (2025). *flir: Find and Fix Lints in R Code*. R
+Bacher E, lintr authors (2026). *flir: Find and Fix Lints in R Code*. R
 package version 0.6.0, <https://flir.etiennebacher.com>.
 
     @Manual{,
       title = {flir: Find and Fix Lints in R Code},
       author = {Etienne Bacher and {lintr authors}},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.6.0},
       url = {https://flir.etiennebacher.com},
     }

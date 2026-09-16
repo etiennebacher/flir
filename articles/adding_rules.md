@@ -1,6 +1,7 @@
 # Adding new rules
 
 ``` r
+
 library(flir, warn.conflicts = FALSE)
 ```
 
@@ -17,8 +18,10 @@ In this vignette, our objective is to replace calls to
 instance because we prefer the formatting of the output with the latter.
 
 ``` r
+
 stop("this is an error")
-#> Error: this is an error
+#> Error:
+#> ! this is an error
 
 rlang::abort("this is an error")
 #> Error:
@@ -56,9 +59,11 @@ multiple elements, like in
 [`paste0()`](https://rdrr.io/r/base/paste.html):
 
 ``` r
+
 n <- 10
 stop("Got ", n, " values instead of 1.")
-#> Error: Got 10 values instead of 1.
+#> Error:
+#> ! Got 10 values instead of 1.
 ```
 
 This is not possible with
@@ -68,6 +73,7 @@ to manually put all those elements in
 [`paste0()`](https://rdrr.io/r/base/paste.html):
 
 ``` r
+
 n <- 10
 rlang::abort(paste0("Got ", n, " values instead of 1."))
 #> Error:
@@ -93,6 +99,7 @@ After storing this rule in `flir/rules/custom/stop_abort.yml`, we can
 call:
 
 ``` r
+
 flir::lint_text(
   'stop("Got ", n, " values instead of 1.")',
   linters = "stop_abort"
@@ -104,6 +111,7 @@ Running our example with
 shows the message:
 
 ``` r
+
 flir::lint_text(
   'stop("Got ", n, " values instead of 1.")',
   linters = "stop_abort"
@@ -117,6 +125,7 @@ And [`fix_text()`](https://flir.etiennebacher.com/reference/fix.md)
 correctly applies the fix:
 
 ``` r
+
 flir::fix_text(
   'stop("Got ", n, " values instead of 1.")',
   linters = "stop_abort"
@@ -149,6 +158,7 @@ Running
 `linters` now works:
 
 ``` r
+
 flir::fix_text('stop("Got ", n, " values instead of 1.")')
 #> Old code: stop("Got ", n, " values instead of 1.")
 #> New code: rlang::abort(paste0("Got ", n, " values instead of 1."))

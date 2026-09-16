@@ -53,12 +53,14 @@ Adding a rule that exists in `lintr`:
     Instead of
 
     ``` r
+
     message <- rex::rex("<message>")
     ```
 
     use
 
     ``` r
+
     message <- "<part of message>"
     ```
 
@@ -79,6 +81,7 @@ Adding a rule that exists in `lintr`:
     e.g.
 
 ``` r
+
 test_that("fix works", {
   linter <- expect_length_linter()
 

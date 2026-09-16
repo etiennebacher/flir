@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Find and Fix Lints in R Code • flir</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Find and Fix Lints in R Code">
 <meta name="description" content="Lints are code patterns that are not optimal because they are inefficient, forget corner cases, or are less readable. flir provides a small set of functions to detect those lints and automatically fix them. It builds on astgrepr, which itself uses the Rust crate ast-grep to parse and navigate R code.">
@@ -61,7 +61,11 @@
 <p>(pronounced “fleer” as in “beer”)</p>
 <!-- badges: start -->
 
-<p><code>flir</code> is an R package to detect and rewrite code patterns. It was originally created to be an R linter and an alternative to <a href="https://lintr.r-lib.org/" class="external-link"><code>lintr</code></a>. However, it may be better to view it as a tool to refactor any type of code by detecting and rewriting custom patterns (see <a href="https://flir.etiennebacher.com/articles/adding_rules">Adding new rules</a>). <code>flir</code> comes with a list of built-in rules and therefore can still be used as a linter (see the “Usage” section below), but I now concentrate my efforts on a new R linter entirely written in Rust: <a href="https://jarl.etiennebacher.com/" class="external-link">Jarl</a>. Therefore, I will not add new rules in <code>flir</code>.</p>
+<p><code>flir</code> is an R package to detect and rewrite code patterns.</p>
+<hr>
+<p><strong>NOTE:</strong> this package was originally created to be an R linter and an alternative to <a href="https://lintr.r-lib.org/" class="external-link"><code>lintr</code></a>. However, its purpose evolved and it is now better to view it as a tool to refactor any type of code by detecting and rewriting custom patterns (see <a href="https://flir.etiennebacher.com/articles/adding_rules">Adding new rules</a>).</p>
+<p><code>flir</code> still comes with a list of built-in rules and therefore can technically still be used as a linter (see the “Usage” section below), but I now concentrate my efforts on a new R linter entirely written in Rust: <a href="https://jarl.etiennebacher.com/" class="external-link">Jarl</a>. Therefore, I will not add new rules in <code>flir</code> and maintenance for the existing rules will be kept to a minimum.</p>
+<hr>
 <p><code>flir</code> is powered by <a href="https://github.com/etiennebacher/astgrepr/" class="external-link"><code>astgrepr</code></a>, which is itself built on the Rust crate <a href="https://ast-grep.github.io/" class="external-link"><code>ast-grep</code></a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -187,8 +191,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 lintr         3.44s    3.44s     0.291   313.5MB    12.2 </span></span>
-<span><span class="co">#&gt; 2 flir       153.77ms 172.76ms     5.89      1.8MB     1.96</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 lintr         1.93s    1.93s     0.519  322.87MB    16.6 </span></span>
+<span><span class="co">#&gt; 2 flir        94.98ms 104.88ms     9.36     1.86MB     3.74</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="why-the-name-flir">Why the name “flir”?<a class="anchor" aria-label="anchor" href="#why-the-name-flir"></a>
@@ -266,7 +270,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
